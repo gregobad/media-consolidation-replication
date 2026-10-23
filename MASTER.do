@@ -64,4 +64,5 @@ do ${PATH}/analysis/scalars.do
 
 // R scripts (run separately, see README):
 //   analysis/donations.R                -> Appendix Figures on political donations
+//   analysis/predict_acquisitions.R     -> Appendix Figure D1 and Table D1 (acquisition propensity)
 //   data_construction/11_market_demos.R -> DMA-level predictors used in the acquisition-propensity appendix
