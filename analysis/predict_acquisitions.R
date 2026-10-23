@@ -10,9 +10,11 @@
 ## Inputs:
 ##   data/acquisitions/acquisition_panel_station_top3_FINAL.dta   (included)
 ##   data/geo/dma_demos.csv, data/geo/census/census_vars.csv        (included)
-##   data/adintel/adintel_clean_updated.dta                        output of data_construction/06_cleans_adintel_data.do
-##                                                                  (derived from proprietary Nielsen Ad Intel data, NOT
-##                                                                  included); only 2010 station means are used
+##   data/station_baseline_characteristics_2010.dta                output of data_construction/07_..., 2010 station
+##                                                                  means for the 644-station analytical sample
+##   data/adintel/adintel_clean_updated.dta                        output of data_construction/06_..., used for 2010
+##                                                                  means of cost per mille and impressions
+##   (both derived from proprietary Nielsen Ad Intel data and NOT included in the archive)
 
 # PREDICTORS OF ACQUISITION (Table D1 and Figure D1 in Appendix D)
 library(lubridate)
@@ -107,24 +109,29 @@ fitGet <- \(m){
 ## read station acquisition / ownership data
 stations <- read_in("acquisitions/acquisition_panel_station_top3_FINAL.dta")
 
-## read station-level baseline data: 2010 station means (February-December, as in
-## data_construction/07_gets_stations_baseline_characteristics_2010.do) from the Ad Intel analysis file
-base_station <- read_dta(glue("{datadir}/adintel/adintel_clean_updated.dta"),
-        col_select = c("callsign", "stationID", "dmacode", "year", "month",
-                       "log_total_spend_news", "log_total_spend_nonnews",
-                       "log_total_duration_news", "log_total_duration_nonnews",
-                       "cpm_news", "cpm_nonnews",
-                       "rating_total_news", "rating_total_nonnews",
-                       "log_imp_total_news", "log_imp_total_nonnews")) %>%
+## read station-level baseline data. Advertising duration, revenue and ratings are the 2010 station means
+## produced by data_construction/07_gets_stations_baseline_characteristics_2010.do for the 644-station
+## analytical sample (February-December means of per-TV-household ad duration and revenue, logged here, and
+## of news / non-news ratings). Cost per mille and impressions are 2010 (February-December) means computed
+## from the Ad Intel analysis file for the same stations.
+base_station <- read_dta(glue("{datadir}/station_baseline_characteristics_2010.dta")) %>%
     setDT %>%
-    .[year == 2010 & month > 1, .(callsign, stationID, dmacode,
-                      log_total_spend_news, log_total_spend_nonnews,
-                      log_total_duration_news, log_total_duration_nonnews,
-                      cpm_news, cpm_nonnews,
-                      rating_news = rating_total_news, rating_nonnews = rating_total_nonnews,
-                      log_imp_news = log_imp_total_news, log_imp_nonnews = log_imp_total_nonnews
-                      )] %>%
-    .[, map(.SD, mean), by = .(callsign, stationID, dmacode)]
+    .[, .(stationID, callsign,
+          log_duration_news = log(duration_perHH_news), log_duration_nonnews = log(duration_perHH_nonnews),
+          log_spend_news = log(spend_perHH_news), log_spend_nonnews = log(spend_perHH_nonnews),
+          rating_news = rating_total_news, rating_nonnews = rating_total_nonnews)]
+
+base_extra <- read_dta(glue("{datadir}/adintel/adintel_clean_updated.dta"),
+        col_select = c("stationID", "dmacode", "year", "month",
+                       "cpm_news", "cpm_nonnews", "imp_total_news", "imp_total_nonnews")) %>%
+    setDT %>%
+    .[year == 2010 & month > 1,
+      .(dmacode = first(dmacode),
+        cpm_news = mean(cpm_news, na.rm = TRUE), cpm_nonnews = mean(cpm_nonnews, na.rm = TRUE),
+        log_imp_news = log(mean(imp_total_news, na.rm = TRUE)), log_imp_nonnews = log(mean(imp_total_nonnews, na.rm = TRUE))),
+      by = .(stationID)]
+
+base_station <- base_extra[base_station, on = .(stationID), nomatch = 0]
 
 # rank of news rating in DMA
 base_station[, news_rating_rank := rank(rating_news, ties.method = "max"), by = .(dmacode)]
@@ -223,10 +230,10 @@ dmavars[, race_nonwhite := 1 - white.alone]
 term_labels <- c(
     baseline_log_imp_news = "2010 Avg. Log Impressions (news)",
     baseline_log_imp_nonnews = "2010 Avg. Log Impressions (non-news)",
-    baseline_log_total_duration_news = "2010 Avg. Log Ad Duration (news)",
-    baseline_log_total_duration_nonnews = "2010 Avg. Log Ad Duration (non-news)",
-    baseline_log_total_spend_news = "2010 Avg. Log Ad Revenue (news)",
-    baseline_log_total_spend_nonnews = "2010 Avg. Log Ad Revenue (non-news)",
+    baseline_log_duration_news = "2010 Avg. Log Ad Duration (news)",
+    baseline_log_duration_nonnews = "2010 Avg. Log Ad Duration (non-news)",
+    baseline_log_spend_news = "2010 Avg. Log Ad Revenue (news)",
+    baseline_log_spend_nonnews = "2010 Avg. Log Ad Revenue (non-news)",
     baseline_rating_news = "2010 Avg. Rating (news)",
     baseline_rating_nonnews = "2010 Avg. Rating (non-news)",
     baseline_cpm_news = "2010 Avg. CPM (news)",
@@ -357,10 +364,10 @@ rhs_selected <- c(
     "male_16_over", "female_16_over", "male_not_labor", "female_not_labor",
     "price_per_imp",
     "dma_always_treated_gray", "dma_always_treated_nexstar", "dma_always_treated_sinclair",
-    "baseline_log_total_spend_news",
-    "baseline_log_total_spend_nonnews",
-    "baseline_log_total_duration_news",
-    "baseline_log_total_duration_nonnews",
+    "baseline_log_spend_news",
+    "baseline_log_spend_nonnews",
+    "baseline_log_duration_news",
+    "baseline_log_duration_nonnews",
     "baseline_cpm_news",
     "baseline_cpm_nonnews",
     "baseline_rating_news", "baseline_news_rating_rank_1", "baseline_news_rating_rank_2", "baseline_news_rating_rank_3",
@@ -542,8 +549,8 @@ acq_lassos <- map2(
 
 
 # within-market version
-withincols <- c("baseline_log_total_duration_news", "baseline_log_total_duration_nonnews",
-                "baseline_log_total_spend_news", "baseline_log_total_spend_nonnews",
+withincols <- c("baseline_log_duration_news", "baseline_log_duration_nonnews",
+                "baseline_log_spend_news", "baseline_log_spend_nonnews",
                 "baseline_rating_news", "baseline_rating_nonnews")
 setFixest_etable(fitstat = ~ n + r2)
 
@@ -557,10 +564,12 @@ tablestyle  = style.tex(main="aer",
                  yesNo="\\checkmark")
 
 
+## standard errors clustered by DMA (set explicitly: fixest >= 0.13 no longer clusters on the first
+## fixed effect by default)
 within_acq_all <- feols(c(acquiredby_gray, acquiredby_nexstar, acquiredby_sinclair) ~
         .[withincols]
         + previous_gray_acq + previous_nexstar_acq + previous_sinclair_acq
-      | dmacode + semester, data = notyet_treated)
+      | dmacode + semester, data = notyet_treated, vcov = ~ dmacode)
 
 etable(within_acq_all,
     style.tex = tablestyle,
