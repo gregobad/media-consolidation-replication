@@ -1,0 +1,40 @@
+{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{8}{c}} \toprule
+                    &\multicolumn{1}{c}{Baseline}&\multicolumn{1}{c}{Outcome}&\multicolumn{3}{c}{Sample}                     &\multicolumn{2}{c}{Treatment}  \\\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-6}\cmidrule(lr){7-8}
+                    &               &     Winsor.   &        Full   &    Balanced   &    Pre-2018   &        O\&O   &SSA/JSA \\ \ & (1) & (2) & (3) & (4) & (5) & (6) & (7)   \\
+\midrule \ & \multicolumn{7}{c}{Panel A: Differences-in-Differences} \\\cmidrule(lr){2-8}
+Post-Acquisition, Sinclair&       0.055***&       0.055***&       0.052*  &       0.062***&       0.038** &       0.045** &       0.048** \\
+                    &     (0.020)   &     (0.020)   &     (0.031)   &     (0.020)   &     (0.018)   &     (0.018)   &     (0.018)   \\
+Post-Acquisition, Nexstar&       0.051***&       0.051***&       0.029*  &       0.052***&       0.040** &       0.050***&       0.046***\\
+                    &     (0.013)   &     (0.013)   &     (0.017)   &     (0.013)   &     (0.016)   &     (0.014)   &     (0.013)   \\
+Post-Acquisition, Gray&       0.039*  &       0.039*  &       0.050*  &       0.037   &       0.026   &       0.042*  &       0.042*  \\
+                    &     (0.022)   &     (0.022)   &     (0.028)   &     (0.023)   &     (0.044)   &     (0.022)   &     (0.022)   \\
+\midrule
+Station FEs         &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   \\
+Month FEs           &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   \\
+Controls            &  \checkmark   &  \checkmark   &               &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   \\
+\midrule Observations&       68651   &       68651   &       71086   &       65124   &       53594   &       68651   &       68651   \\
+Stations            &         644   &         644   &         688   &         603   &         644   &         644   &         644   \\
+DMAs (Clusters)     &         206   &         206   &         206   &         201   &         206   &         206   &         206   \\
+Mean Dep. Variable  &       6.096   &       6.096   &       6.079   &       6.111   &       6.066   &       6.096   &       6.096   \\
+\midrule Sinclair = Nexstar&       0.881   &       0.880   &       0.517   &       0.698   &       0.926   &       0.809   &       0.946   \\
+Sinclair = Gray     &       0.605   &       0.594   &       0.961   &       0.413   &       0.791   &       0.907   &       0.841   \\
+Nexstar = Gray      &       0.628   &       0.615   &       0.473   &       0.544   &       0.750   &       0.725   &       0.861   \\
+\midrule \ & \multicolumn{7}{c}{Panel B: Within-Market Differences-in-Differences} \\\cmidrule(lr){2-8}
+Post-Acquisition, Sinclair&       0.063***&       0.063***&       0.066** &       0.068***&       0.045** &       0.051***&       0.053** \\
+                    &     (0.023)   &     (0.023)   &     (0.027)   &     (0.024)   &     (0.021)   &     (0.018)   &     (0.022)   \\
+Post-Acquisition, Nexstar&       0.039***&       0.040***&       0.025*  &       0.038***&       0.035** &       0.034***&       0.030** \\
+                    &     (0.012)   &     (0.012)   &     (0.014)   &     (0.012)   &     (0.016)   &     (0.012)   &     (0.013)   \\
+Post-Acquisition, Gray&       0.002   &       0.002   &      -0.036   &      -0.000   &       0.017   &       0.005   &       0.007   \\
+                    &     (0.024)   &     (0.024)   &     (0.025)   &     (0.026)   &     (0.046)   &     (0.024)   &     (0.025)   \\
+\midrule
+Station FEs         &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   \\
+DMA-By-Month FEs    &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   \\
+Controls            &  \checkmark   &  \checkmark   &               &  \checkmark   &  \checkmark   &  \checkmark   &  \checkmark   \\
+\midrule Observations&       65665   &       65665   &       68793   &       61992   &       51265   &       65665   &       65665   \\
+Stations            &         617   &         617   &         672   &         574   &         617   &         617   &         617   \\
+DMAs (Clusters)     &         179   &         179   &         190   &         172   &         179   &         179   &         179   \\
+Mean Dep. Variable  &       6.130   &       6.129   &       6.102   &       6.146   &       6.101   &       6.130   &       6.130   \\
+\midrule Sinclair = Nexstar&       0.354   &       0.352   &       0.171   &       0.264   &       0.714   &       0.436   &       0.363   \\
+Sinclair = Gray     &       0.093   &       0.093   &       0.009   &       0.077   &       0.582   &       0.120   &       0.190   \\
+Nexstar = Gray      &       0.179   &       0.179   &       0.030   &       0.178   &       0.716   &       0.271   &       0.407   \\
+\bottomrule \end{tabular}}

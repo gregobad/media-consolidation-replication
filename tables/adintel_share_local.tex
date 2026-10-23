@@ -1,0 +1,25 @@
+{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{5}{c}} \toprule \ & \multicolumn{4}{c}{Share Multi-Market Advertisers} \\\cmidrule(lr){2-5}
+                &\multicolumn{2}{c}{By Duration}&\multicolumn{2}{c}{By Revenue}\\\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+                &\multicolumn{1}{c}{(1)}   &\multicolumn{1}{c}{(2)}   &\multicolumn{1}{c}{(3)}   &\multicolumn{1}{c}{(4)}   \\
+\midrule
+Post-Acquisition, Sinclair&    0.018***&    0.015***&    0.016***&    0.013***\\
+                &  (0.006)   &  (0.005)   &  (0.006)   &  (0.005)   \\
+Post-Acquisition, Nexstar&   -0.004   &   -0.005   &   -0.003   &   -0.004   \\
+                &  (0.005)   &  (0.005)   &  (0.004)   &  (0.005)   \\
+Post-Acquisition, Gray&    0.005   &    0.008   &    0.005   &    0.008   \\
+                &  (0.004)   &  (0.005)   &  (0.004)   &  (0.005)   \\
+\midrule
+Station FEs     &\checkmark   &\checkmark   &\checkmark   &\checkmark   \\
+Month FEs       &\checkmark   &            &\checkmark   &            \\
+DMA-By-Month FEs&            &\checkmark   &            &\checkmark   \\
+Controls        &\checkmark   &\checkmark   &\checkmark   &\checkmark   \\
+\midrule Observations&    68651   &    65665   &    68651   &    65665   \\
+Stations        &      644   &      617   &      644   &      617   \\
+DMAs (Clusters) &      206   &      179   &      206   &      179   \\
+Mean Dep. Variable&    0.841   &    0.836   &    0.838   &    0.833   \\
+\midrule Sinclair = Nexstar&    0.004   &    0.005   &    0.011   &    0.013   \\
+Sinclair = Gray &    0.086   &    0.370   &    0.131   &    0.518   \\
+Nexstar = Gray  &    0.102   &    0.043   &    0.140   &    0.061   \\
+\bottomrule
+\end{tabular}
+}

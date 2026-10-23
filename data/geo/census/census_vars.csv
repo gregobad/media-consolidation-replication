@@ -1,0 +1,260 @@
+var,definition
+H7V001,Total Population
+H7W002,Urban
+H7W005,Rural
+H7X002,White alone
+H7X003,Black or African American alone
+H7X004,American Indian and Alaska Nativ
+H7X005,Asian alone
+H7X006,Native Hawaiian and Other Pacifi
+IFE001,Total Housing Units
+IFE002,Occupied Housing Units
+IFE003,Vacant Housing Units
+JLZE001,Total Population
+JLZE002,Male
+JLZE026,Female
+JM2E001,Total Workers 16 years and over
+JM2E002,Less than 5 minutes
+JM2E003,5 to 9 minutes
+JM2E004,10 to 14 minutes
+JM2E005,15 to 19 minutes
+JM2E006,20 to 24 minutes
+JM2E007,25 to 29 minutes
+JM2E008,30 to 34 minutes
+JM2E009,35 to 39 minutes
+JM2E010,40 to 44 minutes
+JM2E011,45 to 59 minutes
+JM2E012,60 to 89 minutes
+JM2E013,90 or more minutes
+JM5E001,Total Households
+JM5E002,Family households
+JM5E003,Family households: Married
+JM5E004,Family households: Other family
+JM5E005,"Family households: Other family: Male householder, no wife present"
+JM5E006,"Family households: Other family: Female householder, no husband present"
+JM5E007,Nonfamily households
+JM5E008,Nonfamily households: Householder living alone
+JM5E009,Nonfamily households: Householder not living alone
+JN9E001,Total Population 25 years and over
+JN9E002,Male
+JN9E003,Male: No schooling completed
+JN9E004,Male: Nursery to 4th grade
+JN9E005,Male: 5th and 6th grade
+JN9E006,Male: 7th and 8th grade
+JN9E007,Male: 9th grade
+JN9E008,Male: 10th grade
+JN9E009,Male: 11th grade
+JN9E010,"Male: 12th grade, no diploma"
+JN9E011,"Male: High school graduate, GED, or alternative"
+JN9E012,"Male: Some college, less than 1 year"
+JN9E013,"Male: Some college, 1 or more years, no degree"
+JN9E014,Male: Associate's degree
+JN9E015,Male: Bachelor's degree
+JN9E016,Male: Master's degree
+JN9E017,Male: Professional school degree
+JN9E018,Male: Doctorate degree
+JN9E019,Female
+JN9E020,Female: No schooling completed
+JN9E021,Female: Nursery to 4th grade
+JN9E022,Female: 5th and 6th grade
+JN9E023,Female: 7th and 8th grade
+JN9E024,Female: 9th grade
+JN9E025,Female: 10th grade
+JN9E026,Female: 11th grade
+JN9E027,"Female: 12th grade, no diploma"
+JN9E028,"Female: High school graduate, GED, or alternative"
+JN9E029,"Female: Some college, less than 1 year"
+JN9E030,"Female: Some college, 1 or more years, no degree"
+JN9E031,Female: Associate's degree
+JN9E032,Female: Bachelor's degree
+JN9E033,Female: Master's degree
+JN9E034,Female: Professional school degree
+JN9E035,Female: Doctorate degree
+JOCE001,Total Population for whom poverty status is determined
+JOCE002,Under .50
+JOCE003,.50 to .99
+JOCE004,1.00 to 1.24
+JOCE005,1.25 to 1.49
+JOCE006,1.50 to 1.84
+JOCE007,1.85 to 1.99
+JOCE008,2.00 and over
+JOIE001,Median household income in the past 12 months (in 2010 inflation
+JQBE001,Per capita income in the past 12 months (in 2010 inflation
+JRKE001,Total Occupied housing units
+JRKE002,Owner occupied
+JRKE003,Renter occupied
+JS5E001,Median gross rent
+JTIE001,Median value (dollars) Owner
+J6QE001,Total
+J6QE002,Male
+J6QE003,Male: 16 to 19 years
+J6QE004,Male: 16 to 19 years: In labor force
+J6QE005,Male: 16 to 19 years: In labor force: In Armed Forces
+J6QE006,Male: 16 to 19 years: In labor force: Civilian
+J6QE007,Male: 16 to 19 years: In labor force: Civilian: Emplo
+J6QE008,Male: 16 to 19 years: In labor force: Civilian: Unemp
+J6QE009,Male: 16 to 19 years: Not in labor force
+J6QE010,Male: 20 and 21 years
+J6QE011,Male: 20 and 21 years: In labor force
+J6QE012,Male: 20 and 21 years: In labor force: In Armed Force
+J6QE013,Male: 20 and 21 years: In labor force: Civilian
+J6QE014,Male: 20 and 21 years: In labor force: Civilian: Empl
+J6QE015,Male: 20 and 21 years: In labor force: Civilian: Unem
+J6QE016,Male: 20 and 21 years: Not in labor force
+J6QE017,Male: 22 to 24 years
+J6QE018,Male: 22 to 24 years: In labor force
+J6QE019,Male: 22 to 24 years: In labor force: In Armed Forces
+J6QE020,Male: 22 to 24 years: In labor force: Civilian
+J6QE021,Male: 22 to 24 years: In labor force: Civilian: Emplo
+J6QE022,Male: 22 to 24 years: In labor force: Civilian: Unemp
+J6QE023,Male: 22 to 24 years: Not in labor force
+J6QE024,Male: 25 to 29 years
+J6QE025,Male: 25 to 29 years: In labor force
+J6QE026,Male: 25 to 29 years: In labor force: In Armed Forces
+J6QE027,Male: 25 to 29 years: In labor force: Civilian
+J6QE028,Male: 25 to 29 years: In labor force: Civilian: Emplo
+J6QE029,Male: 25 to 29 years: In labor force: Civilian: Unemp
+J6QE030,Male: 25 to 29 years: Not in labor force
+J6QE031,Male: 30 to 34 years
+J6QE032,Male: 30 to 34 years: In labor force
+J6QE033,Male: 30 to 34 years: In labor force: In Armed Forces
+J6QE034,Male: 30 to 34 years: In labor force: Civilian
+J6QE035,Male: 30 to 34 years: In labor force: Civilian: Emplo
+J6QE036,Male: 30 to 34 years: In labor force: Civilian: Unemp
+J6QE037,Male: 30 to 34 years: Not in labor force
+J6QE038,Male: 35 to 44 years
+J6QE039,Male: 35 to 44 years: In labor force
+J6QE040,Male: 35 to 44 years: In labor force: In Armed Forces
+J6QE041,Male: 35 to 44 years: In labor force: Civilian
+J6QE042,Male: 35 to 44 years: In labor force: Civilian: Emplo
+J6QE043,Male: 35 to 44 years: In labor force: Civilian: Unemp
+J6QE044,Male: 35 to 44 years: Not in labor force
+J6QE045,Male: 45 to 54 years
+J6QE046,Male: 45 to 54 years: In labor force
+J6QE047,Male: 45 to 54 years: In labor force: In Armed Forces
+J6QE048,Male: 45 to 54 years: In labor force: Civilian
+J6QE049,Male: 45 to 54 years: In labor force: Civilian: Emplo
+J6QE050,Male: 45 to 54 years: In labor force: Civilian: Unemp
+J6QE051,Male: 45 to 54 years: Not in labor force
+J6QE052,Male: 55 to 59 years
+J6QE053,Male: 55 to 59 years: In labor force
+J6QE054,Male: 55 to 59 years: In labor force: In Armed Forces
+J6QE055,Male: 55 to 59 years: In labor force: Civilian
+J6QE056,Male: 55 to 59 years: In labor force: Civilian: Emplo
+J6QE057,Male: 55 to 59 years: In labor force: Civilian: Unemp
+J6QE058,Male: 55 to 59 years: Not in labor force
+J6QE059,Male: 60 and 61 years
+J6QE060,Male: 60 and 61 years: In labor force
+J6QE061,Male: 60 and 61 years: In labor force: In Armed Force
+J6QE062,Male: 60 and 61 years: In labor force: Civilian
+J6QE063,Male: 60 and 61 years: In labor force: Civilian: Empl
+J6QE064,Male: 60 and 61 years: In labor force: Civilian: Unem
+J6QE065,Male: 60 and 61 years: Not in labor force
+J6QE066,Male: 62 to 64 years
+J6QE067,Male: 62 to 64 years: In labor force
+J6QE068,Male: 62 to 64 years: In labor force: In Armed Forces
+J6QE069,Male: 62 to 64 years: In labor force: Civilian
+J6QE070,Male: 62 to 64 years: In labor force: Civilian: Emplo
+J6QE071,Male: 62 to 64 years: In labor force: Civilian: Unemp
+J6QE072,Male: 62 to 64 years: Not in labor force
+J6QE073,Male: 65 to 69 years
+J6QE074,Male: 65 to 69 years: In labor force
+J6QE075,Male: 65 to 69 years: In labor force: Employed
+J6QE076,Male: 65 to 69 years: In labor force: Unemployed
+J6QE077,Male: 65 to 69 years: Not in labor force
+J6QE078,Male: 70 to 74 years
+J6QE079,Male: 70 to 74 years: In labor force
+J6QE080,Male: 70 to 74 years: In labor force: Employed
+J6QE081,Male: 70 to 74 years: In labor force: Unemployed
+J6QE082,Male: 70 to 74 years: Not in labor force
+J6QE083,Male: 75 years and over
+J6QE084,Male: 75 years and over: In labor force
+J6QE085,Male: 75 years and over: In labor force: Employed
+J6QE086,Male: 75 years and over: In labor force: Unemployed
+J6QE087,Male: 75 years and over: Not in labor force
+J6QE088,Female
+J6QE089,Female: 16 to 19 years
+J6QE090,Female: 16 to 19 years: In labor force
+J6QE091,Female: 16 to 19 years: In labor force: In Armed Forc
+J6QE092,Female: 16 to 19 years: In labor force: Civilian
+J6QE093,Female: 16 to 19 years: In labor force: Civilian: Emp
+J6QE094,Female: 16 to 19 years: In labor force: Civilian: Une
+J6QE095,Female: 16 to 19 years: Not in labor force
+J6QE096,Female: 20 and 21 years
+J6QE097,Female: 20 and 21 years: In labor force
+J6QE098,Female: 20 and 21 years: In labor force: In Armed For
+J6QE099,Female: 20 and 21 years: In labor force: Civilian
+J6QE100,Female: 20 and 21 years: In labor force: Civilian: Em
+J6QE101,Female: 20 and 21 years: In labor force: Civilian: Un
+J6QE102,Female: 20 and 21 years: Not in labor force
+J6QE103,Female: 22 to 24 years
+J6QE104,Female: 22 to 24 years: In labor force
+J6QE105,Female: 22 to 24 years: In labor force: In Armed Forc
+J6QE106,Female: 22 to 24 years: In labor force: Civilian
+J6QE107,Female: 22 to 24 years: In labor force: Civilian: Emp
+J6QE108,Female: 22 to 24 years: In labor force: Civilian: Une
+J6QE109,Female: 22 to 24 years: Not in labor force
+J6QE110,Female: 25 to 29 years
+J6QE111,Female: 25 to 29 years: In labor force
+J6QE112,Female: 25 to 29 years: In labor force: In Armed Forc
+J6QE113,Female: 25 to 29 years: In labor force: Civilian
+J6QE114,Female: 25 to 29 years: In labor force: Civilian: Emp
+J6QE115,Female: 25 to 29 years: In labor force: Civilian: Une
+J6QE116,Female: 25 to 29 years: Not in labor force
+J6QE117,Female: 30 to 34 years
+J6QE118,Female: 30 to 34 years: In labor force
+J6QE119,Female: 30 to 34 years: In labor force: In Armed Forc
+J6QE120,Female: 30 to 34 years: In labor force: Civilian
+J6QE121,Female: 30 to 34 years: In labor force: Civilian: Emp
+J6QE122,Female: 30 to 34 years: In labor force: Civilian: Une
+J6QE123,Female: 30 to 34 years: Not in labor force
+J6QE124,Female: 35 to 44 years
+J6QE125,Female: 35 to 44 years: In labor force
+J6QE126,Female: 35 to 44 years: In labor force: In Armed Forc
+J6QE127,Female: 35 to 44 years: In labor force: Civilian
+J6QE128,Female: 35 to 44 years: In labor force: Civilian: Emp
+J6QE129,Female: 35 to 44 years: In labor force: Civilian: Une
+J6QE130,Female: 35 to 44 years: Not in labor force
+J6QE131,Female: 45 to 54 years
+J6QE132,Female: 45 to 54 years: In labor force
+J6QE133,Female: 45 to 54 years: In labor force: In Armed Forc
+J6QE134,Female: 45 to 54 years: In labor force: Civilian
+J6QE135,Female: 45 to 54 years: In labor force: Civilian: Emp
+J6QE136,Female: 45 to 54 years: In labor force: Civilian: Une
+J6QE137,Female: 45 to 54 years: Not in labor force
+J6QE138,Female: 55 to 59 years
+J6QE139,Female: 55 to 59 years: In labor force
+J6QE140,Female: 55 to 59 years: In labor force: In Armed Forc
+J6QE141,Female: 55 to 59 years: In labor force: Civilian
+J6QE142,Female: 55 to 59 years: In labor force: Civilian: Emp
+J6QE143,Female: 55 to 59 years: In labor force: Civilian: Une
+J6QE144,Female: 55 to 59 years: Not in labor force
+J6QE145,Female: 60 and 61 years
+J6QE146,Female: 60 and 61 years: In labor force
+J6QE147,Female: 60 and 61 years: In labor force: In Armed For
+J6QE148,Female: 60 and 61 years: In labor force: Civilian
+J6QE149,Female: 60 and 61 years: In labor force: Civilian: Em
+J6QE150,Female: 60 and 61 years: In labor force: Civilian: Un
+J6QE151,Female: 60 and 61 years: Not in labor force
+J6QE152,Female: 62 to 64 years
+J6QE153,Female: 62 to 64 years: In labor force
+J6QE154,Female: 62 to 64 years: In labor force: In Armed Forc
+J6QE155,Female: 62 to 64 years: In labor force: Civilian
+J6QE156,Female: 62 to 64 years: In labor force: Civilian: Emp
+J6QE157,Female: 62 to 64 years: In labor force: Civilian: Une
+J6QE158,Female: 62 to 64 years: Not in labor force
+J6QE159,Female: 65 to 69 years
+J6QE160,Female: 65 to 69 years: In labor force
+J6QE161,Female: 65 to 69 years: In labor force: Employed
+J6QE162,Female: 65 to 69 years: In labor force: Unemployed
+J6QE163,Female: 65 to 69 years: Not in labor force
+J6QE164,Female: 70 to 74 years
+J6QE165,Female: 70 to 74 years: In labor force
+J6QE166,Female: 70 to 74 years: In labor force: Employed
+J6QE167,Female: 70 to 74 years: In labor force: Unemployed
+J6QE168,Female: 70 to 74 years: Not in labor force
+J6QE169,Female: 75 years and over
+J6QE170,Female: 75 years and over: In labor force
+J6QE171,Female: 75 years and over: In labor force: Employed
+J6QE172,Female: 75 years and over: In labor force: Unemployed
+J6QE173,Female: 75 years and over: Not in labor force

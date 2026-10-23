@@ -1,0 +1,28 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{6}{c}}
+\toprule
+                &\multicolumn{2}{c}{Mayors}&\multicolumn{2}{c}{State Legislators}&\multicolumn{2}{c}{House Representatives}\\\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+                &\multicolumn{1}{c}{(1)}   &\multicolumn{1}{c}{(2)}   &\multicolumn{1}{c}{(3)}   &\multicolumn{1}{c}{(4)}   &\multicolumn{1}{c}{(5)}   &\multicolumn{1}{c}{(6)}   \\
+\midrule
+Post-Acquisition, Sinclair&   -0.056***&   -0.040** &   -0.048***&   -0.046***&   -0.015   &   -0.031** \\
+                &  (0.017)   &  (0.016)   &  (0.017)   &  (0.011)   &  (0.022)   &  (0.013)   \\
+Post-Acquisition, Nexstar&    0.032** &    0.041***&    0.021   &    0.040***&    0.032   &    0.022*  \\
+                &  (0.014)   &  (0.015)   &  (0.013)   &  (0.011)   &  (0.021)   &  (0.012)   \\
+Post-Acquisition, Gray&    0.006   &    0.007   &    0.005   &    0.003   &    0.018   &    0.025   \\
+                &  (0.011)   &  (0.012)   &  (0.014)   &  (0.016)   &  (0.023)   &  (0.018)   \\
+\midrule
+Station FEs     &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   \\
+Month FEs       &\checkmark   &            &\checkmark   &            &\checkmark   &            \\
+DMA-By-Month FEs&            &\checkmark   &            &\checkmark   &            &\checkmark   \\
+Controls        &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   \\
+\midrule Observations&    52772   &    50614   &    52772   &    50614   &    52772   &    50614   \\
+Stations        &      638   &      613   &      638   &      613   &      638   &      613   \\
+DMAs (Clusters) &      204   &      179   &      204   &      179   &      204   &      179   \\
+Mean Dep. Variable&    0.118   &    0.121   &    0.110   &    0.110   &    0.150   &    0.153   \\
+\midrule Sinclair = Nexstar&    0.001   &    0.001   &    0.002   &    0.000   &    0.107   &    0.002   \\
+Sinclair = Gray &    0.002   &    0.015   &    0.014   &    0.015   &    0.305   &    0.014   \\
+Nexstar = Gray  &    0.151   &    0.063   &    0.360   &    0.043   &    0.634   &    0.887   \\
+\bottomrule
+\end{tabular}
+}
