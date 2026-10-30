@@ -70,6 +70,9 @@ mayors <- glue("{proj_dir}/data/elections/mayor_candidates_export_220627.rds") %
     .[city == "Carson" & state == "NV", city := "Carson City"] %>%
     .[city == "Boise City" & state == "ID", city := "Boise"]
 
+## NOTE: uscities.csv is the proprietary simplemaps US Cities Pro database
+## (see README, "Sources for Proprietary Data Sets"). Only a truncated sample
+## is included in this archive; the full file is required to run this script.
 citygeo <- glue("{proj_dir}/data/geo/uscities.csv") %>%
     fread %>%
     .[, .(city, state = state_id, zips)] %>%
