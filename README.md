@@ -6,15 +6,20 @@ Contact for questions about the replication files: Gregory J. Martin, Stanford G
 
 # How to Use This Archive
 
-1. Stata scripts in `data_construction` construct the analysis datasets from the raw data. Several of these depend on proprietary data that is not included in the archive (see "Sources for Proprietary Data Sets" below). The scripts must be run in the order given by their numeric prefix; `MASTER.do` at the root of the archive calls them in the right order. Scripts whose inputs are not included are commented out in `MASTER.do`, but their *outputs* are included wherever the data license allows, so that downstream scripts can be run.
+1. Two additional sets of scripts are intended to run on secure institutional servers because they process licensed raw data that is not included in the archive.
 
-2. Stata and R scripts in `analysis` produce every table and figure in the manuscript and appendices from the processed data. The Stata scripts are also called by `MASTER.do`; the R scripts are run separately. See below for indices describing which script produces each table or figure. Most tables and figures depend on proprietary data (Nielsen Ad Intel and/or TVEyes transcripts); this is noted in the indices.
+- `adintel_server/00_clean_adintel.R` processes the Nielsen Ad Intel data, and was run on cluster hardware. It creates the cleaned station-by-month and station-by-day data used downstream by `data_construction/06_cleans_adintel_data.do` and the Nielsen-based analysis files.
+- `harmony_server/` contains the TVEyes transcript-processing scripts that run on Harmony Labs' secure infrastructure: `00_filter_national_shows.R` identifies recurring national-show transcripts to exclude, `01_parse_tveyes.R` searches the transcript archive for local place and politician mentions, and `02_stack_harmony.R` / `02_mentions_by_politician.R` aggregate the resulting counts into the station-month files used by `data_construction/05_cleans_content_data.do` and the content analysis tables and figures.
 
-3. Before running anything, set the path to the root of this archive:
+2. Stata scripts in `data_construction` construct the analysis datasets from the raw data. Several of these depend on proprietary data that is not included in the archive (see "Sources for Proprietary Data Sets" below). The scripts must be run in the order given by their numeric prefix; `MASTER.do` at the root of the archive calls them in the right order. Scripts whose inputs are not included are commented out in `MASTER.do`, but their *outputs* are included wherever the data license allows, so that downstream scripts can be run.
+
+3. Stata and R scripts in `analysis` produce every table and figure in the manuscript and appendices from the processed data. The Stata scripts are also called by `MASTER.do`; the R scripts are run separately. See below for indices describing which script produces each table or figure. Most tables and figures depend on proprietary data (Nielsen Ad Intel and/or TVEyes transcripts); this is noted in the indices.
+
+4. Before running anything, set the path to the root of this archive:
    - Stata: edit `global PATH` in `00_setup.do`. `MASTER.do` runs `00_setup.do` first; if you run individual scripts, run `00_setup.do` first in the same session. All Stata scripts use paths relative to the archive root (or the global `${PATH}`).
    - R and Python: edit `path_to_archive` at the top of each script.
 
-4. Outputs are written to `tables/` (LaTeX fragments, `\input` by the manuscript) and `figures/` (PDF/PNG). The archive ships with the versions of these files that appear in the published manuscript, so a replicator can compare re-generated output to the originals. Four tables received small manual edits after being produced by Stata; these are documented in "Manual edits to script output" below.
+5. Outputs are written to `tables/` (LaTeX fragments, `\input` by the manuscript) and `figures/` (PDF/PNG). The archive ships with the versions of these files that appear in the published manuscript, so a replicator can compare re-generated output to the originals. Four tables received small manual edits after being produced by Stata; these are documented in "Manual edits to script output" below.
 
 ## Software
 
@@ -182,13 +187,15 @@ Three public datasets are omitted because of their size. Download them and place
 
 # Sources for Proprietary Data Sets
 
-Three proprietary data sets are used in the paper. The scripts that read them are listed; their derived station-by-month aggregates and analysis files are not redistributed, in keeping with the data providers' terms.
+Four proprietary data sets are used in the paper. The scripts that read them are listed; their derived station-by-month aggregates and analysis files are not redistributed, in keeping with the data providers' terms.
 
 1. **Nielsen Ad Intel.** Advertising occurrences (duration, estimated spending) and impressions for local TV, 2010-2019. Used to construct all advertising and viewership outcomes, the baseline station controls, and the analytical sample. Required by `data_construction/06_cleans_adintel_data.do`, `07_gets_stations_baseline_characteristics_2010.do` and `analysis/predict_acquisitions.R` and, through their outputs, by every other analysis script except `donations.R`. We accessed the data through the Nielsen Datasets at the Kilts Center for Marketing, University of Chicago Booth School of Business: https://www.chicagobooth.edu/research/kilts/research-data/nielsen. Researchers at subscribing institutions can request access through their institution's Kilts contact; others should contact the Kilts Center at the address on that page. The station-by-month aggregation of the raw Ad Intel files (producing `data/adintel/adintel_clean_yearmonth.csv`) was run on the Kilts-licensed copy of the data and follows the definitions in Appendix E of the manuscript.
 
 2. **TVEyes local TV news transcripts.** Closed-caption transcripts of all local newscasts, January 2013-December 2019, archived by Harmony Labs. Used to construct the local-coverage outcomes (mentions of local places and politicians). Required by `data_construction/05_cleans_content_data.do` and, through its output, by the content tables and figures. Transcripts can be licensed directly from TVEyes (https://www.tveyes.com) or accessed through Harmony Labs (https://harmonylabs.org), which makes the archive available to academic researchers. The mention counts (producing `data/harmony/harmony_mentions_station_month.csv` and `harmony_mentions_station_cong_district_month.csv`) were computed on Harmony Labs' infrastructure as described in Appendix E; the lists of place and politician names used are drawn from the sources cited there (Census place and county names; Warshaw's mayoral candidate list; Follow the Money state legislative candidate filings; DIME US House candidates).
 
 3. **BIA/Kelsey Media Access Pro.** Yearly station affiliation, market, and owner, 2009-2017, used to define the sample of Big Four affiliates and the set of stations owned by each group at baseline. Required by `data_construction/01_gets_fccids_for_scraping.do` and `04_creates_acquisition_panel_top3.do`; their outputs (the acquisition panels) are included, so no downstream script needs this file. Contact BIA Advisory Services (https://www.bia.com) for licensing.
+
+4. **simplemaps US Cities Pro.** US city database (geographic coordinates, ZIP codes, and county/state linkage) used to map municipalities to DMAs for the local-place and local-politician mention counts. Required by `harmony_server/01_parse_tveyes.R`. Only a truncated sample is included at `data/geo/uscities.csv`; the full file is needed to run the script. Available from the simplemaps.com US Cities Pro database (v 1.76): https://simplemaps.com/data/us-cities.
 
 # Data dictionary
 
