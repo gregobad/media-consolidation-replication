@@ -6,15 +6,20 @@ Contact for questions about the replication files: Gregory J. Martin, Stanford G
 
 # How to Use This Archive
 
-1. Stata scripts in `data_construction` construct the analysis datasets from the raw data. Several of these depend on proprietary data that is not included in the archive (see "Sources for Proprietary Data Sets" below). The scripts must be run in the order given by their numeric prefix; `MASTER.do` at the root of the archive calls them in the right order. Scripts whose inputs are not included are commented out in `MASTER.do`, but their *outputs* are included wherever the data license allows, so that downstream scripts can be run.
+1. Two additional sets of scripts are intended to run on secure institutional servers because they process licensed raw data that is not included in the archive.
 
-2. Stata and R scripts in `analysis` produce every table and figure in the manuscript and appendices from the processed data. The Stata scripts are also called by `MASTER.do`; the R scripts are run separately. See below for indices describing which script produces each table or figure. Most tables and figures depend on proprietary data (Nielsen Ad Intel and/or TVEyes transcripts); this is noted in the indices.
+- `adintel_server/00_clean_adintel.R` processes the Nielsen Ad Intel data, and was run on cluster hardware. It creates the cleaned station-by-month and station-by-day data used downstream by `data_construction/06_cleans_adintel_data.do` and the Nielsen-based analysis files.
+- `harmony_server/` contains the TVEyes transcript-processing scripts that run on Harmony Labs' secure infrastructure: `00_filter_national_shows.R` identifies recurring national-show transcripts to exclude, `01_parse_tveyes.R` searches the transcript archive for local place and politician mentions, and `02_stack_harmony.R` / `02_mentions_by_politician.R` aggregate the resulting counts into the station-month files used by `data_construction/05_cleans_content_data.do` and the content analysis tables and figures.
 
-3. Before running anything, set the path to the root of this archive:
+2. Stata scripts in `data_construction` construct the analysis datasets from the raw data. Several of these depend on proprietary data that is not included in the archive (see "Sources for Proprietary Data Sets" below). The scripts must be run in the order given by their numeric prefix; `MASTER.do` at the root of the archive calls them in the right order. Scripts whose inputs are not included are commented out in `MASTER.do`, but their *outputs* are included wherever the data license allows, so that downstream scripts can be run.
+
+3. Stata and R scripts in `analysis` produce every table and figure in the manuscript and appendices from the processed data. The Stata scripts are also called by `MASTER.do`; the R scripts are run separately. See below for indices describing which script produces each table or figure. Most tables and figures depend on proprietary data (Nielsen Ad Intel and/or TVEyes transcripts); this is noted in the indices.
+
+4. Before running anything, set the path to the root of this archive:
    - Stata: edit `global PATH` in `00_setup.do`. `MASTER.do` runs `00_setup.do` first; if you run individual scripts, run `00_setup.do` first in the same session. All Stata scripts use paths relative to the archive root (or the global `${PATH}`).
    - R and Python: edit `path_to_archive` at the top of each script.
 
-4. Outputs are written to `tables/` (LaTeX fragments, `\input` by the manuscript) and `figures/` (PDF/PNG). The archive ships with the versions of these files that appear in the published manuscript, so a replicator can compare re-generated output to the originals. Four tables received small manual edits after being produced by Stata; these are documented in "Manual edits to script output" below.
+5. Outputs are written to `tables/` (LaTeX fragments, `\input` by the manuscript) and `figures/` (PDF/PNG). The archive ships with the versions of these files that appear in the published manuscript, so a replicator can compare re-generated output to the originals. Four tables received small manual edits after being produced by Stata; these are documented in "Manual edits to script output" below.
 
 ## Software
 
