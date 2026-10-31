@@ -137,7 +137,7 @@ mayors[, pol_id := 1:.N]
 ### Read state leg candidate names
 ###
 
-candidates_stleg <- c("ftm_bycandidate_stateleg.csv", "ftm_bycandidate_stateleg_2020-2022.csv") %>%
+candidates_stleg <- c("ftm_bycandidate_stateleg_2012-2019.csv", "ftm_bycandidate_stateleg_2020-2022.csv") %>%
     map(~ glue("{proj_dir}/data/elections/{.}") %>% fread) %>% rbindlist(fill = TRUE)
 
 ## add prior non-election years for incumbents
