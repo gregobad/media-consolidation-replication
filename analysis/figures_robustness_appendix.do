@@ -1527,7 +1527,6 @@ g semester=ceil(month/6)
 
 collapse (mean) duration_perHH_news spend_perHH_news $station_controls (max) station_ownedby_* (min) date  dmacode, by(stationID year semester)
 
-g log_spending_perHH_news = log(duration_perHH_news)
 g log_spend_perHH_news = log(spend_perHH_news)
 
 // CREATES ALL THE NECESSARY VARIABLES TO RUN EVENT STUDIES 
@@ -2427,7 +2426,7 @@ twoway  (rspike max95 min95  time if gray==1, lc(gs11) lwidth(medium)) ///
 		xlabel(-5 "{&le}-5" -4 "-4" -3 "-3" -2 "-2" -1 "-1" 0 "0" 1 "1" 2 "2" 3 "3" 4 "4" 5 "5" 6 "{&ge}6", grid valuel glc(gs12) glp(dot)) ///
 		xline(-1, lc(black) lwidth(vthin) lp(solid)) ///
 		ytick(, notick nolabel) xsize(5.5) ysize(4) ///
-		ylabel(-7.5(2.5)5, glc(gs12) glp(dot) format(%4.1f)) ///
+		ylabel(-1.5(1.5)3, glc(gs12) glp(dot) format(%4.1f)) ///
 		yline(0, lc(black) lwidth(vthin) lp(solid)) ///
 		ytitle("Coefficient estimates, 95% CI", c(black)) ///
 		xtitle("Semesters since/to acquisition", c(black)) ///
@@ -3027,7 +3026,9 @@ drop if year==2020
 
 g semester=ceil(month/6)
 
-collapse (mean) log_imp_total_news $station_controls (max) station_ownedby_* (min) date  dmacode, by(stationID year semester)
+collapse (mean) imp_total_news $station_controls (max) station_ownedby_* (min) date  dmacode, by(stationID year semester)
+
+g log_imp_total_news = log(imp_total_news)
 
 // CREATES ALL THE NECESSARY VARIABLES TO RUN EVENT STUDIES 
 

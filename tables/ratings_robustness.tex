@@ -2,39 +2,39 @@
                 &\multicolumn{1}{c}{Baseline}&\multicolumn{4}{c}{Sample}                         &\multicolumn{2}{c}{Treatment}\\\cmidrule(lr){2-2}\cmidrule(lr){3-6}\cmidrule(lr){7-8}
                 &            &     Full   & Balanced   &     Post   &    Sweep   &     O\&O   &SSA/JSA \\ \  & \ & \ & \ & 2014 & Months & \ & \ \\ \  & (1) & (2) & (3) & (4) & (5) & (6) & (7)   \\
 \midrule \ & \multicolumn{7}{c}{Panel A: Differences-in-Differences} \\\cmidrule(lr){2-8}
-Post-Acquisition, Sinclair&    0.055   &    0.086   &    0.049   &    0.204   &    0.062   &    0.049   &    0.021   \\
-                &  (0.098)   &  (0.115)   &  (0.101)   &  (0.237)   &  (0.096)   &  (0.100)   &  (0.090)   \\
-Post-Acquisition, Nexstar&    0.085   &    0.147*  &    0.090   &    0.074   &    0.068   &    0.089   &    0.058   \\
-                &  (0.056)   &  (0.080)   &  (0.058)   &  (0.059)   &  (0.059)   &  (0.056)   &  (0.050)   \\
+Post-Acquisition, Sinclair&    0.055   &    0.086   &    0.047   &    0.204   &    0.061   &    0.048   &    0.021   \\
+                &  (0.098)   &  (0.115)   &  (0.101)   &  (0.236)   &  (0.096)   &  (0.100)   &  (0.090)   \\
+Post-Acquisition, Nexstar&    0.086   &    0.147*  &    0.090   &    0.075   &    0.069   &    0.089   &    0.058   \\
+                &  (0.056)   &  (0.080)   &  (0.059)   &  (0.059)   &  (0.059)   &  (0.056)   &  (0.050)   \\
 Post-Acquisition, Gray&    0.004   &   -0.760***&    0.027   &   -0.203   &   -0.011   &    0.001   &   -0.008   \\
                 &  (0.144)   &  (0.205)   &  (0.142)   &  (0.129)   &  (0.146)   &  (0.145)   &  (0.143)   \\
 \midrule
 Station FEs     &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   \\
 Month FEs       &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   \\
 Controls        &\checkmark   &            &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   \\
-\midrule Observations&    64955   &    68007   &    61914   &    45005   &    22497   &    64955   &    64955   \\
-Stations        &      644   &      685   &      607   &      643   &      644   &      644   &      644   \\
+\midrule Observations&    64940   &    67982   &    61710   &    45004   &    22492   &    64940   &    64940   \\
+Stations        &      644   &      685   &      605   &      643   &      644   &      644   &      644   \\
 DMAs (Clusters) &      206   &      206   &      201   &      206   &      206   &      206   &      206   \\
-Mean Dep. Variable&    5.033   &    4.882   &    5.030   &    4.890   &    5.046   &    5.033   &    5.033   \\
-\midrule Sinclair = Nexstar&    0.788   &    0.651   &    0.712   &    0.601   &    0.951   &    0.719   &    0.716   \\
-Sinclair = Gray &    0.771   &    0.001   &    0.903   &    0.140   &    0.685   &    0.791   &    0.862   \\
-Nexstar = Gray  &    0.593   &    0.000   &    0.677   &    0.053   &    0.610   &    0.562   &    0.659   \\
+Mean Dep. Variable&    5.034   &    4.883   &    5.041   &    4.891   &    5.047   &    5.034   &    5.034   \\
+\midrule Sinclair = Nexstar&    0.782   &    0.651   &    0.707   &    0.606   &    0.947   &    0.712   &    0.710   \\
+Sinclair = Gray &    0.773   &    0.001   &    0.909   &    0.139   &    0.686   &    0.792   &    0.864   \\
+Nexstar = Gray  &    0.591   &    0.000   &    0.680   &    0.052   &    0.609   &    0.560   &    0.658   \\
 \midrule \ & \multicolumn{7}{c}{Panel B: Within-Market Differences-in-Differences} \\\cmidrule(lr){2-8}
-Post-Acquisition, Sinclair&    0.086   &    0.105   &    0.037   &    0.054   &    0.083   &    0.087   &    0.029   \\
+Post-Acquisition, Sinclair&    0.086   &    0.105   &    0.035   &    0.054   &    0.083   &    0.087   &    0.029   \\
                 &  (0.096)   &  (0.123)   &  (0.091)   &  (0.233)   &  (0.094)   &  (0.098)   &  (0.092)   \\
-Post-Acquisition, Nexstar&    0.149*  &    0.216*  &    0.119   &    0.069   &    0.135*  &    0.165** &    0.096   \\
+Post-Acquisition, Nexstar&    0.149*  &    0.216*  &    0.119   &    0.070   &    0.135*  &    0.165** &    0.096   \\
                 &  (0.076)   &  (0.113)   &  (0.081)   &  (0.088)   &  (0.078)   &  (0.075)   &  (0.071)   \\
-Post-Acquisition, Gray&    0.157   &   -0.706***&    0.092   &   -0.074   &    0.146   &    0.160   &    0.134   \\
+Post-Acquisition, Gray&    0.157   &   -0.706***&    0.091   &   -0.073   &    0.147   &    0.160   &    0.134   \\
                 &  (0.137)   &  (0.204)   &  (0.139)   &  (0.122)   &  (0.141)   &  (0.136)   &  (0.137)   \\
 \midrule
 Station FEs     &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   \\
 DMA-By-Month FEs&\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   \\
 Controls        &\checkmark   &            &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   \\
-\midrule Observations&    62183   &    66207   &    59058   &    43070   &    21544   &    62183   &    62183   \\
-Stations        &      617   &      669   &      579   &      616   &      617   &      617   &      617   \\
+\midrule Observations&    62168   &    66182   &    58854   &    43069   &    21539   &    62168   &    62168   \\
+Stations        &      617   &      669   &      577   &      616   &      617   &      617   &      617   \\
 DMAs (Clusters) &      179   &      190   &      173   &      179   &      179   &      179   &      179   \\
-Mean Dep. Variable&    4.744   &    4.683   &    4.724   &    4.611   &    4.758   &    4.744   &    4.744   \\
-\midrule Sinclair = Nexstar&    0.595   &    0.492   &    0.486   &    0.953   &    0.657   &    0.502   &    0.552   \\
-Sinclair = Gray &    0.683   &    0.001   &    0.751   &    0.624   &    0.719   &    0.681   &    0.541   \\
-Nexstar = Gray  &    0.958   &    0.000   &    0.872   &    0.338   &    0.946   &    0.976   &    0.811   \\
+Mean Dep. Variable&    4.745   &    4.684   &    4.735   &    4.612   &    4.759   &    4.745   &    4.745   \\
+\midrule Sinclair = Nexstar&    0.595   &    0.492   &    0.474   &    0.951   &    0.661   &    0.502   &    0.550   \\
+Sinclair = Gray &    0.681   &    0.001   &    0.744   &    0.625   &    0.719   &    0.681   &    0.539   \\
+Nexstar = Gray  &    0.956   &    0.000   &    0.869   &    0.337   &    0.943   &    0.976   &    0.810   \\
 \bottomrule \end{tabular}}

@@ -2,7 +2,7 @@
 // NUMBER OF ACQUISITIONS //
 ////////////////////////////
 
-use ${PATH}/data/acquisitions/acquisition_panel_station_top3_FINAL.dta, clear
+use "${PATH}/data/acquisitions/acquisition_panel_station_top3_FINAL.dta", clear
 
 foreach group in sinclair nexstar gray {
 	bysort stationID: egen min_`group' = min(station_ownedby_`group'_LMA)

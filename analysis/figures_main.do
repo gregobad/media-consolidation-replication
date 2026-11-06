@@ -10,57 +10,34 @@ clear all
 //////////////
 //////////////
 
-use ${PATH}/data/acquisitions/acquisition_panel_station_top3_FINAL.dta, clear
+// PANEL (A)
+
+use "${PATH}/data/acquisitions/acquisition_panel_station_top3_FINAL.dta", clear
 
 unique stationID
 // 763
 
 collapse (sum) station_ownedby_*_LMA , by(date)
 
-tw 	(line station_ownedby_gray_LMA date , lc(gs11) lw(medthick)) ///
-	(line station_ownedby_nexstar_LMA date , lc("43 176 126") lw(medthick)) ///
-	(line station_ownedby_sinclair_LMA date , lc("72 34 115") lw(medthick) ///
-	title("", color(black)) ///
-	graphregion(color(white)) bgcolor(white) ///
-	ytitle("Number of stations owned") ///
-	xtitle("") xsize(5.5) ysize(4)  ///
-	xline(683.5, lc(gs15%50) lwidth(vvthick)  lp(solid)) ///
-	text(7.5 683.5 "Nexstar acquires" "Media General",  size(small)) ///
-	xline(707.5, lc(gs15%50) lwidth(vvthick) lp(solid))  ///
-	text(7.5 707.5 "Gray acquires" "Raycom",  size(small)) ///
-	xlabel(600(12)730, valuelabel grid glc(gs12) glp(dot) format(%tmCY))  ///
-	ylabel(0(20)125, grid valuel glc(gs12) glp(dot)) ///
-	legend(on order(3 2 1) ring(0) col(1) pos(11) region(lc(white) fcolor(none))   ///
-	symy(1) symx(5) textw(15) forces ///
-	label(1 "Gray") ///
-	label(2 "Nexstar") ///
-	label(3 "Sinclair") ///
-	))
-graph export ${PATH}/figures/ownership_over_time_bygroup_top3.pdf, replace
+tw  (line station_ownedby_gray_LMA date,     lc(gs10)  lw(medthick) lp(shortdash)) ///
+    (line station_ownedby_nexstar_LMA date,  lc(gs6)   lw(medthick) lp(longdash))  ///
+    (line station_ownedby_sinclair_LMA date, lc(black) lw(medthick) lp(solid)),    ///
+    title("", color(black)) ///
+    graphregion(color(white)) bgcolor(white) ///
+    ytitle("Number of stations owned") ///
+    xtitle("") xsize(5.5) ysize(4) ///
+    xline(683.5, lc(gs15%50) lwidth(vvthick) lp(solid)) ///
+    text(7.5 683.5 "Nexstar acquires" "Media General", size(small)) ///
+    xline(707.5, lc(gs15%50) lwidth(vvthick) lp(solid)) ///
+    text(7.5 707.5 "Gray acquires" "Raycom", size(small)) ///
+    xlabel(600(12)730, valuelabel grid glc(gs12) glp(dot) format(%tmCY)) ///
+    ylabel(0(20)125, grid valuel glc(gs12) glp(dot)) ///
+    legend(on order(3 2 1) ring(0) col(1) pos(11) region(lc(white) fcolor(none)) ///
+	symy(1) symx(10) textw(15) forces ///
+	label(1 "Gray") label(2 "Nexstar") label(3 "Sinclair"))
+graph export "${PATH}/figures/ownership_over_time_bygroup_top3.pdf", replace
 
-tw 	(line station_ownedby_gray_LMA date , lc(gs11) lw(medthick)) ///
-	(line station_ownedby_nexstar_LMA date , lc("43 176 126") lw(medthick)) ///
-	(line station_ownedby_sinclair_LMA date , lc("72 34 115") lw(medthick) ///
-	title("", color(black)) ///
-	graphregion(color(white)) bgcolor(white) ///
-	ytitle("Number of stations owned") ///
-	xtitle("")  ///
-	xline(683.5, lc(gs15%50) lwidth(vvthick)  lp(solid)) ///
-	text(7.5 683.5 "Nexstar acquires" "Media General",  size(small)) ///
-	xline(707.5, lc(gs15%50) lwidth(vvthick) lp(solid))  ///
-	text(7.5 707.5 "Gray acquires" "Raycom",  size(small)) ///
-	xlabel(600(12)730, valuelabel grid glc(gs12) glp(dot) format(%tmCY))  ///
-	ylabel(0(20)125, grid valuel glc(gs12) glp(dot)) ///
-	legend(on order(3 2 1) ring(0) col(1) pos(11) region(lc(white) fcolor(none))   ///
-	symy(1) symx(5) textw(15) forces ///
-	label(1 "Gray") ///
-	label(2 "Nexstar") ///
-	label(3 "Sinclair") ///
-	))
-graph export ${PATH}/figures/ownership_over_time_bygroup_top3_wide.pdf, replace
-
-
-// PANEL BODY
+// PANEL (B)
 
 use data/adintel/adintel_clean_updated.dta, clear
 
@@ -75,7 +52,7 @@ keep dmacode date hh_total
 tempfile tv_hhs
 save `tv_hhs'
 
-use ${PATH}/data/acquisitions/acquisition_panel_dma_top3_FINAL.dta
+use "${PATH}/data/acquisitions/acquisition_panel_dma_top3_FINAL.dta", clear
 
 merge 1:1 dmacode date using  `tv_hhs'
 
@@ -123,26 +100,23 @@ foreach group in sinclair nexstar gray {
 	
 	}
 
-tw 	(line hh_total_gray date , lc(gs11) lw(medthick)) ///
-	(line hh_total_nexstar date , lc("43 176 126") lw(medthick)) ///
-	(line hh_total_sinclair date , lc("72 34 115") lw(medthick) ///
-	title("", color(black)) ///
-	graphregion(color(white)) bgcolor(white) ///
-	ytitle("Number of TV HHs") ///
-	xtitle("") xsize(5.5) ysize(4)  ///
-	xline(683.5, lc(gs15%50) lwidth(vvthick)  lp(solid)) ///
-	text(5 683.5 "Nexstar acquires" "Media General",  size(small)) ///
-	xline(707.5, lc(gs15%50) lwidth(vvthick) lp(solid))  ///
-	text(5 707.5 "Gray acquires" "Raycom",  size(small)) ///
-	xlabel(600(12)730, valuelabel grid glc(gs12) glp(dot) format(%tmCY))  ///
-	ylabel(0(10)60, grid valuel glc(gs12) glp(dot)) ///
-	legend(on order(3 2 1) ring(0) col(1) pos(11) region(lc(white) fcolor(none))   ///
-	symy(1) symx(5) textw(15) forces ///
-	label(1 "Gray") ///
-	label(2 "Nexstar") ///
-	label(3 "Sinclair") ///
-	))
-graph export ${PATH}/figures/populationreached_over_time_bygroup_top3.pdf, replace
+tw  (line hh_total_gray date,     lc(gs10)  lw(medthick) lp(shortdash)) ///
+    (line hh_total_nexstar date,  lc(gs6)   lw(medthick) lp(longdash))  ///
+    (line hh_total_sinclair date, lc(black) lw(medthick) lp(solid)),    ///
+    title("", color(black)) ///
+    graphregion(color(white)) bgcolor(white) ///
+    ytitle("TV households (millions)") ///
+    xtitle("") xsize(5.5) ysize(4) ///
+    xline(683.5, lc(gs15%50) lwidth(vvthick) lp(solid)) ///
+    text(5 683.5 "Nexstar acquires" "Media General", size(small)) ///
+    xline(707.5, lc(gs15%50) lwidth(vvthick) lp(solid)) ///
+    text(5 707.5 "Gray acquires" "Raycom", size(small)) ///
+    xlabel(600(12)730, valuelabel grid glc(gs12) glp(dot) format(%tmCY)) ///
+    ylabel(0(10)60, grid valuel glc(gs12) glp(dot)) ///
+    legend(on order(3 2 1) ring(0) col(1) pos(11) region(lc(white) fcolor(none)) ///
+	symy(1) symx(10) textw(15) forces ///
+	label(1 "Gray") label(2 "Nexstar") label(3 "Sinclair"))	
+graph export "${PATH}/figures/populationreached_over_time_bygroup_top3.pdf", replace
 
 
 
@@ -150,58 +124,6 @@ graph export ${PATH}/figures/populationreached_over_time_bygroup_top3.pdf, repla
 //////////////
 //////////////
 // FIGURE 2 //
-//////////////
-//////////////
-
-use ${PATH}/data/acquisitions/acquisition_panel_dma_top3_FINAL.dta, clear
-
-ren dma dma_old
-ren dma_kelseybia dma
-replace dma=upper(dma)
-replace dma="TAMPA-ST.PETERSBURG-SARASOTA, FL" if dma=="TAMPA-ST PETERSBURG-SARASOTA, FL"
-
-merge m:1 dma using ${PATH}/data/dma_dmaID_xwalk.dta
-
-keep if _m==3
-drop _m
-
-keep if month==12
-
-bysort dmaID: egen treatment_year = min(year/(ownedby_congl_LMA==1))
-replace treatment_year=2022 if treatment_year==.
-
-bysort dmaID: egen treatment_year_sinclair = min(year/(ownedby_sinclair_LMA==1))
-replace treatment_year_sinclair=2022 if treatment_year_sinclair==.
-
-bysort dmaID: egen treatment_year_gray = min(year/(ownedby_gray_LMA==1))
-replace treatment_year_gray=2022 if treatment_year_gray==.
-
-bysort dmaID: egen treatment_year_nexstar = min(year/(ownedby_nexstar_LMA==1))
-replace treatment_year_nexstar=2022 if treatment_year_nexstar==.
-
-egen tag=tag(dmaID)
-keep if tag==1
-
-merge 1:1 dmaID using ${PATH}/data/DMA_2008_database.dta
-drop _m
-
-colorpalette viridis, n(12)   
-local colors  "`r(p3)'" "`r(p5)'" "`r(p6)'" "`r(p7)'" "`r(p8)'" "`r(p9)'" "`r(p10)'" "`r(p11)'"   "`r(p12)'"   
-
-spmap treatment_year using ${PATH}/data/DMA_2008_coords.dta, id(_ID) ///
-		clmethod(custom)  clbreaks(2009.5 2010.5 2011.5 2012.5 2013.5 2014.5 2015.5 2016.5 2017.5 2019.5 2022.5) ///
-		fcolor("`colors'") ///
-		legend(cols(1) size(*0.75) colfirst bmargin(none) label(2 "Always treated") label(3 "2011") ///
-		label(4 "2012") label(5 "2013") label(6 "2014") label(7 "2015") label(8 "2016") ///
-		label(9 "2017") label(10 "2019") label(11 "Never treated"))
-graph export ${PATH}/figures/map.pdf, replace
-graph export ${PATH}/figures/map.png, replace
-
-
-
-//////////////
-//////////////
-// FIGURE 3 //
 //////////////
 //////////////
 
@@ -325,30 +247,24 @@ replace time = time - 0.15 if sinclair==1
 
 sort time
 	
-twoway  (rspike max95 min95  time if gray==1, lc(gs11) lwidth(medium)) ///
-		(rspike max95 min95  time if nexstar==1, lc("43 176 126") lwidth(medium)) ///
-		(rspike max95 min95  time if sinclair==1,  lc("72 34 115") lwidth(medium)) ///
-		(line estimate time if gray==1, lc(gs11) lp(dash)) ///
-		(line estimate time if nexstar==1, lc("43 176 126") lp(dash)) ///
-		(line estimate time if sinclair==1, lc("72 34 115") lp(dash)) ///
-		(scatter estimate time if gray==1, mc(gs11) mfcolor(white) msymbol(square) msize(medium)) ///
-		(scatter estimate time if nexstar==1, mc("43 176 126") mfcolor(white) msize(medium) msymbol(diamond)) ///
-		(scatter estimate time if sinclair==1, mc("72 34 115") mfcolor(white) msize(medium) msymbol(circle) ///
-		graphr(c(white)) ///
-		bgcolor(white) xsize(5.5) ysize(4) ///
-		title("", c(black)) ///
-		xlabel(-5 "{&le}-5" -4 "-4" -3 "-3" -2 "-2" -1 "-1" 0 "0" 1 "1" 2 "2" 3 "3" 4 "4" 5 "5" 6 "{&ge}6", grid valuel glc(gs12) glp(dot)) ///
-		xline(-1, lc(black) lwidth(vthin) lp(solid)) ///
-		ytick(, notick nolabel) ///
-		ylabel(-7.5(2.5)5, glc(gs12) glp(dot) format(%4.1f)) ///
-		yline(0, lc(black) lwidth(vthin) lp(solid)) ///
-		ytitle("Coefficient estimates, 95% CI", c(black)) ///
-		xtitle("Semesters since/to acquisition", c(black)) ///
-		legend(on order(9 8 7) ring(0) col(3) pos(7) region(lc(white) fcolor(white))   ///
-		label(8 "Nexstar") ///
-		label(7 "Gray") ///
-		label(9 "Sinclair") ///
-		))
+twoway  (rspike max95 min95 time if gray==1,     lc(gs10)  lwidth(medium)) ///
+        (rspike max95 min95 time if nexstar==1,  lc(gs6)   lwidth(medium)) ///
+        (rspike max95 min95 time if sinclair==1, lc(black) lwidth(medium)) ///
+        (connected estimate time if gray==1,     lc(gs10)  lp(shortdash) mc(gs10)  mfcolor(white) msize(medium) msymbol(square)) ///
+        (connected estimate time if nexstar==1,  lc(gs6)   lp(longdash) mc(gs6)   mfcolor(white) msize(medium) msymbol(diamond)) ///
+        (connected estimate time if sinclair==1, lc(black) lp(solid) mc(black) mfcolor(white) msize(medium) msymbol(circle)), ///
+        graphr(c(white)) ///
+        bgcolor(white) xsize(5.5) ysize(4) ///
+        title("", c(black)) ///
+        xlabel(-5 "{&le}-5" -4 "-4" -3 "-3" -2 "-2" -1 "-1" 0 "0" 1 "1" 2 "2" 3 "3" 4 "4" 5 "5" 6 "{&ge}6", grid valuel glc(gs12) glp(dot)) ///
+        xline(-1, lc(black) lwidth(vthin) lp(solid)) ///
+        ytick(, notick nolabel) ///
+        ylabel(-7.5(2.5)5, glc(gs12) glp(dot) format(%4.1f)) ///
+        yline(0, lc(black) lwidth(vthin) lp(solid)) ///
+        ytitle("Coefficient estimates, 95% CI", c(black)) ///
+        xtitle("Semesters since/to acquisition", c(black)) ///
+        legend(on order(6 5 4) ring(0) col(3) pos(7) region(lc(white) fcolor(white)) symx(8) ///
+        label(4 "Gray") label(5 "Nexstar") label(6 "Sinclair"))
 graph export figures/mention_place_pershow_DID_bygroup.pdf, replace
 restore
 
@@ -415,30 +331,24 @@ replace time = time - 0.15 if sinclair==1
 
 sort time
 	
-twoway  (rspike max95 min95  time if gray==1, lc(gs11) lwidth(medium)) ///
-		(rspike max95 min95  time if nexstar==1, lc("43 176 126") lwidth(medium)) ///
-		(rspike max95 min95  time if sinclair==1,  lc("72 34 115") lwidth(medium)) ///
-		(line estimate time if gray==1, lc(gs11) lp(dash)) ///
-		(line estimate time if nexstar==1, lc("43 176 126") lp(dash)) ///
-		(line estimate time if sinclair==1, lc("72 34 115") lp(dash)) ///
-		(scatter estimate time if gray==1, mc(gs11) mfcolor(white) msymbol(square) msize(medium)) ///
-		(scatter estimate time if nexstar==1, mc("43 176 126") mfcolor(white) msize(medium) msymbol(diamond)) ///
-		(scatter estimate time if sinclair==1, mc("72 34 115") mfcolor(white) msize(medium) msymbol(circle) ///
-		graphr(c(white)) ///
-		bgcolor(white) xsize(5.5) ysize(4) ///
-		title("", c(black)) ///
-		xlabel(-5 "{&le}-5" -4 "-4" -3 "-3" -2 "-2" -1 "-1" 0 "0" 1 "1" 2 "2" 3 "3" 4 "4" 5 "5" 6 "{&ge}6", grid valuel glc(gs12) glp(dot)) ///
-		xline(-1, lc(black) lwidth(vthin) lp(solid)) ///
-		ytick(, notick nolabel) ///
-		ylabel(-7.5(2.5)5, glc(gs12) glp(dot)  format(%4.1f)) ///
-		yline(0, lc(black) lwidth(vthin) lp(solid)) ///
-		ytitle("Coefficient estimates, 95% CI", c(black)) ///
-		xtitle("Semesters since/to acquisition", c(black)) ///
-		legend(on order(9 8 7) ring(0) col(3) pos(7) region(lc(white) fcolor(white))   ///
-		label(8 "Nexstar") ///
-		label(7 "Gray") ///
-		label(9 "Sinclair") ///
-		))
+twoway  (rspike max95 min95 time if gray==1,     lc(gs10)  lwidth(medium)) ///
+        (rspike max95 min95 time if nexstar==1,  lc(gs6)   lwidth(medium)) ///
+        (rspike max95 min95 time if sinclair==1, lc(black) lwidth(medium)) ///
+        (connected estimate time if gray==1,     lc(gs10)  lp(shortdash) mc(gs10)  mfcolor(white) msize(medium) msymbol(square)) ///
+        (connected estimate time if nexstar==1,  lc(gs6)   lp(longdash) mc(gs6)   mfcolor(white) msize(medium) msymbol(diamond)) ///
+        (connected estimate time if sinclair==1, lc(black) lp(solid) mc(black) mfcolor(white) msize(medium) msymbol(circle)), ///
+        graphr(c(white)) ///
+        bgcolor(white) xsize(5.5) ysize(4) ///
+        title("", c(black)) ///
+        xlabel(-5 "{&le}-5" -4 "-4" -3 "-3" -2 "-2" -1 "-1" 0 "0" 1 "1" 2 "2" 3 "3" 4 "4" 5 "5" 6 "{&ge}6", grid valuel glc(gs12) glp(dot)) ///
+        xline(-1, lc(black) lwidth(vthin) lp(solid)) ///
+        ytick(, notick nolabel) ///
+        ylabel(-7.5(2.5)5, glc(gs12) glp(dot) format(%4.1f)) ///
+        yline(0, lc(black) lwidth(vthin) lp(solid)) ///
+        ytitle("Coefficient estimates, 95% CI", c(black)) ///
+        xtitle("Semesters since/to acquisition", c(black)) ///
+        legend(on order(6 5 4) ring(0) col(3) pos(7) region(lc(white) fcolor(white)) symx(8) ///
+        label(4 "Gray") label(5 "Nexstar") label(6 "Sinclair"))
 graph export figures/mention_place_pershow_TRIPLEDIFF_bygroup.pdf, replace
 restore
 	
@@ -446,7 +356,7 @@ restore
 
 //////////////
 //////////////
-// FIGURE 4 //
+// FIGURE 3 //
 //////////////
 //////////////
 
@@ -572,30 +482,24 @@ replace time = time - 0.15 if sinclair==1
 
 sort time
 		
-twoway  (rspike max95 min95  time if gray==1, lc(gs11) lwidth(medium)) ///
-		(rspike max95 min95  time if nexstar==1, lc("43 176 126") lwidth(medium)) ///
-		(rspike max95 min95  time if sinclair==1,  lc("72 34 115") lwidth(medium)) ///
-		(line estimate time if gray==1, lc(gs11) lp(dash)) ///
-		(line estimate time if nexstar==1, lc("43 176 126") lp(dash)) ///
-		(line estimate time if sinclair==1, lc("72 34 115") lp(dash)) ///
-		(scatter estimate time if gray==1, mc(gs11) mfcolor(white) msymbol(square) msize(medium)) ///
-		(scatter estimate time if nexstar==1, mc("43 176 126") mfcolor(white) msize(medium) msymbol(diamond)) ///
-		(scatter estimate time if sinclair==1, mc("72 34 115") mfcolor(white) msize(medium) msymbol(circle) ///
-		graphr(c(white)) ///
-		bgcolor(white) xsize(5.5) ysize(4) ///
-		title("", c(black)) ///
-		xlabel(-5 "{&le}-5" -4 "-4" -3 "-3" -2 "-2" -1 "-1" 0 "0" 1 "1" 2 "2" 3 "3" 4 "4" 5 "5" 6 "{&ge}6", grid valuel glc(gs12) glp(dot)) ///
-		xline(-1, lc(black) lwidth(vthin) lp(solid)) ///
-		ytick(, notick nolabel) ///
+twoway  (rspike max95 min95 time if gray==1,     lc(gs10)  lwidth(medium)) ///
+        (rspike max95 min95 time if nexstar==1,  lc(gs6)   lwidth(medium)) ///
+        (rspike max95 min95 time if sinclair==1, lc(black) lwidth(medium)) ///
+        (connected estimate time if gray==1,     lc(gs10)  lp(shortdash) mc(gs10)  mfcolor(white) msize(medium) msymbol(square)) ///
+        (connected estimate time if nexstar==1,  lc(gs6)   lp(longdash) mc(gs6)   mfcolor(white) msize(medium) msymbol(diamond)) ///
+        (connected estimate time if sinclair==1, lc(black) lp(solid) mc(black) mfcolor(white) msize(medium) msymbol(circle)), ///
+        graphr(c(white)) ///
+        bgcolor(white) xsize(5.5) ysize(4) ///
+        title("", c(black)) ///
+        xlabel(-5 "{&le}-5" -4 "-4" -3 "-3" -2 "-2" -1 "-1" 0 "0" 1 "1" 2 "2" 3 "3" 4 "4" 5 "5" 6 "{&ge}6", grid valuel glc(gs12) glp(dot)) ///
+        xline(-1, lc(black) lwidth(vthin) lp(solid)) ///
+        ytick(, notick nolabel) ///
 		ylabel(-0.2(0.1)0.2, glc(gs12) glp(dot) format(%4.1f)) ///
-		yline(0, lc(black) lwidth(vthin) lp(solid)) ///
-		ytitle("Coefficient estimates, 95% CI", c(black)) ///
-		xtitle("Semesters since/to acquisition", c(black)) ///
-		legend(on order(9 8 7) ring(0) col(3) pos(7) region(lc(white) fcolor(white))   ///
-		label(8 "Nexstar") ///
-		label(7 "Gray") ///
-		label(9 "Sinclair") ///
-		))
+        yline(0, lc(black) lwidth(vthin) lp(solid)) ///
+        ytitle("Coefficient estimates, 95% CI", c(black)) ///
+        xtitle("Semesters since/to acquisition", c(black)) ///
+        legend(on order(6 5 4) ring(0) col(3) pos(7) region(lc(white) fcolor(white)) symx(8) ///
+        label(4 "Gray") label(5 "Nexstar") label(6 "Sinclair"))
 graph export figures/log_duration_DID_bygroup.pdf, replace
 restore
 
@@ -621,7 +525,7 @@ g nexstar = regexm(parm,"nexstar_")
 g time=regexs(1) if regexm(parm,"([0-9]+)")==1		
 destring time, replace	
 replace time=time*-1 if regexm(parm,"minus")==1
-keep if time>=-5&time<=8
+keep if time>=-5&time<=6
 
 qui count
 loc maxobs=`r(N)'+1
@@ -661,37 +565,31 @@ replace time = time - 0.15 if sinclair==1
 
 sort time
 
-twoway  (rspike max95 min95  time if gray==1, lc(gs11) lwidth(medium)) ///
-		(rspike max95 min95  time if nexstar==1, lc("43 176 126") lwidth(medium)) ///
-		(rspike max95 min95  time if sinclair==1,  lc("72 34 115") lwidth(medium)) ///
-		(line estimate time if gray==1, lc(gs11) lp(dash)) ///
-		(line estimate time if nexstar==1, lc("43 176 126") lp(dash)) ///
-		(line estimate time if sinclair==1, lc("72 34 115") lp(dash)) ///
-		(scatter estimate time if gray==1, mc(gs11) mfcolor(white) msymbol(square) msize(medium)) ///
-		(scatter estimate time if nexstar==1, mc("43 176 126") mfcolor(white) msize(medium) msymbol(diamond)) ///
-		(scatter estimate time if sinclair==1, mc("72 34 115") mfcolor(white) msize(medium) msymbol(circle) ///
-		graphr(c(white)) ///
-		bgcolor(white) xsize(5.5) ysize(4) ///
-		title("", c(black)) ///
-		xlabel(-5 "{&le}-5" -4 "-4" -3 "-3" -2 "-2" -1 "-1" 0 "0" 1 "1" 2 "2" 3 "3" 4 "4" 5 "5" 6 "{&ge}6", grid valuel glc(gs12) glp(dot)) ///
-		xline(-1, lc(black) lwidth(vthin) lp(solid)) ///
-		ytick(, notick nolabel) ///
+twoway  (rspike max95 min95 time if gray==1,     lc(gs10)  lwidth(medium)) ///
+        (rspike max95 min95 time if nexstar==1,  lc(gs6)   lwidth(medium)) ///
+        (rspike max95 min95 time if sinclair==1, lc(black) lwidth(medium)) ///
+        (connected estimate time if gray==1,     lc(gs10)  lp(shortdash) mc(gs10)  mfcolor(white) msize(medium) msymbol(square)) ///
+        (connected estimate time if nexstar==1,  lc(gs6)   lp(longdash) mc(gs6)   mfcolor(white) msize(medium) msymbol(diamond)) ///
+        (connected estimate time if sinclair==1, lc(black) lp(solid) mc(black) mfcolor(white) msize(medium) msymbol(circle)), ///
+        graphr(c(white)) ///
+        bgcolor(white) xsize(5.5) ysize(4) ///
+        title("", c(black)) ///
+        xlabel(-5 "{&le}-5" -4 "-4" -3 "-3" -2 "-2" -1 "-1" 0 "0" 1 "1" 2 "2" 3 "3" 4 "4" 5 "5" 6 "{&ge}6", grid valuel glc(gs12) glp(dot)) ///
+        xline(-1, lc(black) lwidth(vthin) lp(solid)) ///
+        ytick(, notick nolabel) ///
 		ylabel(-0.2(0.1)0.2, glc(gs12) glp(dot) format(%4.1f)) ///
-		yline(0, lc(black) lwidth(vthin) lp(solid)) ///
-		ytitle("Coefficient estimates, 95% CI", c(black)) ///
-		xtitle("Semesters since/to acquisition", c(black)) ///
-		legend(on order(9 8 7) ring(0) col(3) pos(7) region(lc(white) fcolor(white))   ///
-		label(8 "Nexstar") ///
-		label(7 "Gray") ///
-		label(9 "Sinclair") ///
-		))
+        yline(0, lc(black) lwidth(vthin) lp(solid)) ///
+        ytitle("Coefficient estimates, 95% CI", c(black)) ///
+        xtitle("Semesters since/to acquisition", c(black)) ///
+        legend(on order(6 5 4) ring(0) col(3) pos(7) region(lc(white) fcolor(white)) symx(8) ///
+        label(4 "Gray") label(5 "Nexstar") label(6 "Sinclair"))
 graph export figures/log_duration_TRIPLEDID_bygroup.pdf, replace
 restore
 
 
 //////////////
 //////////////
-// FIGURE 5 //
+// FIGURE 4 //
 //////////////
 //////////////
 
@@ -817,30 +715,24 @@ replace time = time - 0.15 if sinclair==1
 
 sort time
 	
-twoway  (rspike max95 min95  time if gray==1, lc(gs11) lwidth(medium)) ///
-		(rspike max95 min95  time if nexstar==1, lc("43 176 126") lwidth(medium)) ///
-		(rspike max95 min95  time if sinclair==1,  lc("72 34 115") lwidth(medium)) ///
-		(line estimate time if gray==1, lc(gs11) lp(dash)) ///
-		(line estimate time if nexstar==1, lc("43 176 126") lp(dash)) ///
-		(line estimate time if sinclair==1, lc("72 34 115") lp(dash)) ///
-		(scatter estimate time if gray==1, mc(gs11) mfcolor(white) msymbol(square) msize(medium)) ///
-		(scatter estimate time if nexstar==1, mc("43 176 126") mfcolor(white) msize(medium) msymbol(diamond)) ///
-		(scatter estimate time if sinclair==1, mc("72 34 115") mfcolor(white) msize(medium) msymbol(circle) ///
-		graphr(c(white)) ///
-		bgcolor(white) xsize(5.5) ysize(4) ///
-		title("", c(black)) ///
-		xlabel(-5 "{&le}-5" -4 "-4" -3 "-3" -2 "-2" -1 "-1" 0 "0" 1 "1" 2 "2" 3 "3" 4 "4" 5 "5" 6 "{&ge}6", grid valuel glc(gs12) glp(dot)) ///
-		xline(-1, lc(black) lwidth(vthin) lp(solid)) ///
-		ytick(, notick nolabel) ///
+twoway  (rspike max95 min95 time if gray==1,     lc(gs10)  lwidth(medium)) ///
+        (rspike max95 min95 time if nexstar==1,  lc(gs6)   lwidth(medium)) ///
+        (rspike max95 min95 time if sinclair==1, lc(black) lwidth(medium)) ///
+        (connected estimate time if gray==1,     lc(gs10)  lp(shortdash) mc(gs10)  mfcolor(white) msize(medium) msymbol(square)) ///
+        (connected estimate time if nexstar==1,  lc(gs6)   lp(longdash) mc(gs6)   mfcolor(white) msize(medium) msymbol(diamond)) ///
+        (connected estimate time if sinclair==1, lc(black) lp(solid) mc(black) mfcolor(white) msize(medium) msymbol(circle)), ///
+        graphr(c(white)) ///
+        bgcolor(white) xsize(5.5) ysize(4) ///
+        title("", c(black)) ///
+        xlabel(-5 "{&le}-5" -4 "-4" -3 "-3" -2 "-2" -1 "-1" 0 "0" 1 "1" 2 "2" 3 "3" 4 "4" 5 "5" 6 "{&ge}6", grid valuel glc(gs12) glp(dot)) ///
+        xline(-1, lc(black) lwidth(vthin) lp(solid)) ///
+        ytick(, notick nolabel) ///
 		ylabel(-0.5(0.5)1.5, glc(gs12) glp(dot) format(%4.1f)) ///
-		yline(0, lc(black) lwidth(vthin) lp(solid)) ///
-		ytitle("Coefficient estimates, 95% CI", c(black)) ///
-		xtitle("Semesters since/to acquisition", c(black)) ///
-		legend(on order(9 8 7) ring(0) col(3) pos(7) region(lc(white) fcolor(white))   ///
-		label(8 "Nexstar") ///
-		label(7 "Gray") ///
-		label(9 "Sinclair") ///
-		))
+        yline(0, lc(black) lwidth(vthin) lp(solid)) ///
+        ytitle("Coefficient estimates, 95% CI", c(black)) ///
+        xtitle("Semesters since/to acquisition", c(black)) ///
+        legend(on order(6 5 4) ring(0) col(3) pos(7) region(lc(white) fcolor(white)) symx(8) ///
+        label(4 "Gray") label(5 "Nexstar") label(6 "Sinclair"))
 graph export figures/news_rating_DID_bygroup.pdf, replace
 restore 
 
@@ -906,30 +798,24 @@ replace time = time - 0.15 if sinclair==1
 
 sort time
 	
-twoway  (rspike max95 min95  time if gray==1, lc(gs11) lwidth(medium)) ///
-		(rspike max95 min95  time if nexstar==1, lc("43 176 126") lwidth(medium)) ///
-		(rspike max95 min95  time if sinclair==1,  lc("72 34 115") lwidth(medium)) ///
-		(line estimate time if gray==1, lc(gs11) lp(dash)) ///
-		(line estimate time if nexstar==1, lc("43 176 126") lp(dash)) ///
-		(line estimate time if sinclair==1, lc("72 34 115") lp(dash)) ///
-		(scatter estimate time if gray==1, mc(gs11) mfcolor(white) msymbol(square) msize(medium)) ///
-		(scatter estimate time if nexstar==1, mc("43 176 126") mfcolor(white) msize(medium) msymbol(diamond)) ///
-		(scatter estimate time if sinclair==1, mc("72 34 115") mfcolor(white) msize(medium) msymbol(circle) ///
-		graphr(c(white)) ///
-		bgcolor(white) xsize(5.5) ysize(4) ///
-		title("", c(black)) ///
-		xlabel(-5 "{&le}-5" -4 "-4" -3 "-3" -2 "-2" -1 "-1" 0 "0" 1 "1" 2 "2" 3 "3" 4 "4" 5 "5" 6 "{&ge}6", grid valuel glc(gs12) glp(dot)) ///
-		xline(-1, lc(black) lwidth(vthin) lp(solid)) ///
-		ytick(, notick nolabel) ///
+twoway  (rspike max95 min95 time if gray==1,     lc(gs10)  lwidth(medium)) ///
+        (rspike max95 min95 time if nexstar==1,  lc(gs6)   lwidth(medium)) ///
+        (rspike max95 min95 time if sinclair==1, lc(black) lwidth(medium)) ///
+        (connected estimate time if gray==1,     lc(gs10)  lp(shortdash) mc(gs10)  mfcolor(white) msize(medium) msymbol(square)) ///
+        (connected estimate time if nexstar==1,  lc(gs6)   lp(longdash) mc(gs6)   mfcolor(white) msize(medium) msymbol(diamond)) ///
+        (connected estimate time if sinclair==1, lc(black) lp(solid) mc(black) mfcolor(white) msize(medium) msymbol(circle)), ///
+        graphr(c(white)) ///
+        bgcolor(white) xsize(5.5) ysize(4) ///
+        title("", c(black)) ///
+        xlabel(-5 "{&le}-5" -4 "-4" -3 "-3" -2 "-2" -1 "-1" 0 "0" 1 "1" 2 "2" 3 "3" 4 "4" 5 "5" 6 "{&ge}6", grid valuel glc(gs12) glp(dot)) ///
+        xline(-1, lc(black) lwidth(vthin) lp(solid)) ///
+        ytick(, notick nolabel) ///
 		ylabel(-0.5(0.5)1.5, glc(gs12) glp(dot) format(%4.1f)) ///
-		yline(0, lc(black) lwidth(vthin) lp(solid)) ///
-		ytitle("Coefficient estimates, 95% CI", c(black)) ///
-		xtitle("Semesters since/to acquisition", c(black)) ///
-		legend(on order(9 8 7) ring(0) col(3) pos(7) region(lc(white) fcolor(white))   ///
-		label(8 "Nexstar") ///
-		label(7 "Gray") ///
-		label(9 "Sinclair") ///
-		))
+        yline(0, lc(black) lwidth(vthin) lp(solid)) ///
+        ytitle("Coefficient estimates, 95% CI", c(black)) ///
+        xtitle("Semesters since/to acquisition", c(black)) ///
+        legend(on order(6 5 4) ring(0) col(3) pos(7) region(lc(white) fcolor(white)) symx(8) ///
+        label(4 "Gray") label(5 "Nexstar") label(6 "Sinclair"))
 graph export figures/news_rating_TRIPLEDIFF_bygroup.pdf, replace
 
 restore

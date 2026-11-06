@@ -2,7 +2,7 @@
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 \begin{tabular}{l*{3}{c}}
 \toprule
-                &\multicolumn{1}{c}{\shortstack{Never Heard of\\Representative}}&\multicolumn{1}{c}{\shortstack{Not Able to Evaluate\\Representative}}&\multicolumn{1}{c}{\shortstack{Has No Preference\\over Election}}\\\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}
+                &\multicolumn{1}{c}{Never Heard}&\multicolumn{1}{c}{Cannot Evaluate}&\multicolumn{1}{c}{No Preference}\\\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}
                 &\multicolumn{1}{c}{(1)}   &\multicolumn{1}{c}{(2)}   &\multicolumn{1}{c}{(3)}   \\
 \midrule
 Post-Acquisition, Sinclair&    0.013** &    0.009   &    0.002   \\
@@ -12,12 +12,8 @@ Post-Acquisition, Nexstar&    0.008   &    0.008   &    0.010** \\
 Post-Acquisition, Gray&    0.006   &    0.004   &   -0.003   \\
                 &  (0.009)   &  (0.009)   &  (0.006)   \\
 \midrule
-DMA FEs          &\checkmark   &\checkmark   &\checkmark   \\
-CD-By-Redistricting Cycle FEs&\checkmark   &\checkmark   &\checkmark   \\
-Year FEs        &\checkmark   &\checkmark   &\checkmark   \\
-Controls        &\checkmark   &\checkmark   &\checkmark   \\
-\midrule Observations&   381135   &   379945   &   291174   \\
-DMAs (Clusters) &  205   &  205  &  205   \\
+Observations    &   381135   &   379945   &   291174   \\
+DMAs (Clusters) &      205   &      205   &      205   \\
 Mean Dep. Variable&    0.281   &    0.210   &    0.202   \\
 \midrule Sinclair = Nexstar&    0.574   &    0.877   &    0.264   \\
 Sinclair = Gray &    0.578   &    0.676   &    0.445   \\
