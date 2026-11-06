@@ -31,7 +31,7 @@ eststo clear
 eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -55,7 +55,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_place_pershow_w99	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -79,7 +79,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_mention_place_total		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -104,7 +104,7 @@ eststo: ppmlhdfe mention_place				station_ownedby_sinclair_LMA station_ownedby_n
 											station_ownedby_gray_LMA ///
 											c.($station_controls)#i.date ///
 											if insample==1, ///
-											absorb(stationID date) cluster(dma)
+											absorb(stationID date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -128,7 +128,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_place_perword 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -152,7 +152,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date) cluster(dma)
+											absorb(stationID date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -176,7 +176,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA ///
 											if insample==1&balanced_sample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -200,7 +200,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_OO station_ownedby_nexstar_OO  ///
 											station_ownedby_gray_OO ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -225,7 +225,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_SSA station_ownedby_nexstar_SSA ///
 											station_ownedby_gray_SSA ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -298,7 +298,7 @@ eststo clear
 eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -322,7 +322,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_place_pershow_w99	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -346,7 +346,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_mention_place_total		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -371,7 +371,7 @@ eststo: ppmlhdfe mention_place				station_ownedby_sinclair_LMA station_ownedby_n
 											station_ownedby_gray_LMA ///
 											c.($station_controls)#i.date ///
 											if insample==1, ///
-											absorb(stationID date##dmacode) cluster(dma)
+											absorb(stationID date##dmacode) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -395,7 +395,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_place_perword 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -419,7 +419,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA  ///
 											, ///
-											absorb(stationID date##dmacode) cluster(dma)
+											absorb(stationID date##dmacode) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -443,7 +443,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA  ///
 											if insample==1&balanced_sample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -467,7 +467,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_OO station_ownedby_nexstar_OO  ///
 											station_ownedby_gray_OO ///
 											if insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -492,7 +492,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_SSA station_ownedby_nexstar_SSA  ///
 											station_ownedby_gray_SSA ///
 											if insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -593,7 +593,7 @@ eststo clear
 eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -619,7 +619,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_duration_perHH_news_w99	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -640,12 +640,40 @@ test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 
-// 3. BALANCED SAMPLE
+		
+// 3. LEVEL
+
+eststo: reghdfe duration_perHH_news			station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
+											station_ownedby_gray_LMA ///
+											if insample==1, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE  		"\checkmark"
+qui estadd local dmamonthFE		""
+qui estadd local controls 		"\checkmark"
+test station_ownedby_sinclair_LMA = station_ownedby_nexstar_LMA
+qui scalar pvalue_sinclair_nexstar =  `r(p)'
+qui estadd scalar pvalue_sinclair_nexstar 
+test station_ownedby_sinclair_LMA = station_ownedby_gray_LMA
+qui scalar pvalue_sinclair_gray =  `r(p)'
+qui estadd scalar pvalue_sinclair_gray 
+test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
+qui scalar pvalue_nexstar_gray =  `r(p)'
+qui estadd scalar pvalue_nexstar_gray 		
+
+
+// 4. BALANCED SAMPLE
 
 eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date) cluster(dma)
+											absorb(stationID date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -667,12 +695,12 @@ qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 
 
-// 3. BALANCED SAMPLE
+// 4. BALANCED SAMPLE
 
 eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if balanced_sample==1&insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -693,12 +721,12 @@ test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 
-// 4. DROPS POST 2018
+// 6. DROPS POST 2018
 
 eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if year<2018&insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -719,12 +747,12 @@ test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 				
-// 6. TMT OO
+// 7. TMT OO
 		
 eststo: reghdfe log_duration_perHH_news 	station_ownedby_sinclair_OO station_ownedby_nexstar_OO  ///
 											station_ownedby_gray_OO ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -745,12 +773,12 @@ test station_ownedby_nexstar_OO = station_ownedby_gray_OO
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 
-// 7. TMT SSA
+// 8. TMT SSA
 		
 eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_SSA station_ownedby_gray_SSA ///
 											station_ownedby_nexstar_SSA ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -780,20 +808,20 @@ esttab, nogaps keep(station_ownedby_*)  ///
 				station_ownedby_nexstar_OO station_ownedby_nexstar_LMA ///
 				) ///
 		noomitted nonotes se(%9.3f) b(%9.3f) nonumbers ///
-		mlabels(" " "Winsor." "Balanced" "Pre-2018" "O\&O" "SSA/JSA \\ \ & (1) & (2) & (3) & (4) & (5) & (6)") ///
+		mlabels(" " "Winsor." "Levels" "Full" "Balanced" "Pre-2018" "O\&O" "SSA/JSA \\ \ & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8)") ///
 		label starlevels(* 0.10 ** 0.05 *** 0.01)  ///
-		mgroups("Baseline" "Outcome" "Sample" "Treatment", pattern(1 1 1 0 1 0) ///
+		mgroups("Baseline" "Outcome" "Sample" "Treatment", pattern(1 1 0 1 0 0 1 0) ///
 		prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
 		stats(stationFE monthFE controls N N_stations N_clust ymean ///
-			  pvalue_sinclair_gray pvalue_sinclair_nexstar   pvalue_nexstar_gray, ///
+			  pvalue_sinclair_nexstar pvalue_sinclair_gray    pvalue_nexstar_gray, ///
 			  fmt(%9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
 			  labels("Station FEs" "Month FEs" "Controls" "\midrule Observations" "Stations" "DMAs (Clusters)" ///
-					"Mean Dep. Variable" "\midrule Sinclair = Gray" "Sinclair = Nexstar" "Gray = Nexstar")) 
+					"Mean Dep. Variable" "\midrule Sinclair = Nexstar" "Sinclair = Gray" "Nexstar = Gray" )) 
 					
 esttab using tables/adintel_robustness.tex, replace nogaps keep(station_ownedby_*)   ///
 		fragment /// 
-		prehead("{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{8}{c}} \toprule") ///
-		posthead("\midrule \ & \multicolumn{7}{c}{Panel A: Differences-in-Differences} \\\cmidrule(lr){2-8}") ///
+		prehead("{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{9}{c}} \toprule") ///
+		posthead("\midrule \ & \multicolumn{8}{c}{Panel A: Differences-in-Differences} \\\cmidrule(lr){2-9}") ///
 		rename(	station_ownedby_sinclair_SSA station_ownedby_sinclair_LMA ///
 				station_ownedby_gray_SSA station_ownedby_gray_LMA ///
 				station_ownedby_nexstar_SSA station_ownedby_nexstar_LMA ///
@@ -802,9 +830,9 @@ esttab using tables/adintel_robustness.tex, replace nogaps keep(station_ownedby_
 				station_ownedby_nexstar_OO station_ownedby_nexstar_LMA ///
 				) ///
 		noomitted nonotes se(%9.3f) b(%9.3f) nonumbers ///
-		mlabels(" " "Winsor." "Full" "Balanced" "Pre-2018" "O\&O" "SSA/JSA \\ \ & (1) & (2) & (3) & (4) & (5) & (6) & (7)") ///
+		mlabels(" " "Winsor." "Levels" "Full" "Balanced" "Pre-2018" "O\&O" "SSA/JSA \\ \ & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8)") ///
 		label starlevels(* 0.10 ** 0.05 *** 0.01)  ///
-		mgroups("Baseline" "Outcome" "Sample" "Treatment", pattern(1 1 1 0 0 1 0) ///
+		mgroups("Baseline" "Outcome" "Sample" "Treatment", pattern(1 1 0 1 0 0 1 0) ///
 		prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
 		stats(stationFE monthFE controls N N_stations N_clust ymean ///
 			  pvalue_sinclair_nexstar pvalue_sinclair_gray    pvalue_nexstar_gray, ///
@@ -869,7 +897,34 @@ test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 
-// 3. FULL SAMPLE
+		
+// 3. LEVELS
+
+eststo: reghdfe duration_perHH_news			station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
+											station_ownedby_gray_LMA ///
+											if insample==1, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE  		""
+qui estadd local dmamonthFE		"\checkmark"
+qui estadd local controls 		"\checkmark"
+test station_ownedby_sinclair_LMA = station_ownedby_nexstar_LMA
+qui scalar pvalue_sinclair_nexstar =  `r(p)'
+qui estadd scalar pvalue_sinclair_nexstar 
+test station_ownedby_sinclair_LMA = station_ownedby_gray_LMA
+qui scalar pvalue_sinclair_gray =  `r(p)'
+qui estadd scalar pvalue_sinclair_gray 
+test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
+qui scalar pvalue_nexstar_gray =  `r(p)'
+qui estadd scalar pvalue_nexstar_gray 		
+
+// 4. FULL SAMPLE
 eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
@@ -894,7 +949,7 @@ test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 
-// 3. FULL SAMPLE
+// 5. BALANCED SAMPLE
 eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if balanced_sample==1&insample==1, ///
@@ -919,8 +974,7 @@ test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 
-// 4. DROPS POST 2018
-
+// 6. DROPS POST 2018
 eststo: reghdfe log_duration_perHH_news 	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if year<2018&insample==1, ///
@@ -945,8 +999,7 @@ test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 		
-// 6. TMT OO
-		
+// 7. TMT OO	
 eststo: reghdfe log_duration_perHH_news 	station_ownedby_sinclair_OO station_ownedby_nexstar_OO  ///
 											station_ownedby_gray_OO ///
 											if insample==1, ///
@@ -971,8 +1024,7 @@ test station_ownedby_nexstar_OO = station_ownedby_gray_OO
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 
-// 7. TMT SSA
-		
+// 8. TMT SSA	
 eststo: reghdfe log_duration_perHH_news 	station_ownedby_sinclair_SSA station_ownedby_nexstar_SSA  ///
 											station_ownedby_gray_SSA ///
 											if insample==1, ///
@@ -1006,7 +1058,7 @@ esttab, nogaps keep(station_ownedby_*)  ///
 				station_ownedby_nexstar_OO station_ownedby_nexstar_LMA ///
 				) ///
 		noomitted nonotes se(%9.3f) b(%9.3f) nonumbers ///
-		mlabels(" " "Winsor." "Balanced" "Pre-2018" "O\&O" "SSA/JSA \\ \ & (1) & (2) & (3) & (4) & (5) & (6)") ///
+		mlabels(" " "Winsor." "Levels" "Balanced" "Pre-2018" "O\&O" "SSA/JSA \\ \ & (1) & (2) & (3) & (4) & (5) & (6)  & (7) & (8)") ///
 		label starlevels(* 0.10 ** 0.05 *** 0.01)  ///
 		mgroups("Baseline" "Outcome" "Sample" "Treatment", pattern(1 1 1 0 1 0) ///
 		prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
@@ -1025,7 +1077,7 @@ esttab using tables/adintel_robustness.tex, fragment append nogaps keep(station_
 				station_ownedby_nexstar_OO station_ownedby_nexstar_LMA ///
 				) ///
 		label noomitted nonotes se(%9.3f) b(%9.3f) nomtitle nonumbers starlevels(* 0.10 ** 0.05 *** 0.01) ///
-		posthead("\midrule \ & \multicolumn{7}{c}{Panel B: Within-Market Differences-in-Differences} \\\cmidrule(lr){2-8}") ///
+		posthead("\midrule \ & \multicolumn{8}{c}{Panel B: Within-Market Differences-in-Differences} \\\cmidrule(lr){2-9}") ///
 		postfoot("\bottomrule \end{tabular}}") ///
 		stats(stationFE dmamonthFE controls N N_stations N_clust ymean ///
 			  pvalue_sinclair_nexstar pvalue_sinclair_gray    pvalue_nexstar_gray, ///
@@ -1081,7 +1133,7 @@ eststo clear
 eststo: reghdfe log_spend_perHH_news 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1107,7 +1159,32 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_spend_perHH_news_w99	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE  		"\checkmark"
+qui estadd local dmamonthFE		""
+qui estadd local controls 		"\checkmark"
+test station_ownedby_sinclair_LMA = station_ownedby_nexstar_LMA
+qui scalar pvalue_sinclair_nexstar =  `r(p)'
+qui estadd scalar pvalue_sinclair_nexstar 
+test station_ownedby_sinclair_LMA = station_ownedby_gray_LMA
+qui scalar pvalue_sinclair_gray =  `r(p)'
+qui estadd scalar pvalue_sinclair_gray 
+test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
+qui scalar pvalue_nexstar_gray =  `r(p)'
+qui estadd scalar pvalue_nexstar_gray 		
+		
+// 3. WINS
+eststo: reghdfe spend_perHH_news			station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
+											station_ownedby_gray_LMA ///
+											if insample==1, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1128,11 +1205,11 @@ test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 
-// 3. FULL SAMPLE
+// 4. FULL SAMPLE
 eststo: reghdfe log_spend_perHH_news		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date) cluster(dma)
+											absorb(stationID date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1153,11 +1230,11 @@ test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 
-// 3. FULL SAMPLE
+// 5. FULL SAMPLE
 eststo: reghdfe log_spend_perHH_news		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if balanced_sample==1&insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1178,12 +1255,11 @@ test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 
-// 4. DROPS POST 2018
-
+// 6. DROPS POST 2018
 eststo: reghdfe log_spend_perHH_news 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if year<2018&insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1205,12 +1281,11 @@ qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 		
 		
-// 6. TMT OO
-		
+// 7. TMT OO	
 eststo: reghdfe log_spend_perHH_news 		station_ownedby_sinclair_OO station_ownedby_nexstar_OO  ///
 											station_ownedby_gray_OO ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1231,12 +1306,11 @@ test station_ownedby_nexstar_OO = station_ownedby_gray_OO
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 
-// 7. TMT SSA
-		
+// 8. TMT SSA	
 eststo: reghdfe log_spend_perHH_news 		station_ownedby_sinclair_SSA station_ownedby_nexstar_SSA  ///
 											station_ownedby_gray_SSA ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1266,9 +1340,9 @@ esttab, nogaps keep(station_ownedby_*)  ///
 				station_ownedby_nexstar_OO station_ownedby_nexstar_LMA ///
 				) ///
 		noomitted nonotes se(%9.3f) b(%9.3f) nonumbers ///
-		mlabels(" " "Winsor." "Full" "Balanced" "Pre-2018" "O\&O" "SSA/JSA \\ \ & (1) & (2) & (3) & (4) & (5) & (6)") ///
+		mlabels(" " "Winsor." "Levels" "Full" "Balanced" "Pre-2018" "O\&O" "SSA/JSA \\ \ & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8)") ///
 		label starlevels(* 0.10 ** 0.05 *** 0.01)  ///
-		mgroups("Baseline" "Outcome" "Sample" "Treatment", pattern(1 1 1 0 0 1 0) ///
+		mgroups("Baseline" "Outcome" "Sample" "Treatment", pattern(1 1 0 1 0 0 1 0) ///
 		prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
 		stats(stationFE monthFE controls N N_stations N_clust ymean ///
 			  pvalue_sinclair_nexstar pvalue_sinclair_gray    pvalue_nexstar_gray, ///
@@ -1278,8 +1352,8 @@ esttab, nogaps keep(station_ownedby_*)  ///
 					
 esttab using tables/adintel_robustness_spending.tex, replace nogaps keep(station_ownedby_*)   ///
 		fragment /// 
-		prehead("{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{8}{c}} \toprule") ///
-		posthead("\midrule \ & \multicolumn{7}{c}{Panel A: Differences-in-Differences} \\\cmidrule(lr){2-8}") ///
+		prehead("{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{9}{c}} \toprule") ///
+		posthead("\midrule \ & \multicolumn{8}{c}{Panel A: Differences-in-Differences} \\\cmidrule(lr){2-9}") ///
 		rename(	station_ownedby_sinclair_SSA station_ownedby_sinclair_LMA ///
 				station_ownedby_gray_SSA station_ownedby_gray_LMA ///
 				station_ownedby_nexstar_SSA station_ownedby_nexstar_LMA ///
@@ -1288,9 +1362,9 @@ esttab using tables/adintel_robustness_spending.tex, replace nogaps keep(station
 				station_ownedby_nexstar_OO station_ownedby_nexstar_LMA ///
 				) ///
 		noomitted nonotes se(%9.3f) b(%9.3f) nonumbers ///
-		mlabels(" " "Winsor." "Full" "Balanced" "Pre-2018" "O\&O" "SSA/JSA \\ \ & (1) & (2) & (3) & (4) & (5) & (6) & (7)") ///
+		mlabels(" " "Winsor." "Levels" "Full" "Balanced" "Pre-2018" "O\&O" "SSA/JSA \\ \ & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8)") ///
 		label starlevels(* 0.10 ** 0.05 *** 0.01)  ///
-		mgroups("Baseline" "Outcome" "Sample" "Treatment", pattern(1 1 1 0 0 1 0) ///
+		mgroups("Baseline" "Outcome" "Sample" "Treatment", pattern(1 1 0 1 0 0 1 0) ///
 		prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
 		stats(stationFE monthFE controls N N_stations N_clust ymean ///
 			  pvalue_sinclair_nexstar pvalue_sinclair_gray    pvalue_nexstar_gray, ///
@@ -1354,8 +1428,33 @@ qui estadd scalar pvalue_sinclair_gray
 test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
+		
+// 3. WINS
+eststo: reghdfe spend_perHH_news			station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
+											station_ownedby_gray_LMA ///
+											if insample==1, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE  		""
+qui estadd local dmamonthFE		"\checkmark"
+qui estadd local controls 		"\checkmark"
+test station_ownedby_sinclair_LMA = station_ownedby_nexstar_LMA
+qui scalar pvalue_sinclair_nexstar =  `r(p)'
+qui estadd scalar pvalue_sinclair_nexstar 
+test station_ownedby_sinclair_LMA = station_ownedby_gray_LMA
+qui scalar pvalue_sinclair_gray =  `r(p)'
+qui estadd scalar pvalue_sinclair_gray 
+test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
+qui scalar pvalue_nexstar_gray =  `r(p)'
+qui estadd scalar pvalue_nexstar_gray 		
 
-// 3. FULL SAMPLE
+// 4. FULL SAMPLE
 eststo: reghdfe log_spend_perHH_news		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
@@ -1380,7 +1479,7 @@ test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 
-// 3. FULL SAMPLE
+// 5. FULL SAMPLE
 eststo: reghdfe log_spend_perHH_news		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if balanced_sample==1&insample==1, ///
@@ -1405,8 +1504,7 @@ test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 
-// 4. DROPS POST 2018
-
+// 6. DROPS POST 2018
 eststo: reghdfe log_spend_perHH_news 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if year<2018&insample==1, ///
@@ -1431,8 +1529,7 @@ test station_ownedby_nexstar_LMA = station_ownedby_gray_LMA
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 				
-// 6. TMT OO
-		
+// 7. TMT OO	
 eststo: reghdfe log_spend_perHH_news 		station_ownedby_sinclair_OO station_ownedby_nexstar_OO  ///
 											station_ownedby_gray_OO ///
 											if insample==1, ///
@@ -1457,8 +1554,7 @@ test station_ownedby_nexstar_OO = station_ownedby_gray_OO
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 		
 
-// 7. TMT SSA
-		
+// 8. TMT SSA	
 eststo: reghdfe log_spend_perHH_news 		station_ownedby_sinclair_SSA station_ownedby_nexstar_SSA  ///
 											station_ownedby_gray_SSA ///
 											if insample==1, ///
@@ -1511,7 +1607,7 @@ esttab using tables/adintel_robustness_spending.tex, fragment append nogaps keep
 				station_ownedby_nexstar_OO station_ownedby_nexstar_LMA ///
 				) ///
 		label noomitted nonotes se(%9.3f) b(%9.3f) nomtitle nonumbers starlevels(* 0.10 ** 0.05 *** 0.01) ///
-		posthead("\midrule \ & \multicolumn{7}{c}{Panel B: Within-Market Differences-in-Differences} \\\cmidrule(lr){2-8}") ///
+		posthead("\midrule \ & \multicolumn{8}{c}{Panel B: Within-Market Differences-in-Differences} \\\cmidrule(lr){2-9}") ///
 		postfoot("\bottomrule \end{tabular}}") ///
 		stats(stationFE dmamonthFE controls N N_stations N_clust ymean ///
 			  pvalue_sinclair_nexstar pvalue_sinclair_gray    pvalue_nexstar_gray, ///
@@ -1525,7 +1621,7 @@ esttab using tables/adintel_robustness_spending.tex, fragment append nogaps keep
 
 ///////////////////////
 ///////////////////////
-// APPENDIX TABLE F5 //
+// APPENDIX TABLE F4 //
 ///////////////////////
 ///////////////////////
 
@@ -1556,7 +1652,7 @@ eststo clear
 eststo: reghdfe rating_total_news 		 	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1580,7 +1676,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe rating_total_news 		 	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date) cluster(dma)
+											absorb(stationID date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1604,7 +1700,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe rating_total_news 		 	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if balanced_sample==1&insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1628,7 +1724,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe rating_total_news 		 	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if year>=2014&insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1652,7 +1748,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe rating_total_news 		 	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if sweep_month==1&insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1675,8 +1771,8 @@ qui estadd scalar pvalue_nexstar_gray
 // 4. O&O
 eststo: reghdfe rating_total_news 		 	station_ownedby_sinclair_OO station_ownedby_nexstar_OO  ///
 											station_ownedby_gray_OO ///
-											insample, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											if insample==1, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1700,8 +1796,8 @@ qui estadd scalar pvalue_nexstar_gray
 // 5. INCLUDES SSA
 eststo: reghdfe rating_total_news 		 	station_ownedby_sinclair_SSA station_ownedby_nexstar_SSA  ///
 											station_ownedby_gray_SSA ///
-											insample, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											if insample==1, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1775,7 +1871,7 @@ eststo clear
 eststo: reghdfe rating_total_news	 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1799,7 +1895,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe rating_total_news	 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date##dmacode) cluster(dma)
+											absorb(stationID date##dmacode) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1823,7 +1919,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe rating_total_news	 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if balanced_sample==1&insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1847,7 +1943,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe rating_total_news	 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if year>=2014&insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1871,7 +1967,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe rating_total_news	 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if sweep_month==1&insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1895,7 +1991,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe rating_total_news	 		station_ownedby_sinclair_OO station_ownedby_nexstar_OO  ///
 											station_ownedby_gray_OO ///
 											if insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1920,7 +2016,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe rating_total_news	 		station_ownedby_sinclair_SSA station_ownedby_nexstar_SSA  ///
 											station_ownedby_gray_SSA ///
 											if insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -1995,7 +2091,7 @@ esttab using tables/ratings_robustness.tex, fragment append nogaps keep(station_
 
 ///////////////////////
 ///////////////////////
-// APPENDIX TABLE F6 //
+// APPENDIX TABLE F5 //
 ///////////////////////
 ///////////////////////
 
@@ -2026,7 +2122,7 @@ eststo clear
 eststo: reghdfe log_imp_total_news 		 	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -2050,7 +2146,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news 		 	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date) cluster(dma)
+											absorb(stationID date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -2074,7 +2170,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news 		 	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if balanced_sample==1&insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -2098,7 +2194,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news 		 	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if year>=2014&insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -2122,7 +2218,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news 		 	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if sweep_month==1&insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -2147,7 +2243,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news 		 	station_ownedby_sinclair_OO station_ownedby_nexstar_OO  ///
 											station_ownedby_gray_OO ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -2172,7 +2268,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news 		 	station_ownedby_sinclair_SSA station_ownedby_nexstar_SSA  ///
 											station_ownedby_gray_SSA ///
 											if insample==1, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -2244,7 +2340,7 @@ eststo clear
 eststo: reghdfe log_imp_total_news	 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -2268,7 +2364,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news	 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date##dmacode) cluster(dma)
+											absorb(stationID date##dmacode) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -2293,7 +2389,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news	 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if balanced_sample==1&insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -2317,7 +2413,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news	 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if year>=2014&insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -2341,7 +2437,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news	 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											if sweep_month==1&insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -2364,7 +2460,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news	 		station_ownedby_sinclair_OO station_ownedby_nexstar_OO  ///
 											station_ownedby_gray_OO ///
 											if insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -2389,7 +2485,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news	 		station_ownedby_sinclair_SSA station_ownedby_nexstar_SSA  ///
 											station_ownedby_gray_SSA ///
 											if insample==1, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -2456,7 +2552,1819 @@ esttab using tables/log_impressions_robustness.tex, fragment append nogaps keep(
 
 
 
+	  
 
+
+///////////////////////
+///////////////////////
+// APPENDIX TABLE F6 //
+///////////////////////
+///////////////////////
+
+
+use data/harmony/content_cleaned.dta, clear
+
+merge m:1 stationID using data/station_baseline_characteristics_2010_small.dta
+
+keep if _m==3
+drop _merge
+
+cap drop tag
+egen tag=tag(stationID)								
+
+// CREATES THE NECESSARY VARIABLES
+
+bysort dmacode: egen ever_sinclair_dma = max(station_ownedby_sinclair_LMA)
+bysort dmacode: egen ever_nexstar_dma = max(station_ownedby_nexstar_LMA)
+bysort dmacode: egen ever_gray_dma = max(station_ownedby_gray_LMA)
+
+bysort stationID: egen ever_sinclair = max(station_ownedby_sinclair_LMA)
+bysort stationID: egen ever_nexstar = max(station_ownedby_nexstar_LMA)
+bysort stationID: egen ever_gray = max(station_ownedby_gray_LMA)
+
+// 1. SINCLAIR
+
+eststo clear
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA ///
+											, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA ///
+											if ever_nexstar==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA  ///
+											if ever_gray==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA ///
+											if ever_nexstar==0&ever_gray==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA  ///
+											if ever_nexstar_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA  ///
+											if ever_gray_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA ///
+											if ever_nexstar_dma==0&ever_gray_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+esttab using tables/content_spillovers_DID.tex, replace fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		prehead("{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{10}{c}} \toprule \ & \multicolumn{1}{c}{Baseline} & \multicolumn{4}{c}{Drops Stations}   & \multicolumn{4}{c}{Drops DMAs} \\ \cmidrule(lr){2-2}\cmidrule(lr){3-6}\cmidrule(lr){7-10} \ & " " & Sinclair & Nexstar & Gray & Both & Sinclair & Nexstar & Gray & Both \\	\ & (1) & (2) & (3) & (4) & (5) & (6)  & (7)  & (8)  & (9) \\") ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel A: Sinclair} \\\cmidrule(lr){2-10}") ///
+		compress extracols(2 5) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+// 2. NEXSTAR
+
+eststo clear
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_nexstar_LMA ///
+											, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_nexstar_LMA ///
+											if ever_sinclair==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_nexstar_LMA  ///
+											if ever_gray==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe mention_place_pershow 		station_ownedby_nexstar_LMA ///
+											if ever_sinclair==0&ever_gray==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_nexstar_LMA  ///
+											if ever_sinclair_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_nexstar_LMA  ///
+											if ever_gray_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe mention_place_pershow 		station_ownedby_nexstar_LMA ///
+											if ever_sinclair_dma==0&ever_gray_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+esttab using tables/content_spillovers_DID.tex, append fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel B: Nexstar} \\\cmidrule(lr){2-10}") ///
+		compress extracols(3 6) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+// 3. GRAY
+
+eststo clear
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_gray_LMA ///
+											, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_gray_LMA ///
+											if ever_sinclair==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_gray_LMA  ///
+											if ever_nexstar==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+										
+eststo: reghdfe mention_place_pershow 		station_ownedby_gray_LMA ///
+											if ever_sinclair==0&ever_nexstar==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_gray_LMA  ///
+											if ever_sinclair_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_gray_LMA  ///
+											if ever_nexstar_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+											
+eststo: reghdfe mention_place_pershow 		station_ownedby_gray_LMA ///
+											if ever_sinclair_dma==0&ever_nexstar_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+esttab using tables/content_spillovers_DID.tex, append fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel C: Gray} \\\cmidrule(lr){2-10}") ///
+		postfoot("\bottomrule \end{tabular}}") ///
+		compress extracols(4 7) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+
+
+///////////////////////
+///////////////////////
+// APPENDIX TABLE F7 //
+///////////////////////
+///////////////////////
+
+
+use data/harmony/content_cleaned.dta, clear
+
+merge m:1 stationID using data/station_baseline_characteristics_2010_small.dta
+
+keep if _m==3
+drop _merge
+
+cap drop tag
+egen tag=tag(stationID)								
+
+// CREATES THE NECESSARY VARIABLES
+
+bysort dmacode: egen ever_sinclair_dma = max(station_ownedby_sinclair_LMA)
+bysort dmacode: egen ever_nexstar_dma = max(station_ownedby_nexstar_LMA)
+bysort dmacode: egen ever_gray_dma = max(station_ownedby_gray_LMA)
+
+bysort stationID: egen ever_sinclair = max(station_ownedby_sinclair_LMA)
+bysort stationID: egen ever_nexstar = max(station_ownedby_nexstar_LMA)
+bysort stationID: egen ever_gray = max(station_ownedby_gray_LMA)
+
+// 1. SINCLAIR
+
+eststo clear
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA ///
+											, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA ///
+											if ever_nexstar==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA  ///
+											if ever_gray==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA ///
+											if ever_nexstar==0&ever_gray==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA  ///
+											if ever_nexstar_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA  ///
+											if ever_gray_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA ///
+											if ever_nexstar_dma==0&ever_gray_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+esttab using tables/content_spillovers_TRIPLEDIFF.tex, replace fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		prehead("{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{10}{c}} \toprule \ & \multicolumn{1}{c}{Baseline} & \multicolumn{4}{c}{Drops Stations}   & \multicolumn{4}{c}{Drops DMAs} \\ \cmidrule(lr){2-2}\cmidrule(lr){3-6}\cmidrule(lr){7-10} \ & " " & Sinclair & Nexstar & Gray & Both & Sinclair & Nexstar & Gray & Both \\	\ & (1) & (2) & (3) & (4) & (5) & (6)  & (7)  & (8)  & (9) \\") ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel A: Sinclair} \\\cmidrule(lr){2-10}") ///
+		compress extracols(2 5) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+// 2. NEXSTAR
+
+eststo clear
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_nexstar_LMA ///
+											, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_nexstar_LMA ///
+											if ever_sinclair==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_nexstar_LMA  ///
+											if ever_gray==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe mention_place_pershow 		station_ownedby_nexstar_LMA ///
+											if ever_sinclair==0&ever_gray==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_nexstar_LMA  ///
+											if ever_sinclair_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_nexstar_LMA  ///
+											if ever_gray_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe mention_place_pershow 		station_ownedby_nexstar_LMA ///
+											if ever_sinclair_dma==0&ever_gray_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+esttab using tables/content_spillovers_TRIPLEDIFF.tex, append fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel B: Nexstar} \\\cmidrule(lr){2-10}") ///
+		compress extracols(3 6) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+// 3. GRAY
+
+eststo clear
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_gray_LMA ///
+											, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_gray_LMA ///
+											if ever_sinclair==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_gray_LMA  ///
+											if ever_nexstar==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+										
+eststo: reghdfe mention_place_pershow 		station_ownedby_gray_LMA ///
+											if ever_sinclair==0&ever_nexstar==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_gray_LMA  ///
+											if ever_sinclair_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe mention_place_pershow 		station_ownedby_gray_LMA  ///
+											if ever_nexstar_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+											
+eststo: reghdfe mention_place_pershow 		station_ownedby_gray_LMA ///
+											if ever_sinclair_dma==0&ever_nexstar_dma==0, ///
+											absorb(stationID date##dmacode##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+esttab using tables/content_spillovers_TRIPLEDIFF.tex, append fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel C: Gray} \\\cmidrule(lr){2-10}") ///
+		postfoot("\bottomrule \end{tabular}}") ///
+		compress extracols(4 7) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+			  
+////////////////////////
+////////////////////////
+// APPENDIX TABLE F8 //
+////////////////////////
+////////////////////////
+
+		  
+			
+use data/adintel/adintel_clean_updated.dta, clear
+
+merge m:1 stationID using data/station_baseline_characteristics_2010_small.dta
+
+keep if _m==3
+drop _merge
+
+drop if year==2010
+drop if year==2020
+			
+
+// CREATES ALL THE NECESSARY VARIABLES 
+
+bysort dmacode: egen ever_sinclair_dma = max(station_ownedby_sinclair_LMA)
+bysort dmacode: egen ever_nexstar_dma = max(station_ownedby_nexstar_LMA)
+bysort dmacode: egen ever_gray_dma = max(station_ownedby_gray_LMA)
+
+bysort stationID: egen ever_sinclair = max(station_ownedby_sinclair_LMA)
+bysort stationID: egen ever_nexstar = max(station_ownedby_nexstar_LMA)
+bysort stationID: egen ever_gray = max(station_ownedby_gray_LMA)
+
+// DID 
+
+// 1. SINCLAIR
+
+eststo clear
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA ///
+											, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA ///
+											if ever_nexstar==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA  ///
+											if ever_gray==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA ///
+											if ever_nexstar==0&ever_gray==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA  ///
+											if ever_nexstar_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA  ///
+											if ever_gray_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA ///
+											if ever_nexstar_dma==0&ever_gray_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+esttab using tables/adintel_spillovers_DID.tex, replace fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		prehead("{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{10}{c}} \toprule \ & \multicolumn{1}{c}{Baseline} & \multicolumn{4}{c}{Drops Stations}   & \multicolumn{4}{c}{Drops DMAs} \\ \cmidrule(lr){2-2}\cmidrule(lr){3-6}\cmidrule(lr){7-10} \ & " " & Sinclair & Nexstar & Gray & Both & Sinclair & Nexstar & Gray & Both \\	\ & (1) & (2) & (3) & (4) & (5) & (6)  & (7)  & (8)  & (9) \\") ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel A: Sinclair} \\\cmidrule(lr){2-10}") ///
+		compress extracols(2 5) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+// 2. NEXSTAR
+
+eststo clear
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_nexstar_LMA ///
+											, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_nexstar_LMA ///
+											if ever_sinclair==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_nexstar_LMA  ///
+											if ever_gray==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe log_duration_perHH_news		station_ownedby_nexstar_LMA ///
+											if ever_sinclair==0&ever_gray==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_nexstar_LMA  ///
+											if ever_sinclair_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_nexstar_LMA  ///
+											if ever_gray_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe log_duration_perHH_news		station_ownedby_nexstar_LMA ///
+											if ever_sinclair_dma==0&ever_gray_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+esttab using tables/adintel_spillovers_DID.tex, append fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel B: Nexstar} \\\cmidrule(lr){2-10}") ///
+		compress extracols(3 6) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+// 3. GRAY
+
+eststo clear
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_gray_LMA ///
+											, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_gray_LMA ///
+											if ever_sinclair==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_gray_LMA  ///
+											if ever_nexstar==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+										
+eststo: reghdfe log_duration_perHH_news		station_ownedby_gray_LMA ///
+											if ever_sinclair==0&ever_nexstar==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_gray_LMA  ///
+											if ever_sinclair_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_gray_LMA  ///
+											if ever_nexstar_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+											
+eststo: reghdfe log_duration_perHH_news		station_ownedby_gray_LMA ///
+											if ever_sinclair_dma==0&ever_nexstar_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+esttab using tables/adintel_spillovers_DID.tex, append fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel C: Gray} \\\cmidrule(lr){2-10}") ///
+		postfoot("\bottomrule \end{tabular}}") ///
+		compress extracols(4 7) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+			  
+			  
+
+///////////////////////
+///////////////////////
+// APPENDIX TABLE F9 //
+///////////////////////
+///////////////////////
+
+		  
+use data/adintel/adintel_clean_updated.dta, clear
+
+merge m:1 stationID using data/station_baseline_characteristics_2010_small.dta
+
+keep if _m==3
+drop _merge
+
+drop if year==2010
+drop if year==2020
+			
+// CREATES ALL THE NECESSARY VARIABLES 
+
+bysort dmacode: egen ever_sinclair_dma = max(station_ownedby_sinclair_LMA)
+bysort dmacode: egen ever_nexstar_dma = max(station_ownedby_nexstar_LMA)
+bysort dmacode: egen ever_gray_dma = max(station_ownedby_gray_LMA)
+
+bysort stationID: egen ever_sinclair = max(station_ownedby_sinclair_LMA)
+bysort stationID: egen ever_nexstar = max(station_ownedby_nexstar_LMA)
+bysort stationID: egen ever_gray = max(station_ownedby_gray_LMA)
+ 
+
+// 1. SINCLAIR
+
+eststo clear
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA ///
+											, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA ///
+											if ever_nexstar==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA  ///
+											if ever_gray==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA ///
+											if ever_nexstar==0&ever_gray==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA  ///
+											if ever_nexstar_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA  ///
+											if ever_gray_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA ///
+											if ever_nexstar_dma==0&ever_gray_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+esttab using tables/adintel_spillovers_TRIPLEDIFF.tex, replace fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		prehead("{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{10}{c}} \toprule \ & \multicolumn{1}{c}{Baseline} & \multicolumn{4}{c}{Drops Stations}   & \multicolumn{4}{c}{Drops DMAs} \\ \cmidrule(lr){2-2}\cmidrule(lr){3-6}\cmidrule(lr){7-10} \ & " " & Sinclair & Nexstar & Gray & Both & Sinclair & Nexstar & Gray & Both \\	\ & (1) & (2) & (3) & (4) & (5) & (6)  & (7)  & (8)  & (9) \\") ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel A: Sinclair} \\\cmidrule(lr){2-10}") ///
+		compress extracols(2 5) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+// 2. NEXSTAR
+
+eststo clear
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_nexstar_LMA ///
+											, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_nexstar_LMA ///
+											if ever_sinclair==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_nexstar_LMA  ///
+											if ever_gray==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe log_duration_perHH_news		station_ownedby_nexstar_LMA ///
+											if ever_sinclair==0&ever_gray==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_nexstar_LMA  ///
+											if ever_sinclair_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_nexstar_LMA  ///
+											if ever_gray_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe log_duration_perHH_news		station_ownedby_nexstar_LMA ///
+											if ever_sinclair_dma==0&ever_gray_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+esttab using tables/adintel_spillovers_TRIPLEDIFF.tex, append fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel B: Nexstar} \\\cmidrule(lr){2-10}") ///
+		compress extracols(3 6) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+// 3. GRAY
+
+eststo clear
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_gray_LMA ///
+											, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_gray_LMA ///
+											if ever_sinclair==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_gray_LMA  ///
+											if ever_nexstar==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+										
+eststo: reghdfe log_duration_perHH_news		station_ownedby_gray_LMA ///
+											if ever_sinclair==0&ever_nexstar==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_gray_LMA  ///
+										if ever_sinclair_dma==0, ///
+										absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe log_duration_perHH_news		station_ownedby_gray_LMA  ///
+											if ever_nexstar_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+											
+eststo: reghdfe log_duration_perHH_news		station_ownedby_gray_LMA ///
+											if ever_sinclair_dma==0&ever_nexstar_dma==0, ///
+											absorb(stationID date##dmacode##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+esttab using tables/adintel_spillovers_TRIPLEDIFF.tex, append fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel C: Gray} \\\cmidrule(lr){2-10}") ///
+		postfoot("\bottomrule \end{tabular}}") ///
+		compress extracols(4 7) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+
+	  
+			  
+////////////////////////
+////////////////////////
+// APPENDIX TABLE F10 //
+////////////////////////
+////////////////////////
+
+
+use data/adintel/adintel_clean_updated.dta, clear
+
+merge m:1 stationID using data/station_baseline_characteristics_2010_small.dta
+
+keep if _m==3
+drop _merge
+
+drop if year==2010
+drop if year==2020
+		
+// CREATES ALL THE NECESSARY VARIABLES
+
+bysort dmacode: egen ever_sinclair_dma = max(station_ownedby_sinclair_LMA)
+bysort dmacode: egen ever_nexstar_dma = max(station_ownedby_nexstar_LMA)
+bysort dmacode: egen ever_gray_dma = max(station_ownedby_gray_LMA)
+
+bysort stationID: egen ever_sinclair = max(station_ownedby_sinclair_LMA)
+bysort stationID: egen ever_nexstar = max(station_ownedby_nexstar_LMA)
+bysort stationID: egen ever_gray = max(station_ownedby_gray_LMA)
+
+// 1. SINCLAIR
+
+eststo clear
+
+eststo: reghdfe rating_total_news		station_ownedby_sinclair_LMA ///
+											, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_sinclair_LMA ///
+											if ever_nexstar==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_sinclair_LMA  ///
+											if ever_gray==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe rating_total_news		station_ownedby_sinclair_LMA ///
+											if ever_nexstar==0&ever_gray==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_sinclair_LMA  ///
+											if ever_nexstar_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_sinclair_LMA  ///
+											if ever_gray_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe rating_total_news		station_ownedby_sinclair_LMA ///
+											if ever_nexstar_dma==0&ever_gray_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+esttab using tables/ratings_spillovers_DID.tex, replace fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		prehead("{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{10}{c}} \toprule \ & \multicolumn{1}{c}{Baseline} & \multicolumn{4}{c}{Drops Stations}   & \multicolumn{4}{c}{Drops DMAs} \\ \cmidrule(lr){2-2}\cmidrule(lr){3-6}\cmidrule(lr){7-10} \ & " " & Sinclair & Nexstar & Gray & Both & Sinclair & Nexstar & Gray & Both \\	\ & (1) & (2) & (3) & (4) & (5) & (6)  & (7)  & (8)  & (9) \\") ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel A: Sinclair} \\\cmidrule(lr){2-10}") ///
+		compress extracols(2 5) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+// 2. NEXSTAR
+
+eststo clear
+
+eststo: reghdfe rating_total_news		station_ownedby_nexstar_LMA ///
+											, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_nexstar_LMA ///
+											if ever_sinclair==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_nexstar_LMA  ///
+											if ever_gray==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe rating_total_news		station_ownedby_nexstar_LMA ///
+											if ever_sinclair==0&ever_gray==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_nexstar_LMA  ///
+											if ever_sinclair_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_nexstar_LMA  ///
+											if ever_gray_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe rating_total_news		station_ownedby_nexstar_LMA ///
+											if ever_sinclair_dma==0&ever_gray_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+esttab using tables/ratings_spillovers_DID.tex, append fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel B: Nexstar} \\\cmidrule(lr){2-10}") ///
+		compress extracols(3 6) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+// 3. GRAY
+
+eststo clear
+
+eststo: reghdfe rating_total_news		station_ownedby_gray_LMA ///
+											, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe rating_total_news		station_ownedby_gray_LMA ///
+											if ever_sinclair==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe rating_total_news		station_ownedby_gray_LMA  ///
+											if ever_nexstar==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+										
+eststo: reghdfe rating_total_news		station_ownedby_gray_LMA ///
+											if ever_sinclair==0&ever_nexstar==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe rating_total_news		station_ownedby_gray_LMA  ///
+											if ever_sinclair_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe rating_total_news		station_ownedby_gray_LMA  ///
+											if ever_nexstar_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+											
+eststo: reghdfe rating_total_news		station_ownedby_gray_LMA ///
+											if ever_sinclair_dma==0&ever_nexstar_dma==0, ///
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+esttab using tables/ratings_spillovers_DID.tex, append fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel C: Gray} \\\cmidrule(lr){2-10}") ///
+		postfoot("\bottomrule \end{tabular}}") ///
+		compress extracols(4 7) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+		  
+
+////////////////////////
+////////////////////////
+// APPENDIX TABLE F11 //
+////////////////////////
+////////////////////////
+
+
+use data/adintel/adintel_clean_updated.dta, clear
+
+merge m:1 stationID using data/station_baseline_characteristics_2010_small.dta
+
+keep if _m==3
+drop _merge
+
+drop if year==2010
+drop if year==2020
+		
+// CREATES ALL THE NECESSARY VARIABLES
+
+bysort dmacode: egen ever_sinclair_dma = max(station_ownedby_sinclair_LMA)
+bysort dmacode: egen ever_nexstar_dma = max(station_ownedby_nexstar_LMA)
+bysort dmacode: egen ever_gray_dma = max(station_ownedby_gray_LMA)
+
+bysort stationID: egen ever_sinclair = max(station_ownedby_sinclair_LMA)
+bysort stationID: egen ever_nexstar = max(station_ownedby_nexstar_LMA)
+bysort stationID: egen ever_gray = max(station_ownedby_gray_LMA)
+
+// 1. SINCLAIR
+
+eststo clear
+
+eststo: reghdfe rating_total_news		station_ownedby_sinclair_LMA ///
+											, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_sinclair_LMA ///
+											if ever_nexstar==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_sinclair_LMA  ///
+											if ever_gray==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe rating_total_news		station_ownedby_sinclair_LMA ///
+											if ever_nexstar==0&ever_gray==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_sinclair_LMA  ///
+											if ever_nexstar_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_sinclair_LMA  ///
+											if ever_gray_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe rating_total_news		station_ownedby_sinclair_LMA ///
+											if ever_nexstar_dma==0&ever_gray_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+esttab using tables/ratings_spillovers_TRIPLEDIFF.tex, replace fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		prehead("{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{10}{c}} \toprule \ & \multicolumn{1}{c}{Baseline} & \multicolumn{4}{c}{Drops Stations}   & \multicolumn{4}{c}{Drops DMAs} \\ \cmidrule(lr){2-2}\cmidrule(lr){3-6}\cmidrule(lr){7-10} \ & " " & Sinclair & Nexstar & Gray & Both & Sinclair & Nexstar & Gray & Both \\	\ & (1) & (2) & (3) & (4) & (5) & (6)  & (7)  & (8)  & (9) \\") ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel A: Sinclair} \\\cmidrule(lr){2-10}") ///
+		compress extracols(2 5) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+// 2. NEXSTAR
+
+eststo clear
+
+eststo: reghdfe rating_total_news		station_ownedby_nexstar_LMA ///
+											, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_nexstar_LMA ///
+											if ever_sinclair==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_nexstar_LMA  ///
+											if ever_gray==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe rating_total_news		station_ownedby_nexstar_LMA ///
+											if ever_sinclair==0&ever_gray==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_nexstar_LMA  ///
+											if ever_sinclair_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+eststo: reghdfe rating_total_news		station_ownedby_nexstar_LMA  ///
+											if ever_gray_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+											
+eststo: reghdfe rating_total_news		station_ownedby_nexstar_LMA ///
+											if ever_sinclair_dma==0&ever_gray_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+
+esttab using tables/ratings_spillovers_TRIPLEDIFF.tex, append fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel B: Nexstar} \\\cmidrule(lr){2-10}") ///
+		compress extracols(3 6) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+
+// 3. GRAY
+
+eststo clear
+
+eststo: reghdfe rating_total_news		station_ownedby_gray_LMA ///
+											, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe rating_total_news		station_ownedby_gray_LMA ///
+											if ever_sinclair==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe rating_total_news		station_ownedby_gray_LMA  ///
+											if ever_nexstar==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+										
+eststo: reghdfe rating_total_news		station_ownedby_gray_LMA ///
+											if ever_sinclair==0&ever_nexstar==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe rating_total_news		station_ownedby_gray_LMA  ///
+										if ever_sinclair_dma==0, ///
+										absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+eststo: reghdfe rating_total_news		station_ownedby_gray_LMA  ///
+											if ever_nexstar_dma==0, ///
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+											
+eststo: reghdfe rating_total_news		station_ownedby_gray_LMA ///
+											if ever_sinclair_dma==0&ever_nexstar_dma==0, ///
+											absorb(stationID date##dmacode##dmacode c.($station_controls)##i.date) cluster(dmacode)											
+qui su `e(depvar)' if e(sample)==1
+qui scalar ymean =  `r(mean)'
+qui estadd scalar ymean 
+qui unique stationID if e(sample)==1
+qui scalar N_stations =  `r(unique)'
+qui estadd scalar N_stations 
+qui estadd local stationFE 		"\checkmark"
+qui estadd local monthFE		"\checkmark"
+qui estadd local controls		"\checkmark"
+
+esttab using tables/ratings_spillovers_TRIPLEDIFF.tex, append fragment nogaps keep(station_ownedby_*)  ///
+		noomitted nonotes se(%9.3f) b(%9.3f) ///
+		label starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle nonumbers ///
+		posthead("\midrule \ & \multicolumn{9}{c}{Panel C: Gray} \\\cmidrule(lr){2-10}") ///
+		postfoot("\bottomrule \end{tabular}}") ///
+		compress extracols(4 7) ///
+		stats(N N_stations N_clust ymean, ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable")) 
+			  
 
 
 

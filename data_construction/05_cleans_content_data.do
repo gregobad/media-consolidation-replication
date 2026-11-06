@@ -33,12 +33,9 @@ drop if callsign=="KOBI"&year==2014&month<=10
 
 replace callsign="KOBI" if callsign=="KOTI"
 
-// fix dmacode for Palm Springs stations
-replace dmacode=804 if callsign=="KPSP"
-replace dmacode=804 if callsign=="KDFX"
-
 drop year month
 
+drop dmacode
 
 merge 1:1 callsign date using data/acquisitions/acquisition_panel_station_top3_FINAL.dta
 
@@ -80,59 +77,7 @@ drop if missing==N // stations not in existance for the full period, but always 
 
 drop _m
 
-// /////////////////////
-// // CHECKS THE DATA //
-// /////////////////////
-//
-// cap drop tag_date
-// egen tag_date=tag(date)
-//
-// cap drop n_programs_tot
-// bysort date: egen n_programs_tot=total(n_progs)
-//
-// tw line n_programs_tot date if tag_date==1, ///
-// 		graphr(c(white)) ///
-// 		bgcolor(white) ///
-// 		title("Overall # of Programs per Month", c(black)) ///
-// 		xlabel(636(12)731, grid valuel glc(gs12) glp(dot) format(%tmCY)) ///
-// 		ytick(, notick nolabel) ///
-// 		ylabel(, glc(gs12) glp(dot)) ///
-// 		ytitle("Number of Programs", c(black)) ///
-// 		xtitle("", c(black)) ///
-// 		legend(off)
-//
-// cap drop zero_programs
-// cap drop zeros
-// g zero_programs = n_progs == 0
-// bysort date: egen zeros=total(zero_programs)
-//
-// tw line zeros date if tag_date==1, ///
-// 		graphr(c(white)) ///
-// 		bgcolor(white) ///
-// 		title("Number of Stations with Zero Programs", c(black)) ///
-// 		xlabel(636(12)731, grid valuel glc(gs12) glp(dot)  format(%tmCY)) ///
-// 		ytick(, notick nolabel) ///
-// 		ylabel(, glc(gs12) glp(dot)) ///
-// 		ytitle("Number of Stations with Zero Programs", c(black)) ///
-// 		xtitle("", c(black)) ///
-// 		legend(off)
-//
-// cap drop mean
-// bysort date: egen mean=mean(mention_place_pershow)
-//
-// tw line mean date if tag_date==1, ///
-// 		graphr(c(white)) ///
-// 		bgcolor(white) ///
-// 		title("Mean Number of Place Mentions per Show", c(black)) ///
-// 		xlabel(636(12)731, grid valuel glc(gs12) glp(dot) format(%tmCY)) ///
-// 		ytick(, notick nolabel) ///
-// 		ylabel(11(1)18, glc(gs12) glp(dot)) ///
-// 		ytitle("Mean Number of Place Mentions per Show", c(black)) ///
-// 		xtitle("", c(black)) ///
-// 		legend(off)
-		
-// sets mentions equal to zero if there are no programs or no words
-
+// sets mentions equal to missing if there are no programs or no words
 replace mention_place_total = .  if n_progs==0
 replace mention_pol_local_total = .  if n_progs==0
 replace mention_pol_stateleg_total = . if n_progs==0
@@ -174,54 +119,7 @@ foreach var of varlist 	mention_place mention_pol_local mention_pol_stateleg ///
 	g `var'_pershow=`var'/n_progs
 	g `var'_perword=`var'/n_words
 	}
-	
-
-// /////////////////////
-// // CHECKS THE DATA //
-// /////////////////////
-//
-// cap drop n_programs_tot
-// bysort date: egen n_programs_tot=total(n_progs)
-//
-// tw line n_programs_tot date if tag_date==1, ///
-// 		graphr(c(white)) ///
-// 		bgcolor(white) ///
-// 		title("Overall # of Programs per Month", c(black)) ///
-// 		xlabel(636(12)719, grid valuel glc(gs12) glp(dot) format(%tmCY)) ///
-// 		ytick(, notick nolabel) ///
-// 		ylabel(, glc(gs12) glp(dot)) ///
-// 		ytitle("Number of Programs", c(black)) ///
-// 		xtitle("", c(black)) ///
-// 		legend(off)
-//
-// cap drop mean
-// bysort date: egen mean=mean(mention_place_pershow)
-//
-// tw line mean date if tag_date==1, ///
-// 		graphr(c(white)) ///
-// 		bgcolor(white) ///
-// 		title("Mean Number of Place Mentions per Show", c(black)) ///
-// 		xlabel(636(12)719, grid valuel glc(gs12) glp(dot) format(%tmCY)) ///
-// 		ytick(, notick nolabel) ///
-// 		ylabel(11(1)18, glc(gs12) glp(dot)) ///
-// 		ytitle("Mean Number of Place Mentions per Show", c(black)) ///
-// 		xtitle("", c(black)) ///
-// 		legend(off)
-//
-// cap drop mean
-// bysort date: egen mean=mean(mention_place_perword)
-//
-// tw line mean date if tag_date==1, ///
-// 		graphr(c(white)) ///
-// 		bgcolor(white) ///
-// 		title("Mean Number of Place Mentions per Word", c(black)) ///
-// 		xlabel(636(12)719, grid valuel glc(gs12) glp(dot) format(%tmCY)) ///
-// 		ytick(, notick nolabel) ///
-// 		ylabel(0.0028(0.0002)0.0038, glc(gs12) glp(dot)) ///
-// 		ytitle("Mean Number of Place Mentions per Word", c(black)) ///
-// 		xtitle("", c(black)) ///
-// 		legend(off)	
-		
+			
 // creates outcome variable
 
 cap drop log_mention_place_pershow

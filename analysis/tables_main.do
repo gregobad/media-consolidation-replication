@@ -18,14 +18,13 @@ drop _merge
 cap drop tag
 egen tag=tag(stationID)								
 
-
 eststo clear
 
 // BASELINE, DID
 eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date) cluster(dma)
+											absorb(stationID date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -50,7 +49,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -75,7 +74,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date##dmacode) cluster(dma)
+											absorb(stationID date##dmacode) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -100,7 +99,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_place_pershow 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -127,10 +126,10 @@ esttab, nogaps keep(station_ownedby_*)  ///
 		mgroups("Mentions/Shows", pattern(1 0 0 0 0 0 0 0) ///
 		prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
 		compress ///
-		stats(stationFE monthFE dmamonthFE controls N N_stations N_clust ymean ///
+		stats(N N_stations N_clust ymean ///
 			  pvalue_sinclair_nexstar pvalue_sinclair_gray pvalue_nexstar_gray, ///
-			  fmt(%9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
-			  labels("Station FEs" "Month FEs" "DMA-By-Month FEs" "Controls" "\midrule Observations" "Stations" "DMAs (Clusters)" ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" ///
 					"Mean Dep. Variable" "\midrule Sinclair = Nexstar" "Sinclair = Gray" "Nexstar = Gray")) 
 
 esttab using tables/content_main.tex, replace booktabs nogaps keep(station_ownedby_*)  ///
@@ -139,10 +138,10 @@ esttab using tables/content_main.tex, replace booktabs nogaps keep(station_owned
 		mgroups("Mentions/Shows", pattern(1 0 0 0 0 0 0 0 ) ///
 		prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
 		compress ///
-		stats(stationFE monthFE dmamonthFE controls N N_stations N_clust ymean ///
+		stats(N N_stations N_clust ymean ///
 			  pvalue_sinclair_nexstar pvalue_sinclair_gray pvalue_nexstar_gray, ///
-			  fmt(%9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
-			  labels("Station FEs" "Month FEs" "DMA-By-Month FEs" "Controls" "\midrule Observations" "Stations" "DMAs (Clusters)" ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" ///
 					"Mean Dep. Variable" "\midrule Sinclair = Nexstar" "Sinclair = Gray" "Nexstar = Gray")) 
 
 
@@ -172,7 +171,7 @@ eststo clear
 eststo: reghdfe mention_pol_local_pershow		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 												station_ownedby_gray_LMA ///
 												, ///
-												absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+												absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -197,7 +196,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_pol_local_pershow		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 												station_ownedby_gray_LMA ///
 												, ///
-												absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+												absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -222,7 +221,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_pol_stateleg_pershow		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 													station_ownedby_gray_LMA ///
 													, ///
-													absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+													absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -247,7 +246,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_pol_stateleg_pershow 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 													station_ownedby_gray_LMA ///
 													, ///
-													absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+													absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -272,7 +271,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_pol_congress_pershow		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 													station_ownedby_gray_LMA ///
 													, ///
-													absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+													absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -297,7 +296,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe mention_pol_congress_pershow		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA ///
 													station_ownedby_gray_LMA ///
 													, ///
-													absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+													absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -324,10 +323,10 @@ esttab, nogaps keep(station_ownedby_*)  ///
 		mgroups("Mayors" "State Legislators" "Members of the House", pattern(1 0 1 0 1 0) ///
 		prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
 		compress ///
-		stats(stationFE monthFE dmamonthFE controls N N_stations N_clust ymean ///
+		stats(N N_stations N_clust ymean ///
 			  pvalue_sinclair_nexstar pvalue_sinclair_gray  pvalue_nexstar_gray, ///
-			  fmt(%9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
-			  labels("Station FEs" "Month FEs" "DMA-By-Month FEs" "Controls"  "\midrule Observations" "Stations" "DMAs (Clusters)" ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" ///
 					"Mean Dep. Variable" "\midrule Sinclair = Nexstar" "Sinclair = Gray" "Nexstar = Gray")) 
 
 esttab using tables/content_additional_outcomes.tex, replace nogaps keep(station_ownedby_*)  ///
@@ -336,10 +335,10 @@ esttab using tables/content_additional_outcomes.tex, replace nogaps keep(station
 		mgroups("Mayors" "State Legislators"  "House Representatives", pattern(1 0 1 0 1 0) ///
 		prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
 		compress ///
-		stats(stationFE monthFE dmamonthFE controls N N_stations N_clust ymean ///
+		stats(N N_stations N_clust ymean ///
 			  pvalue_sinclair_nexstar pvalue_sinclair_gray  pvalue_nexstar_gray, ///
-			  fmt(%9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
-			  labels("Station FEs" "Month FEs" "DMA-By-Month FEs" "Controls"  "\midrule Observations" "Stations" "DMAs (Clusters)" ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" ///
 					"Mean Dep. Variable" "\midrule Sinclair = Nexstar" "Sinclair = Gray" "Nexstar = Gray")) 
 
 					
@@ -363,7 +362,7 @@ eststo clear
 
 eststo: reghdfe log_duration_perHH_news 	station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA, ///
-											absorb(stationID date) cluster(dma)
+											absorb(stationID date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -386,7 +385,7 @@ qui estadd scalar pvalue_nexstar_gray
 
 eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -409,7 +408,7 @@ qui estadd scalar pvalue_nexstar_gray
 
 eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA, ///
-											absorb(stationID date##dmacode) cluster(dma)
+											absorb(stationID date##dmacode) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -432,7 +431,7 @@ qui estadd scalar pvalue_nexstar_gray
 
 eststo: reghdfe log_duration_perHH_news		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -457,7 +456,7 @@ qui estadd scalar pvalue_nexstar_gray
 
 eststo: reghdfe log_spend_perHH_news 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA, ///
-											absorb(stationID date ) cluster(dma)
+											absorb(stationID date ) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -480,7 +479,7 @@ qui estadd scalar pvalue_nexstar_gray
 
 eststo: reghdfe log_spend_perHH_news 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA, ///
-											absorb(stationID date c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -503,7 +502,7 @@ qui estadd scalar pvalue_nexstar_gray
 
 eststo: reghdfe log_spend_perHH_news 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA, ///
-											absorb(stationID date##dmacode) cluster(dma)
+											absorb(stationID date##dmacode) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -526,7 +525,7 @@ qui estadd scalar pvalue_nexstar_gray
 
 eststo: reghdfe log_spend_perHH_news 		station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA, ///
-											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -553,10 +552,10 @@ esttab, nogaps keep(station_ownedby_*) ///
 		mgroups("Log Duration" "Log Revenues", pattern(1 0 0 0 1 0 0 0) ///
 		prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
 		compress ///
-		stats(stationFE monthFE  dmamonthFE controls N N_stations N_clust ymean ///
+		stats(N N_stations N_clust ymean ///
 			  pvalue_sinclair_nexstar pvalue_sinclair_gray  pvalue_nexstar_gray, ///
-			  fmt(%9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
-			  labels("Station FEs" "Month FEs"  "DMA-By-Month FEs" "Controls" "\midrule Observations" "Stations" "DMAs (Clusters)" ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" ///
 					"Mean Dep. Variable" "\midrule Sinclair = Nexstar" "Sinclair = Gray" "Nexstar = Gray" )) 
 
 esttab using tables/adintel_main.tex, replace nogaps keep(station_ownedby_*) ///
@@ -565,12 +564,12 @@ esttab using tables/adintel_main.tex, replace nogaps keep(station_ownedby_*) ///
 		mgroups("Log Duration" "Log Revenue", pattern(1 0 0 0 1 0 0 0) ///
 		prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
 		compress ///
-		stats(stationFE monthFE  dmamonthFE controls N N_stations N_clust ymean ///
+		stats(N N_stations N_clust ymean ///
 			  pvalue_sinclair_nexstar pvalue_sinclair_gray  pvalue_nexstar_gray, ///
-			  fmt(%9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
-			  labels("Station FEs" "Month FEs"  "DMA-By-Month FEs" "Controls" "\midrule Observations" "Stations" "DMAs (Clusters)" ///
+			  fmt(%9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" ///
 					"Mean Dep. Variable" "\midrule Sinclair = Nexstar" "Sinclair = Gray" "Nexstar = Gray" )) 
-	
+
 
 
 
@@ -593,7 +592,7 @@ eststo clear
 eststo: reghdfe rating_total_news			station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date) cluster(dma)
+											absorb(stationID date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -617,7 +616,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe rating_total_news			station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date  c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date  c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -642,7 +641,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe rating_total_news 			station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date##dmacode) cluster(dma)
+											absorb(stationID date##dmacode) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -666,7 +665,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe rating_total_news 			station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date##dmacode  c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode  c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -690,7 +689,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news			station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date) cluster(dma)
+											absorb(stationID date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -714,7 +713,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news			station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date  c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date  c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -739,7 +738,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news			station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date##dmacode) cluster(dma)
+											absorb(stationID date##dmacode) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -763,7 +762,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe log_imp_total_news			station_ownedby_sinclair_LMA station_ownedby_nexstar_LMA  ///
 											station_ownedby_gray_LMA ///
 											, ///
-											absorb(stationID date##dmacode  c.($station_controls)##i.date) cluster(dma)
+											absorb(stationID date##dmacode  c.($station_controls)##i.date) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
 qui estadd scalar ymean 
@@ -790,10 +789,10 @@ esttab, nogaps keep(station_ownedby_*)  ///
 		mgroups("News Ratings" "Log Impressions", pattern(1 0 0 0 1 0 0 0) ///
 		prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
 		compress ///
-		stats(stationFE monthFE dmamonthFE controls N N_stations N_clust ymean ///
+		stats(N N_stations N_clust ymean ///
 			  pvalue_sinclair_nexstar pvalue_sinclair_gray  pvalue_nexstar_gray, ///
-			  fmt(%9.0f %9.0f %9.0f %9.0f  %9.0f  %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
-			  labels("Station FEs" "Month FEs" "DMA-By-Month FEs" "Controls"  "\midrule Observations" "Stations" "DMAs (Clusters)" ///
+			  fmt(%9.0f  %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" ///
 					"Mean Dep. Variable" "\midrule Sinclair = Nexstar" "Sinclair = Gray" "Nexstar = Gray" )) 
 
 esttab using tables/ratings_main.tex, replace booktabs nogaps keep(station_ownedby_*)   ///
@@ -802,10 +801,10 @@ esttab using tables/ratings_main.tex, replace booktabs nogaps keep(station_owned
 		mgroups("News Ratings" "Log Impressions", pattern(1 0 0 0 1 0 0 0) ///
 		prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
 		compress ///
-		stats(stationFE monthFE dmamonthFE controls N N_stations N_clust ymean ///
+		stats(N N_stations N_clust ymean ///
 			  pvalue_sinclair_nexstar pvalue_sinclair_gray  pvalue_nexstar_gray, ///
-			  fmt(%9.0f %9.0f %9.0f %9.0f  %9.0f  %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
-			  labels("Station FEs" "Month FEs" "DMA-By-Month FEs" "Controls"  "\midrule Observations" "Stations" "DMAs (Clusters)" ///
+			  fmt(%9.0f  %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
+			  labels("Observations" "Stations" "DMAs (Clusters)" ///
 					"Mean Dep. Variable" "\midrule Sinclair = Nexstar" "Sinclair = Gray" "Nexstar = Gray" )) 
 
 /////////////
@@ -814,14 +813,12 @@ esttab using tables/ratings_main.tex, replace booktabs nogaps keep(station_owned
 
 use data/CCES/CCES_final.dta, clear
 
-* Note: new versions without weights and with, SEPARATELY, dma FEs and cd_by_redistricting FEs (and including TRIBUNE) 
-
 eststo clear
 
 eststo: reghdfe recog_houserep_never_heardbroad 	ownedby_sinclair_LMA ///
 													ownedby_nexstar_LMA ownedby_gray_LMA  ///
 													$controls_CCES , ///
-													absorb(dmacode cdID##redistricting  year) cluster(dma)
+													absorb(dmacode cdID##redistricting  year) cluster(dmacode)
 											
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
@@ -846,7 +843,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe dontknow_approval_housemember 	ownedby_sinclair_LMA ///
 												ownedby_gray_LMA ownedby_nexstar_LMA ///
 												$controls_CCES , ///
-												absorb(dmacode cdID##redistricting year) cluster(dma)
+												absorb(dmacode cdID##redistricting year) cluster(dmacode)
 											
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
@@ -872,7 +869,7 @@ qui estadd scalar pvalue_nexstar_gray
 eststo: reghdfe no_prefencehouse 	ownedby_sinclair_LMA ///
 											ownedby_gray_LMA ownedby_nexstar_LMA ///
 											$controls_CCES , ///
-											absorb(dmacode cdID##redistricting  year) cluster(dma)
+											absorb(dmacode cdID##redistricting  year) cluster(dmacode)
 
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
@@ -894,29 +891,28 @@ test ownedby_nexstar_LMA = ownedby_gray_LMA
 qui scalar pvalue_nexstar_gray =  `r(p)'
 qui estadd scalar pvalue_nexstar_gray 
 
-
 esttab, replace nogaps keep(ownedby_*)  ///
 				noomitted nonotes se(%9.3f) b(%9.3f) nomtitle  ///
 				label starlevels(* 0.10 ** 0.05 *** 0.01) ///
-				mgroups("\shortstack{Never Heard of\\Representative}" "\shortstack{Not Able to Evaluate\\Representative}" "\shortstack{Has No Preference\\over Election}", pattern(1 0 1 0 1 0) ///
+				mgroups("Never Heard" "Cannot Evaluate" "No Preference", pattern(1 1 1) ///
 				prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
 				compress ///
-				stats(dmaFE cd_by_redist_FE yearFE  controls N N_cds N_clust ymean ///
+				stats(N N_clust ymean ///
 					  pvalue_sinclair_nexstar pvalue_sinclair_gray pvalue_nexstar_gray, ///
-					  fmt(%9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
-					  labels("dma FE" "CD-By-Redistricting Cycle FEs" "Year FEs" "Controls" "\midrule Observations" "CDs" "DMAs (Clusters)" ///
+					  fmt(%9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
+					  labels("Observations" "DMAs (Clusters)" ///
 							"Mean Dep. Variable" "\midrule Sinclair = Nexstar" "Sinclair = Gray" "Nexstar = Gray")) 
 
 esttab using tables/CCES_unweightednew.tex, replace nogaps keep(ownedby_*)  ///
 				noomitted nonotes se(%9.3f) b(%9.3f) nomtitle  ///
 				label starlevels(* 0.10 ** 0.05 *** 0.01) ///
-				mgroups("\shortstack{Never Heard of\\Representative}" "\shortstack{Not Able to Evaluate\\Representative}" "\shortstack{Has No Preference\\over Election}", pattern(1 1 1) ///
+				mgroups("Never Heard" "Cannot Evaluate" "No Preference", pattern(1 1 1) ///
 				prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
 				compress ///
-				stats(dmaFE cd_by_redist_FE yearFE  controls N N_clust ymean ///
+				stats(N N_clust ymean ///
 					  pvalue_sinclair_nexstar pvalue_sinclair_gray pvalue_nexstar_gray, ///
-					  fmt(%9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
-					  labels("DMA FE" "CD-By-Redistricting Cycle FEs" "Year FEs" "Controls" "\midrule Observations" "DMAs (Clusters)" ///
+					  fmt(%9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
+					  labels("Observations" "DMAs (Clusters)" ///
 							"Mean Dep. Variable" "\midrule Sinclair = Nexstar" "Sinclair = Gray" "Nexstar = Gray")) 
 
 
@@ -950,21 +946,18 @@ drop if callsign=="KOBI"&year==2014&month<=10
 
 replace callsign="KOBI" if callsign=="KOTI"
 
-// fix dmacode for Palm Springs stations
-replace dmacode=804 if callsign=="KPSP"
-replace dmacode=804 if callsign=="KDFX"
-
+drop dmacode
 drop year month
 
 merge m:1 callsign date using data/acquisitions/acquisition_panel_station_top3_FINAL.dta
 
-//    Result                      Number of obs
+//     Result                      Number of obs
 //     -----------------------------------------
-//     Not matched                        61,703
-//         from master                    30,990  (_merge==1)
-//         from using                     30,713  (_merge==2)
+//     Not matched                       101,226
+//         from master                    66,695  (_merge==1)
+//         from using                     34,531  (_merge==2)
 //
-//     Matched                            69,330  (_merge==3)
+//     Matched                           405,909  (_merge==3)
 //     -----------------------------------------
 
 drop if year(dofm(date))>2020
@@ -975,11 +968,11 @@ tab _m
 //    Matching result from |
 //                   merge |      Freq.     Percent        Cum.
 // ------------------------+-----------------------------------
-//         Master only (1) |     10,926        9.85        9.85
-//          Using only (2) |     30,713       27.68       37.52
-//             Matched (3) |     69,330       62.48      100.00
+//         Master only (1) |     66,695       13.89       13.89
+//          Using only (2) |      7,391        1.54       15.43
+//             Matched (3) |    405,909       84.57      100.00
 // ------------------------+-----------------------------------
-//                   Total |    110,969      100.00
+//                   Total |    479,995      100.00
 
 keep if _m==3
 drop _m
@@ -1012,21 +1005,21 @@ cap drop tag
 // CLEANS VARIABLES
 
 egen cdID=group(state district)
-egen tag=tag(cdID)
+egen tag=tag(cdID dmacode)
 
 su share_of_dma if tag==1, d
-g high_congruence = (share_of_dma>=`r(p50)') 
+g above_median = (share_of_dma>=`r(p50)') 
 
 g mentions_pol_congress_pershow = mentions_pol_congress_total / n_progs
 g dummy=(mentions_pol_congress_pershow>0) if mentions_pol_congress_pershow!=.
 		
-label var high_congruence  "High"
+label var above_median  "High"
 
 // RUNS THE REGRESSIONS
 
 eststo clear
 
-eststo: reghdfe dummy 							high_congruence, ///
+eststo: reghdfe dummy 							above_median, ///
 												cluster(dmacode) absorb(date stationID c.($station_controls)##i.date)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
@@ -1042,7 +1035,7 @@ qui estadd local stationFE			"\checkmark"
 qui estadd local cdFE				""
 qui estadd local controls			"\checkmark"
 
-eststo: reghdfe dummy 							high_congruence, cluster(dmacode) ///
+eststo: reghdfe dummy 							above_median, cluster(dmacode) ///
 												absorb(date stationID c.($station_controls)##i.date cdID)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean =  `r(mean)'
@@ -1058,33 +1051,13 @@ qui estadd local stationFE			"\checkmark"
 qui estadd local cdFE				"\checkmark"
 qui estadd local controls			"\checkmark"
 
-esttab using tables/congruence_unweightedF.tex, replace fragment nogaps keep(high_congruence)  ///
-				coeflabels(high_congruence "Above Median Congruence") ///
-		label noomitted nonotes se(%9.3f) b(%9.3f) ///
-		starlevels(* 0.10 ** 0.05 *** 0.01) nomtitle extracols(3 4 5 6) ///
-		prehead("{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{7}{c}} \toprule  \ & \multicolumn{6}{c}{Panel A: Content} \\\cmidrule(lr){2-7}") ///
-		mgroups("Mentions/Show", pattern(1 0) ///
-		prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))	///
-		compress ///
-		stats(stationFE cdFE monthFE  ////
-			  controls N N_stations N_CDs N_clust ymean ///
-			  , ///
-			  fmt(%9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.3f %9.3f %9.3f %9.3f %9.3f ) ///
-			  labels("Station FEs" "CD FEs" "Month FEs" "Controls" "\midrule Observations" "Stations" "CDs" "DMAs (Clusters)" ///
-					"Mean Dep. Variable")) 
-
-
 // PANEL B
 
 use data/CCES/CCES_final.dta, clear
 
-
-eststo clear
-
-
 eststo: reghdfe recog_houserep_never_heardbroad	above_median ///
 									$controls_CCES , ///
-									absorb(dma year) cluster(dma)
+									absorb(dma year) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean = r(mean)
 qui estadd scalar ymean
@@ -1095,11 +1068,11 @@ qui estadd local dmaFE "\checkmark"
 qui estadd local yearFE "\checkmark"
 qui estadd local controls "\checkmark"
 qui estadd local CD_by_redist_FEs ""
-
+qui estadd local N_stations						"---"
 
 eststo: reghdfe recog_houserep_never_heardbroad	above_median ///
 									$controls_CCES , ///
-									absorb(dma cdID##redistricting year) cluster(dma)
+									absorb(dma cdID##redistricting year) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean = r(mean)
 qui estadd scalar ymean
@@ -1110,10 +1083,11 @@ qui estadd local dmaFE 					"\checkmark"
 qui estadd local yearFE 				"\checkmark"
 qui estadd local controls 				"\checkmark"
 qui estadd local CD_by_redist_FEs 		"\checkmark"
+qui estadd local N_stations						"---"
 
 eststo: reghdfe dontknow_approval_housemember	above_median ///
 									$controls_CCES , ///
-									absorb(dma year) cluster(dma)
+									absorb(dma year) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean = r(mean)
 qui estadd scalar ymean
@@ -1124,10 +1098,11 @@ qui estadd local dmaFE 					"\checkmark"
 qui estadd local yearFE				 	"\checkmark"
 qui estadd local controls 				"\checkmark"
 qui estadd local CD_by_redist_FEs ""
+qui estadd local N_stations						"---"
 
 eststo: reghdfe dontknow_approval_housemember	above_median ///
 									$controls_CCES , ///
-									absorb(dma cdID##redistricting year) cluster(dma)
+									absorb(dma cdID##redistricting year) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean = r(mean)
 qui estadd scalar ymean
@@ -1138,10 +1113,11 @@ qui estadd local dmaFE 					"\checkmark"
 qui estadd local yearFE 				"\checkmark"
 qui estadd local controls 				"\checkmark"
 qui estadd local CD_by_redist_FEs 		"\checkmark"
-		
+qui estadd local N_stations						"---"
+	
 eststo: reghdfe no_prefencehouse	above_median ///
 									$controls_CCES , ///
-									absorb(dma year) cluster(dma)
+									absorb(dma year) cluster(dmacode)
 	qui su `e(depvar)' if e(sample)==1
 	qui scalar ymean = r(mean)
 	qui estadd scalar ymean
@@ -1152,10 +1128,11 @@ eststo: reghdfe no_prefencehouse	above_median ///
 	qui estadd local yearFE 				"\checkmark"
 	qui estadd local controls 				"\checkmark"
 	qui estadd local CD_by_redist_FEs 			""
+	qui estadd local N_stations						"---"
 
 eststo: reghdfe no_prefencehouse	above_median ///
 									$controls_CCES , ///
-									absorb(dma cdID##redistricting year) cluster(dma)
+									absorb(dma cdID##redistricting year) cluster(dmacode)
 qui su `e(depvar)' if e(sample)==1
 qui scalar ymean = r(mean)
 qui estadd scalar ymean
@@ -1166,24 +1143,39 @@ qui estadd local dmaFE 							"\checkmark"
 qui estadd local yearFE 						"\checkmark"
 qui estadd local controls 						"\checkmark"
 qui estadd local CD_by_redist_FEs 				"\checkmark"
+qui estadd local N_stations						"---"
 
-
-esttab using tables/congruence_unweightedF.tex, append fragment nogaps keep(above_median) ///
-    coeflabels(above_median "Above Median Congruence") ///
+esttab, replace nogaps keep(above_median) ///
+	prehead("{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{9}{c}} \toprule  \ & \multicolumn{2}{c}{Content} & \multicolumn{6}{c}{Political Knowledge} \\\cmidrule(lr){2-3} \cmidrule(lr){4-9}") ///
+    coeflabels(above_median "High Congruence") ///
     noomitted nonotes se(%9.3f) b(%9.3f) nomtitle ///
     label starlevels(* 0.10 ** 0.05 *** 0.01) ///
-    mgroups("\shortstack{Never Heard of\\Representative}" ///
-            "\shortstack{Not Able to Evaluate\\Representative}" ///
-            "\shortstack{Has No Preference\\over Election}", ///
-            pattern(1 0 1 0 1 0) prefix(\multicolumn{@span}{c}{) ///
+    mgroups("Mentioned" ///
+			"Never Heard" ///
+            "Cannot Evaluate" ///
+            "No Preference", ///
+            pattern(1 0 1 0 1 0 1 0) prefix(\multicolumn{@span}{c}{) ///
             suffix(}) span erepeat(\cmidrule(lr){@span})) ///
-    prehead("\midrule \ & \multicolumn{6}{c}{Panel B: Political Knowledge} \\\cmidrule(lr){2-7}") ///
-    postfoot("\bottomrule \end{tabular}}") ///
     compress ///
-    stats(dmaFE yearFE controls CD_by_redist_FEs N N_cds N_clust ymean, ///
-          fmt(%9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.0f %9.3f) ///
-          labels("DMA FEs" "Year FEs" "Controls" "CD_by_redist FEs" ///
-                 "\midrule Observations" "CDs" "DMAs (Clusters)" "Mean Dep. Variable"))
+    stats(N N_stations N_clust ymean, ///
+          fmt(%9.0f %9.0f %9.0f %9.3f) ///
+          labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable"))
+
+esttab using tables/congruence_unweightedF.tex, replace nogaps keep(above_median) ///
+	prehead("{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{9}{c}} \toprule  \ & \multicolumn{2}{c}{Content} & \multicolumn{6}{c}{Political Knowledge} \\\cmidrule(lr){2-3} \cmidrule(lr){4-9}") ///
+    coeflabels(above_median "High Congruence") ///
+    noomitted nonotes se(%9.3f) b(%9.3f) nomtitle ///
+    label starlevels(* 0.10 ** 0.05 *** 0.01) ///
+    mgroups("Mentioned" ///
+			"Never Heard" ///
+            "Cannot Evaluate" ///
+            "No Preference", ///
+            pattern(1 0 1 0 1 0 1 0) prefix(\multicolumn{@span}{c}{) ///
+            suffix(}) span erepeat(\cmidrule(lr){@span})) ///
+    compress ///
+    stats(N N_stations N_clust ymean, ///
+          fmt(%9.0f %9.0f %9.0f %9.3f) ///
+          labels("Observations" "Stations" "DMAs (Clusters)" "Mean Dep. Variable"))
 
 
 

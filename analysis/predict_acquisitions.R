@@ -111,7 +111,7 @@ stations <- read_in("acquisitions/acquisition_panel_station_top3_FINAL.dta")
 
 ## read station-level baseline data. Advertising duration, revenue and ratings are the 2010 station means
 ## produced by data_construction/07_gets_stations_baseline_characteristics_2010.do for the 644-station
-## analytical sample (February-December means of per-TV-household ad duration and revenue, logged here, and
+## analytical sample (February-December means of per-half-hour ad duration and revenue, logged here, and
 ## of news / non-news ratings). Cost per mille and impressions are 2010 (February-December) means computed
 ## from the Ad Intel analysis file for the same stations.
 base_station <- read_dta(glue("{datadir}/station_baseline_characteristics_2010.dta")) %>%

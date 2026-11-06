@@ -1,32 +1,14 @@
-{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{7}{c}} \toprule  \ & \multicolumn{6}{c}{Panel A: Content} \\\cmidrule(lr){2-7}
-                &\multicolumn{2}{c}{Mentions/Show}&         &         &         &         \\\cmidrule(lr){2-3}
-                &\multicolumn{1}{c}{(1)}   &\multicolumn{1}{c}{(2)}   &         &         &         &         \\
+{\def \sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi} \begin{tabular}{l*{9}{c}} \toprule  \ & \multicolumn{2}{c}{Content} & \multicolumn{6}{c}{Political Knowledge} \\\cmidrule(lr){2-3} \cmidrule(lr){4-9}
+                &\multicolumn{2}{c}{Mentioned}&\multicolumn{2}{c}{Never Heard}&\multicolumn{2}{c}{Cannot Evaluate}&\multicolumn{2}{c}{No Preference}\\\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
+                &\multicolumn{1}{c}{(1)}   &\multicolumn{1}{c}{(2)}   &\multicolumn{1}{c}{(3)}   &\multicolumn{1}{c}{(4)}   &\multicolumn{1}{c}{(5)}   &\multicolumn{1}{c}{(6)}   &\multicolumn{1}{c}{(7)}   &\multicolumn{1}{c}{(8)}   \\
 \midrule
-Above Median Congruence&    0.207***&    0.202***&         &         &         &         \\
-                &  (0.014)   &  (0.013)   &         &         &         &         \\
+High Congruence &    0.204***&    0.197***&   -0.060***&   -0.076***&   -0.053***&   -0.070***&   -0.022***&   -0.035***\\
+                &  (0.014)   &  (0.013)   &  (0.007)   &  (0.008)   &  (0.007)   &  (0.007)   &  (0.004)   &  (0.006)   \\
 \midrule
-Station FEs     &\checkmark   &\checkmark   &         &         &         &         \\
-CD FEs          &            &\checkmark   &         &         &         &         \\
-Month FEs       &\checkmark   &\checkmark   &         &         &         &         \\
-Controls        &\checkmark   &\checkmark   &         &         &         &         \\
-\midrule Observations&   335868   &   335868   &         &         &         &         \\
-Stations        &      636   &      636   &         &         &         &         \\
-%CDs             &      432   &      432   &         &         &         &         \\
-DMAs (Clusters) &      203   &      203   &         &         &         &         \\
-Mean Dep. Variable&    0.221   &    0.221   &         &         &         &         \\
-\midrule \ & \multicolumn{6}{c}{Panel B: Political Knowledge} \\\cmidrule(lr){2-7}
-                &\multicolumn{2}{c}{\shortstack{Never Heard of\\Representative}}&\multicolumn{2}{c}{\shortstack{Not Able to Evaluate\\Representative}}&\multicolumn{2}{c}{\shortstack{Has No Preference\\over Election}}\\\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
-                &\multicolumn{1}{c}{(1)}   &\multicolumn{1}{c}{(2)}   &\multicolumn{1}{c}{(3)}   &\multicolumn{1}{c}{(4)}   &\multicolumn{1}{c}{(5)}   &\multicolumn{1}{c}{(6)}   \\
-\midrule
-Above Median Congruence&   -0.060***&   -0.076***&   -0.053***&   -0.070***&   -0.022***&   -0.035***\\
-                &  (0.007)   &  (0.008)   &  (0.007)   &  (0.007)   &  (0.004)   &  (0.006)   \\
-\midrule
-DMA FEs         &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   \\
-Year FEs        &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   \\
-Controls        &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   &\checkmark   \\
-CD-By-Redistricting Cycle&            &\checkmark   &            &\checkmark   &            &\checkmark   \\
-\midrule Observations&   381135   &   381135   &   379945   &   379945   &   291174   &   291174   \\
-%CDs             &      444   &      444   &      444   &      444   &      444   &      444   \\
-DMAs (Clusters) &      205   &      205   &      205   &      205   &      205   &      205   \\
-Mean Dep. Variable&    0.281   &    0.281   &    0.210   &    0.210   &    0.202   &    0.202   \\
-\bottomrule \end{tabular}}
+Observations    &   335868   &   335868   &   381135   &   381135   &   379945   &   379945   &   291174   &   291174   \\
+Stations        &      636   &      636   &      ---   &      ---   &      ---   &      ---   &      ---   &      ---   \\
+DMAs (Clusters) &      204   &      204   &      205   &      205   &      205   &      205   &      205   &      205   \\
+Mean Dep. Variable&    0.221   &    0.221   &    0.281   &    0.281   &    0.210   &    0.210   &    0.202   &    0.202   \\
+\bottomrule
+\end{tabular}
+}
