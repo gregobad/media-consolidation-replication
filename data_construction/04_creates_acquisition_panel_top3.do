@@ -5,11 +5,11 @@
 // CREATES ACQUISITION PANEL //
 ///////////////////////////////
 
-////////////////////////////////////////
-// GETS STATIONS FROM BIA/KELSEY DATA //
-////////////////////////////////////////
+///////////////////////////
+// GETS CALLSIGN HISTORY //
+///////////////////////////
 
-use data/acquisitions/callsign_history_cleaned.dta, replace
+use data/acquisitions/callsign_history_cleaned.dta, clear
 
 bysort fccid (from_ym): g n=_n
 
@@ -445,29 +445,9 @@ list fccid callsign agreement_type agmt_start_date_str group_providing_services 
 //      +-----------------------------------------------------------------+
 //      | fccid   callsign   agreeme~e   agmt_sta~r   group_providing_s~s |
 //      |-----------------------------------------------------------------|
-//   1. |   144       KNVA         LMA   1 DEC 2014         Media General | OK
-//   2. |   144       KNVA         LMA   1 JAN 2017   Nexstar Bcstg Group |
-//  15. |  4693       WYTV   SSA & JSA   1 DEC 2014         Media General | OK
-//  16. |  4693       WYTV   SSA & JSA   1 JAN 2017   Nexstar Bcstg Group | 
-//  36. | 11970       WXXA   SSA & JSA   1 DEC 2012         Media General | OK 
-//  37. | 11970       WXXA   SSA & JSA   1 JAN 2017   Nexstar Bcstg Group |
-//  72. | 36533       WLAJ         LMA   1 NOV 2011   Sinclair Bcst Group | SEE BELOW
-//  73. | 36533       WLAJ   SSA & JSA   1 MAR 2013         Media General |
-//  74. | 36533       WLAJ   SSA & JSA   1 JAN 2017   Nexstar Bcstg Group |
-//  83. | 49397       KTKA   SSA & JSA   1 DEC 2014         Media General | OK
-//  84. | 49397       KTKA   SSA & JSA   1 JAN 2017   Nexstar Bcstg Group |
-//  92. | 55049       KASY   SSA & JSA   1 DEC 2014         Media General | OK
-//  93. | 55049       KASY         SSA   1 JAN 2017   Nexstar Bcstg Group |
-// 110. | 70138       WBDT   SSA & JSA   1 DEC 2014         Media General | OK
-// 111. | 70138       WBDT   SSA & JSA   1 JAN 2017   Nexstar Bcstg Group |
-// 125. | 73311       WNAC         LMA   1 DEC 2014         Media General | OK
-// 126. | 73311       WNAC         LMA   1 JAN 2017   Nexstar Bcstg Group |
-// 137. | 76268       KWBQ   SSA & JSA   1 DEC 2014         Media General | OK
-// 138. | 76268       KWBQ         SSA   1 JAN 2017   Nexstar Bcstg Group |
-// 144. | 84157       KRWB   SSA & JSA   1 DEC 2014         Media General | OK
-// 145. | 84157       KRWB         SSA   1 JAN 2017   Nexstar Bcstg Group |
+//  65. | 36533       WLAJ         LMA   1 NOV 2011   Sinclair Bcst Group |
+//  66. | 36533       WLAJ   SSA & JSA   1 JAN 2017   Nexstar Bcstg Group |
 //      +-----------------------------------------------------------------+
-
 
 drop if fccid==36533&group_providing_services=="Nexstar Bcstg Group"
 
@@ -592,7 +572,7 @@ list fccid SSA_nexstar_date ownedby_sinclair_date if SSA_nexstar_date!=.&ownedby
 
 //  pay attention to these cases when defining treatment variables
 //  under O&O version, keep sinclair ownership
-//  under LMA/SSA, also keep nexstar ownership as it comes first (1996 vs 2001)
+//  under LMA/SSA, also keep sinclair ownership as it comes first (1996 vs 2001)
 //         +-----------------------------+
 //         | fccid   SSA_ne~e   o~sinc~e |
 //         |-----------------------------|
@@ -670,7 +650,6 @@ g ownedby_gray_SSA = 0
 replace ownedby_gray_SSA = 1 if date >= ownedby_gray_date
 replace ownedby_gray_SSA = 1 if date >= LMA_gray_date
 replace ownedby_gray_SSA = 1 if date >= SSA_gray_date
-replace ownedby_gray_SSA = 0 if fccid==53820 // KYOU, HAS LMA WITH RAYCOM THAT PRECEEDS THE ACQUISITION
 
 g ownedby_nexstar_SSA = 0
 replace ownedby_nexstar_SSA = 1 if date >= ownedby_nexstar_date
@@ -892,7 +871,7 @@ cap drop check
 
 egen check=rsum(ownedby_sinclair_LMA_first ownedby_gray_LMA_first ownedby_nexstar_LMA_first)
 tab check ownedby_congl_LMA
-tab check ownedby_congl_LMA if ownedby_congl_LMA==1&check>1&year(dofm( ownedby_congl_date ))!=2010&month(dofm(ownedby_congl_date))!=1
+tab check ownedby_congl_LMA if ownedby_congl_LMA==1&check>1&ownedby_congl_date!=ym(2010,1)
 // either dmas with two stations owned by different conglomerates from the start
 // or Sioux City, with two acquisitions by different groups on the same date
 

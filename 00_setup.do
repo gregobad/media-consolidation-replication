@@ -12,13 +12,14 @@ pause off
 // SET THE PATH TO THE ROOT OF THIS ARCHIVE HERE               //
 /////////////////////////////////////////////////////////////////
 
-global PATH "/path/to/replication"
+global PATH ""
 
 cd "${PATH}"
 
 // output folders (created if missing)
 cap mkdir "${PATH}/tables"
 cap mkdir "${PATH}/figures"
+cap mkdir "${PATH}/data/CCES/raw/individual"
 
 //////////////////
 // SETS GLOBALS //

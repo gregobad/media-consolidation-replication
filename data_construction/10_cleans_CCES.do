@@ -439,13 +439,13 @@ $100,000 - $119,999 |     17,384       80.36       80.36
 	rename watch_news_type_2 watch_news_type_national
 	rename watch_news_type_3 watch_news_type_both
 
-	br year caseID watch_news_type media_use_TV watch_news_type_local watch_news_type_national watch_news_type_both if media_use_TV==0 & (watch_news_type_local!=. | watch_news_type_national !=. | watch_news_type_both!=.)	
+// 	br year caseID watch_news_type media_use_TV watch_news_type_local watch_news_type_national watch_news_type_both if media_use_TV==0 & (watch_news_type_local!=. | watch_news_type_national !=. | watch_news_type_both!=.)	
 ** Note : since there are some mistakes in the original CCES variables (causing the anomaly of the br above) we need to do the following corretion:
 	
 	replace watch_news_type_local = . if media_use_TV == 0 & watch_news_type_local!=.
 	replace watch_news_type_national = . if media_use_TV == 0 & watch_news_type_national!=.
 	replace watch_news_type_both = . if media_use_TV == 0 & watch_news_type_both!=.
-	br year caseID watch_news_type media_use_TV watch_news_type_local watch_news_type_national watch_news_type_both if media_use_TV==0 & (watch_news_type_local!=. | watch_news_type_national !=. | watch_news_type_both!=.)
+// 	br year caseID watch_news_type media_use_TV watch_news_type_local watch_news_type_national watch_news_type_both if media_use_TV==0 & (watch_news_type_local!=. | watch_news_type_national !=. | watch_news_type_both!=.)
 
 ** See text file "CCES_mistakes_newsvariables" for more info. 
 

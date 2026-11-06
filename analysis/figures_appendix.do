@@ -5,20 +5,21 @@
 clear all
 	
 	
+	
 ///////////////////////		
 ///////////////////////
 // APPENDIX FIGURE 1 //
 ///////////////////////
 ///////////////////////		
 
-use ${PATH}/data/acquisitions/acquisition_panel_dma_top3_FINAL.dta, clear
+use "${PATH}/data/acquisitions/acquisition_panel_dma_top3_FINAL.dta", clear
 
 ren dma dma_old
 ren dma_kelseybia dma
 replace dma=upper(dma)
 replace dma="TAMPA-ST.PETERSBURG-SARASOTA, FL" if dma=="TAMPA-ST PETERSBURG-SARASOTA, FL"
 
-merge m:1 dma using ${PATH}/data/dma_dmaID_xwalk.dta
+merge m:1 dma using "${PATH}/data/dma_dmaID_xwalk.dta"
 
 keep if _m==3
 drop _m
@@ -40,44 +41,53 @@ replace treatment_year_nexstar=2022 if treatment_year_nexstar==.
 egen tag=tag(dmaID)
 keep if tag==1
 
-merge 1:1 dmaID using ${PATH}/data/DMA_2008_database.dta
+merge 1:1 dmaID using "${PATH}/data/DMA_2008_database.dta"
 drop _m
 		
 colorpalette viridis, n(12)   
 local colors  "`r(p3)'" "`r(p5)'" "`r(p6)'" "`r(p7)'" "`r(p8)'" "`r(p9)'" "`r(p10)'" "`r(p11)'"   "`r(p12)'"   
 
-spmap treatment_year_sinclair using ${PATH}/data/DMA_2008_coords.dta, id(_ID) ///
+spmap treatment_year using "${PATH}/data/DMA_2008_coords.dta", id(_ID) ///
+		clmethod(custom)  clbreaks(2009.5 2010.5 2011.5 2012.5 2013.5 2014.5 2015.5 2016.5 2017.5 2019.5 2022.5) ///
+		fcolor("`colors'") ///
+		legend(cols(1) size(*0.75) colfirst bmargin(none) label(2 "Always treated") label(3 "2011") ///
+		label(4 "2012") label(5 "2013") label(6 "2014") label(7 "2015") label(8 "2016") ///
+		label(9 "2017") label(10 "2019") label(11 "Never treated"))
+graph export "${PATH}/figures/map.pdf", replace
+graph export "${PATH}/figures/map.png", replace
+
+spmap treatment_year_sinclair using "${PATH}/data/DMA_2008_coords.dta", id(_ID) ///
 		clmethod(custom)  clbreaks(2009.5 2010.5 2011.5 2012.5 2013.5 2014.5 2015.5 2016.5 2017.5 2019.5 2022.5) ///
 		fcolor("`colors'") ///
 		legend(cols(1) size(*0.75) colfirst bmargin(none) label(2 "Always Treated") label(3 "2011") ///
 		label(4 "2012") label(5 "2013") label(6 "2014") label(7 "2015") label(8 "2016") ///
 		label(9 "2017") label(10 "2019") label(11 "Never Treated"))
-graph export ${PATH}/figures/map_sinclair.pdf, replace
-graph export ${PATH}/figures/map_sinclair.png, replace
+graph export "${PATH}/figures/map_sinclair.pdf", replace
+graph export "${PATH}/figures/map_sinclair.png", replace
 		
 colorpalette viridis, n(12)   
 local colors  "`r(p3)'" "`r(p5)'" "`r(p6)'" "`r(p7)'" "`r(p8)'" "`r(p9)'" "`r(p10)'" "`r(p11)'"   "`r(p12)'"   
 
-spmap treatment_year_gray using ${PATH}/data/DMA_2008_coords.dta, id(_ID) ///
+spmap treatment_year_gray using "${PATH}/data/DMA_2008_coords.dta", id(_ID) ///
 		clmethod(custom)  clbreaks(2009.5 2010.5 2011.5 2012.5 2013.5 2014.5 2015.5 2016.5 2017.5 2019.5 2022.5) ///
 		fcolor("`colors'") ///
 		legend(cols(1) size(*0.75) colfirst bmargin(none) label(2 "Always Treated") label(3 "2011") ///
 		label(4 "2012") label(5 "2013") label(6 "2014") label(7 "2015") label(8 "2016") ///
 		label(9 "2017") label(10 "2019") label(11 "Never Treated"))
-graph export ${PATH}/figures/map_gray.pdf, replace
-graph export ${PATH}/figures/map_gray.png, replace
+graph export "${PATH}/figures/map_gray.pdf", replace
+graph export "${PATH}/figures/map_gray.png", replace
 
 colorpalette viridis, n(12)   
 local colors  "`r(p3)'" "`r(p5)'" "`r(p6)'" "`r(p7)'" "`r(p8)'" "`r(p9)'" "`r(p10)'" "`r(p11)'"   "`r(p12)'"   
 		
-spmap treatment_year_nexstar using ${PATH}/data/DMA_2008_coords.dta, id(_ID) ///
+spmap treatment_year_nexstar using "${PATH}/data/DMA_2008_coords.dta", id(_ID) ///
 		clmethod(custom)  clbreaks(2009.5 2010.5 2011.5 2012.5 2013.5 2014.5 2015.5 2016.5 2017.5 2019.5 2022.5) ///
 		fcolor("`colors'") ///
 		legend(cols(1) size(*0.75) colfirst bmargin(none) label(2 "Always Treated") label(3 "2011") ///
 		label(4 "2012") label(5 "2013") label(6 "2014") label(7 "2015") label(8 "2016") ///
 		label(9 "2017") label(10 "2019") label(11 "Never Treated"))
-graph export ${PATH}/figures/map_nexstar.pdf, replace
-graph export ${PATH}/figures/map_nexstar.png, replace
+graph export "${PATH}/figures/map_nexstar.pdf", replace
+graph export "${PATH}/figures/map_nexstar.png", replace
 
 
 
@@ -124,7 +134,7 @@ tw 	line fx x, 	lc(gs3) mc(gs3) mfcolor(white) msymbol(circle) msize(medium) ///
 							ytitle("Density", c(black)) ///
 							xtitle("Mentions/show fixed effects", c(black)) xsize(5.5) ysize(4) ///
 							legend(off)
-graph export ${PATH}/figures/descriptives_mentions_density.pdf, replace
+graph export "${PATH}/figures/descriptives_mentions_density.pdf", replace
 restore
 
 collapse 	(median) median = mention_place_pershow ///
@@ -144,14 +154,14 @@ tw 	rarea p25 p75 date, 	color(gs12%30)  || ///
 							ytitle("Mentions/show", c(black)) ///
 							xtitle("", c(black)) xsize(5.5) ysize(4) ///
 							legend(off)
-graph export ${PATH}/figures/descriptives_mentions_overtime.pdf, replace
+graph export "${PATH}/figures/descriptives_mentions_overtime.pdf", replace
 
 
-///////////////////////		
-///////////////////////
-// APPENDIX FIGURE 3 //
-///////////////////////
-///////////////////////		
+//////////////////////////		
+//////////////////////////
+// APPENDIX FIGURE 3, 4 //
+//////////////////////////
+//////////////////////////
 
 // ADVERTISING VARIABLES
 
@@ -195,7 +205,7 @@ tw 	line fx x, 	lc(gs3) mc(gs3) mfcolor(white) msymbol(circle) msize(medium) ///
 							ytitle("Density", c(black)) ///
 							xtitle("Duration per half-hour of local news fixed effects", c(black)) xsize(5.5) ysize(4) ///
 							legend(off)
-graph export ${PATH}/figures/descriptives_adsduration_density.pdf, replace
+graph export "${PATH}/figures/descriptives_adsduration_density.pdf", replace
 restore
 
 // REVENUE, DENSITY
@@ -224,7 +234,7 @@ tw 	line fx x, 	lc(gs3) mc(gs3) mfcolor(white) msymbol(circle) msize(medium) ///
 							ytitle("Density", c(black)) ///
 							xtitle("Revenue per half-hour of local news fixed effects (1000s)", c(black)) xsize(5.5) ysize(4) ///
 							legend(off)
-graph export ${PATH}/figures/descriptives_adsrevenue_density.pdf, replace
+graph export "${PATH}/figures/descriptives_adsrevenue_density.pdf", replace
 restore
 
 collapse 	(median) median_duration = duration_perHH_news median_revenue = spend_perHH_news ///
@@ -244,7 +254,7 @@ tw 	rarea p25_duration p75_duration date, 	color(gs12%30)  || ///
 										ytitle("Duration per half-hour of local news", c(black)) ///
 										xtitle("", c(black)) xsize(5.5) ysize(4) ///
 										legend(off)
-graph export ${PATH}/figures/descriptives_adsduration_overtime.pdf, replace
+graph export "${PATH}/figures/descriptives_adsduration_overtime.pdf", replace
 
 	
 // REVENUE, OVER TIME
@@ -259,14 +269,14 @@ tw 	rarea p25_revenue p75_revenue date, 	color(gs12%30)  || ///
 										ytitle("Revenue per half-hour of local news (1000s)", c(black)) ///
 										xtitle("", c(black)) xsize(5.5) ysize(4) ///
 										legend(off)
-graph export ${PATH}/figures/descriptives_adsrevenue_overtime.pdf, replace
+graph export "${PATH}/figures/descriptives_adsrevenue_overtime.pdf", replace
 
 	
-///////////////////////		
-///////////////////////
-// APPENDIX FIGURE 4 //
-///////////////////////
-///////////////////////		
+//////////////////////////
+//////////////////////////
+// APPENDIX FIGURE 5, 6 //
+//////////////////////////
+//////////////////////////		
 		
 // RATINGS VARIABLES
 
@@ -310,7 +320,7 @@ tw 	line fx x, 	lc(gs3) mc(gs3) mfcolor(white) msymbol(circle) msize(medium) ///
 							ytitle("Density", c(black)) ///
 							xtitle("News ratings fixed effects", c(black)) xsize(5.5) ysize(4) ///
 							legend(off)
-graph export ${PATH}/figures/descriptives_ratings_density.pdf, replace
+graph export "${PATH}/figures/descriptives_ratings_density.pdf", replace
 restore
 
 // IMPRESSIONS, DENSITY
@@ -338,7 +348,7 @@ tw 	line fx x, 	lc(gs3) mc(gs3) mfcolor(white) msymbol(circle) msize(medium) ///
 							ytitle("Density", c(black)) ///
 							xtitle("Impressions fixed effects (1000s)", c(black)) xsize(5.5) ysize(4) ///
 							legend(off)
-graph export ${PATH}/figures/descriptives_impressions_density.pdf, replace
+graph export "${PATH}/figures/descriptives_impressions_density.pdf", replace
 restore
 
 collapse 	(median) median_ratings = rating_total_news median_imp = imp_total_news ///
@@ -360,7 +370,7 @@ tw 	rarea p25_ratings p75_ratings date  if date>648, 	color(gs12%30)  || ///
 										ytitle("News ratings", c(black)) ///
 										xtitle("", c(black)) xsize(5.5) ysize(4) ///
 										legend(off)
-graph export ${PATH}/figures/descriptives_ratings_overtime.pdf, replace
+graph export "${PATH}/figures/descriptives_ratings_overtime.pdf", replace
 	
 // IMPRESSIONS, OVER TIME
 tw 	rarea p25_imp p75_imp date  if date>648, 	color(gs12%30)  || ///
@@ -376,12 +386,12 @@ tw 	rarea p25_imp p75_imp date  if date>648, 	color(gs12%30)  || ///
 										ytitle("Impressions (1000s)", c(black)) ///
 										xtitle("", c(black)) xsize(5.5) ysize(4) ///
 										legend(off)
-graph export ${PATH}/figures/descriptives_impressions_overtime.pdf, replace
+graph export "${PATH}/figures/descriptives_impressions_overtime.pdf", replace
 			
 		
 ///////////////////////		
 ///////////////////////
-// APPENDIX FIGURE 5 //
+// APPENDIX FIGURE 7 //
 ///////////////////////		
 ///////////////////////		
 
@@ -625,7 +635,7 @@ restore
 		
 ///////////////////////		
 ///////////////////////
-// APPENDIX FIGURE 6 //
+// APPENDIX FIGURE 8 //
 ///////////////////////		
 ///////////////////////	
 
