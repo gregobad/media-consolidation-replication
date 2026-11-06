@@ -4,12 +4,17 @@
 ##
 ## Inputs: NHGIS 2010 Census / 2006-2010 ACS county extracts (data/geo/census/), county-to-DMA crosswalk
 ## (data/geo/cty2DMA.RData), MIT Election Lab county presidential returns (data/elections/),
-## newspaper circulation per capita (data/newspapers/), and two files NOT included in this archive:
-##   - data/tv/ads2010_market_agg.rds   (2010 advertising price per impression by market; derived from
-##                                       proprietary Nielsen Ad Intel data)
-##   - data/acquisitions/acquisition_panel_station_FINAL.dta (an earlier, five-group version of the
-##                                       acquisition panel; used only to count stations per DMA)
+## newspaper circulation per capita (data/newspapers/), the station acquisition panel
+## (data/acquisitions/acquisition_panel_station_top3_FINAL.dta; used only to count stations per DMA),
+## and one file NOT included in this archive:
+##   - data/adintel/adintel_clean_yearmonth.csv (station-by-month Nielsen Ad Intel aggregates, output of
+##                                       adintel_server/00_clean_adintel.R; used for the 2010 price per
+##                                       impression by DMA)
 ## The output file data/geo/dma_demos.csv IS included, so this script is provided for documentation.
+##
+## County-level medians (income, rent, home value), per-capita income, the Gini coefficient and
+## newspaper circulation per capita are aggregated to the DMA as means weighted by county population
+## times the county's population share in the DMA (vote_allocation); counts are summed.
 
 ### SET WORKING DIRECTORY HERE
 path_to_archive <- "/path/to/replication"
@@ -70,15 +75,15 @@ census1 <- left_join(census1, dmacty, by = c("STATEA" = "statefips", "COUNTYA" =
 
 # aggregate at DMA level:
 census1 <- census1 |>
-  mutate_at(vars(H7V001:IFE003), \(x) x * vote_allocation) |>
+  mutate_at(vars(H7V001:IFE003), ~ . * vote_allocation) |>
   group_by(DMA) |>
   summarize_at(vars(H7V001:IFE003), sum)
 
 # create percentages
 census1 <- census1 |>
-  ungroup |>
-  mutate_at(vars(H7W002:H7X006), \(x) x / H7V001) |>
-  mutate_at(vars(IFE002:IFE003), \(x) x / IFE001)
+  ungroup() |>
+  mutate_at(vars(H7W002:H7X006), ~ . / H7V001) |>
+  mutate_at(vars(IFE002:IFE003), ~ . / IFE001)
 
 
 # second census file ------------------------------------------------------
@@ -276,26 +281,32 @@ census2.varsdf <- data.frame(
 census2 <- left_join(census2, dmacty, by = c("STATEA" = "statefips", "COUNTYA" = "countyfips"))
 ## a few counties are split (use vote_allocation to adjust)
 
+## county-by-DMA population weights (ACS total population x share of county in DMA),
+## used below to aggregate county-level medians, Gini and newspaper circulation to the DMA
+cty_weights <- census2 |>
+  transmute(STATEA, COUNTYA, DMA, w = JLZE001 * vote_allocation)
 
 # aggregate at DMA level:
 census2.1 <- census2 |>
-  mutate_at(vars(JLZE001:JOCE008, JRKE001:JRKE003), \(x) x * vote_allocation) |>
+  mutate_at(vars(JLZE001:JOCE008, JRKE001:JRKE003), ~ . * vote_allocation) |>
   group_by(DMA) |>
   summarize_at(vars(JLZE001:JOCE008, JRKE001:JRKE003), sum)
 
+# county medians / per-capita income: population-weighted mean across the DMA's counties
 census2.2 <- census2 |>
   group_by(DMA) |>
-  summarize_at(vars(JOIE001, JQBE001, JS5E001, JTIE001), mean)
+  summarize_at(vars(JOIE001, JQBE001, JS5E001, JTIE001),
+               ~ weighted.mean(., JLZE001 * vote_allocation, na.rm = TRUE))
 
 census2 <- left_join(census2.1, census2.2)
 
 census2 <- census2 |>
-  mutate_at(vars(JLZE002, JLZE026), \(x) x / JLZE001) |>
-  mutate_at(vars(JM2E002:JM2E013), \(x) x / JM2E001) |>
-  mutate_at(vars(JM5E002:JM5E009), \(x) x / JM5E001) |>
-  mutate_at(vars(JN9E002:JN9E035), \(x) x / JN9E001) |>
-  mutate_at(vars(JOCE002:JOCE008), \(x) x / JOCE001) |>
-  mutate_at(vars(JRKE002, JRKE003), \(x) x / JRKE001)
+  mutate_at(vars(JLZE002, JLZE026), ~ . / JLZE001) |>
+  mutate_at(vars(JM2E002:JM2E013), ~ . / JM2E001) |>
+  mutate_at(vars(JM5E002:JM5E009), ~ . / JM5E001) |>
+  mutate_at(vars(JN9E002:JN9E035), ~ . / JN9E001) |>
+  mutate_at(vars(JOCE002:JOCE008), ~ . / JOCE001) |>
+  mutate_at(vars(JRKE002, JRKE003), ~ . / JRKE001)
 
 # third census file -------------------------------------------------------
 
@@ -501,7 +512,7 @@ census3.1 <- census3 |>
   summarize_at(vars(J6QE001:J6QE173), sum)
 
 census3.1 <- census3.1 |>
-  ungroup |>
+  ungroup() |>
   mutate(male_labor_total = rowSums(across(all_of(male.vars$var))),
          female_labor_total = rowSums(across(all_of(female.vars$var))))
 
@@ -511,9 +522,10 @@ census3.1 <- census3.1 |>
   select(DMA, male_16_over = J6QE002, female_16_over = J6QE088, male_not_labor, female_not_labor)
 
 census3.2 <- census3 |>
-  select(DMA, gini = J4TE001) |>
+  select(STATEA, COUNTYA, DMA, gini = J4TE001) |>
+  left_join(cty_weights, by = c("STATEA", "COUNTYA", "DMA")) |>
   group_by(DMA) |>
-  summarize(gini = mean(gini))
+  summarize(gini = weighted.mean(gini, w, na.rm = TRUE))
 
 census3 <- left_join(census3.1, census3.2)
 
@@ -531,7 +543,7 @@ write_csv(census.varsdf, file = "data/geo/census/census_vars.csv")
 elec <- read_csv("data/elections/countypres_2000-2020.csv") |>
   filter(year == 2012) |>
   select(county_fips, office, party, candidatevotes, totalvotes) |>
-  ungroup |>
+  ungroup() |>
   mutate(party = str_to_lower(party))# |> 
   #mutate(vote = candidatevotes/totalvotes)f
 
@@ -547,7 +559,7 @@ elec <- left_join(
 )
 
 elec <- elec |>
-  mutate_at(vars(totalvotes:other), \(x) x * vote_allocation) |>
+  mutate_at(vars(totalvotes:other), ~ . * vote_allocation) |>
   group_by(DMA) |>
   summarize_at(vars(totalvotes:other), sum, na.rm = TRUE) |>
   mutate(d_vote = democrat/totalvotes,
@@ -560,7 +572,22 @@ elec <- elec |>
 dma_demos <- census.final |> left_join(elec)
 
 ## add in ad prices:
-ads <- read_rds("data/tv/ads2010_market_agg.rds")
+## 2010 average price per ad impression on local newscasts by DMA = total news ad spending /
+## total news impressions, pooling all stations, months and advertiser types (local / multimarket).
+## In the station-month file, imp_total_* is the mean impressions per ad, so total impressions
+## = n_ads_* x imp_total_*. Ad Intel MarketCode = Nielsen DMA code - 400.
+ads <- read_csv("data/adintel/adintel_clean_yearmonth.csv",
+                col_select = c(MarketCode, PeriodYearMonth,
+                               starts_with("total_spend_"), starts_with("n_ads_"),
+                               starts_with("imp_total_"))) |>
+  filter(year(PeriodYearMonth) == 2010) |>
+  pivot_longer(-c(MarketCode, PeriodYearMonth),
+               names_to = c(".value", "category"),
+               names_pattern = "(total_spend|n_ads|imp_total)_(.*)") |>
+  filter(str_detect(category, "_news$"),   # news programs only (excludes *_nonnews)
+         n_ads > 0, !is.na(imp_total), !is.na(total_spend)) |>
+  group_by(dmacode = MarketCode + 400) |>
+  summarize(price_per_imp = sum(total_spend) / sum(n_ads * imp_total))
 
 
 demos <- left_join(dma_demos, ads |> mutate(dmacode = as.character(dmacode)), by = c("DMA" = "dmacode"))
@@ -570,34 +597,27 @@ demos <- left_join(dma_demos, ads |> mutate(dmacode = as.character(dmacode)), by
 
 circ <- read_csv("data/newspapers/circulation_per_capita_2010.csv")
 
-load("data/geo/cty2DMA.RData")
-dmacty <- ungroup(dmacty) |> filter(year == 2010) 
-
-dmacty <- dmacty |>
-  ungroup |>
-  mutate(merge_fips = paste(as.numeric(statefips), countyfips, sep="")) |>
-  group_by(merge_fips) |>
-  arrange(desc(vote_allocation)) |>
-  filter(row_number()==1) |>
-  select(merge_fips, DMA)
-
-circ <- inner_join(circ, dmacty |> mutate(merge_fips = as.numeric(merge_fips)), by = c("fips" = "merge_fips"))
-circ <- circ |> 
-  ungroup |> 
-  group_by(DMA) |> 
-  summarize(total_circ_pc_2010 = mean(total_circ_pc_2010, na.rm=T))
+# population-weighted mean of county circulation per capita; split counties
+# contribute to each of their DMAs in proportion to vote_allocation
+circ <- inner_join(
+  circ,
+  cty_weights |>
+    filter(!is.na(DMA)) |>
+    mutate(fips = as.numeric(paste0(STATEA, COUNTYA))),
+  by = "fips"
+)
+circ <- circ |>
+  group_by(DMA) |>
+  summarize(total_circ_pc_2010 = weighted.mean(total_circ_pc_2010, w, na.rm = TRUE))
 
 
-acqs <- haven::read_dta("data/acquisitions/acquisition_panel_station_FINAL.dta")
+# number of stations per DMA in the acquisition sample (count stations by fccid,
+# so call-sign changes are not double counted)
+acqs <- haven::read_dta("data/acquisitions/acquisition_panel_station_top3_FINAL.dta")
 
 acqs <- acqs |>
-  ungroup |>
-  group_by(callsign) |>
-  arrange(date) |>
-  filter(row_number()==1) |>
-  ungroup |>
   group_by(dmacode) |>
-  summarize(num_stations = n())
+  summarize(num_stations = n_distinct(fccid))
 
 demos <- left_join(demos %>% mutate(DMA = as.numeric(DMA)), acqs, by = c("DMA" = "dmacode"))
 demos <- left_join(demos, circ %>% mutate(DMA = as.numeric(DMA)))
